@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/missionpersona/" />
+  <title>Bureau des Affaires Non Résolues</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ÉCRAN D'ACCUEIL : tableau des dossiers -->
+  <section id="ecran-accueil" class="ecran active">
+    <div class="accueil-wrap">
+      <header class="accueil-entete">
+        <span class="tampon">Confidentiel</span>
+        <h1 id="titre-bureau"></h1>
+        <p id="soustitre-bureau" class="bureau-soustitre"></p>
+        <div class="filet"></div>
+      </header>
+      <div id="grille-dossiers" class="grille-dossiers"></div>
+      <p class="accueil-pied">Cliquez sur un dossier pour ouvrir l'enquête.</p>
+    </div>
+  </section>
+
+  <!-- ÉCRAN DE BRIEFING (présentation du dossier) -->
+  <section id="ecran-briefing" class="ecran">
+    <div class="lecture-wrap">
+      <button id="btn-briefing-retour" class="btn-retour">‹ Retour aux dossiers</button>
+
+      <div class="carte-enquete">
+        <div class="brief-tete">
+          <div class="brief-photo">
+            <img id="brief-portrait" alt=""
+                 onerror="this.onerror=null;this.src='portraits/inconnu.svg'">
+          </div>
+          <div>
+            <span id="brief-affaire" class="badge-affaire"></span>
+            <h2 id="brief-nom"></h2>
+            <p id="brief-role" class="role-enquete"></p>
+          </div>
+        </div>
+
+        <div class="brief-securite"><span class="point-rouge"></span><span id="brief-securite"></span></div>
+
+        <div id="brief-identite" class="brief-identite"></div>
+
+        <div class="brief-bloc">
+          <span class="brief-bloc-titre">Incident référencé</span>
+          <div id="brief-incident" class="brief-incident"></div>
+        </div>
+
+        <div class="brief-bloc">
+          <span class="brief-bloc-titre">Votre mission</span>
+          <p id="brief-mission" class="brief-mission"></p>
+        </div>
+
+        <button id="btn-commencer-enquete" class="btn btn-principal">Commencer l'enquête ›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCRAN D'ENQUÊTE (3 phases) -->
+  <section id="ecran-lecture" class="ecran">
+    <div class="lecture-wrap">
+      <button id="btn-retour" class="btn-retour">‹ Retour aux dossiers</button>
+
+      <div class="carte-enquete">
+
+        <!-- En-tête commun -->
+        <div class="enquete-entete">
+          <img id="avatar-enquete" class="avatar-enquete" alt=""
+               onerror="this.onerror=null;this.src='portraits/inconnu.svg'">
+          <span id="badge-affaire" class="badge-affaire"></span>
+          <div>
+            <h2 id="nom-enquete"></h2>
+            <p id="role-enquete" class="role-enquete"></p>
+          </div>
+        </div>
+
+        <div class="ligne-meta">
+          <span id="rubrique-chip" class="rubrique-chip"></span>
+          <span id="jauge" class="jauge"></span>
+        </div>
+
+        <div class="progression">
+          <span id="etape-courante"></span>
+          <div class="barre"><div id="barre-remplie" class="barre-remplie"></div></div>
+        </div>
+
+        <!-- PHASE 1 : SCÈNE + AUDIO -->
+        <div id="phase-scene" class="phase">
+          <div class="slate">
+            <span id="scene-lieu" class="scene-lieu"></span>
+            <span id="scene-duree" class="scene-duree"></span>
+          </div>
+
+          <div class="lecteur">
+            <button id="btn-play" class="btn-play" aria-label="Lecture / Pause">
+              <span id="icone-play">▶</span>
+            </button>
+            <div class="lecteur-infos">
+              <div class="temps">
+                <span id="temps-actuel">0:00</span>
+                <span id="temps-total">0:00</span>
+              </div>
+              <div class="barre-audio" id="barre-audio">
+                <div id="barre-audio-remplie" class="barre-audio-remplie"></div>
+              </div>
+            </div>
+          </div>
+          <audio id="audio" preload="auto"></audio>
+
+          <p class="scene-aide">Écoutez l'extrait ensemble, puis passez à la question.</p>
+
+          <button id="btn-vers-question" class="btn btn-principal">Passer à la question ›</button>
+        </div>
+
+        <!-- PHASE 2 : QUESTION + CONSIGNE -->
+        <div id="phase-question" class="phase">
+          <p class="etiquette-question">Question pour vos apprenants</p>
+          <p id="texte-question" class="texte-question"></p>
+          <div id="bloc-consigne" class="consigne">
+            <span class="consigne-titre">💡 Consigne</span>
+            <p id="texte-consigne"></p>
+          </div>
+          <p class="discussion-note">Échangez en groupe, notez votre réponse, puis dévoilez l'analyse.</p>
+          <button id="btn-reveler" class="btn btn-principal">Révéler l'analyse ›</button>
+        </div>
+
+        <!-- PHASE 3 : RÉVÉLATION -->
+        <div id="phase-revelation" class="phase">
+          <div class="revelation">
+            <span class="revelation-tampon">📋 Analyse du dossier</span>
+            <h3 id="revelation-titre" class="revelation-titre"></h3>
+            <p id="revelation-texte" class="revelation-texte"></p>
+            <div class="indice">
+              <span class="indice-label">Indice collecté</span>
+              <p id="revelation-indice"></p>
+            </div>
+          </div>
+          <button id="btn-q-suivante" class="btn btn-principal">Question suivante ›</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCRAN DE FIN -->
+  <section id="ecran-fin" class="ecran">
+    <div class="lecture-wrap">
+      <div class="carte-enquete centre">
+        <span class="tampon tampon-classe">Affaire classée</span>
+        <h2>Dossier refermé</h2>
+        <p class="bureau-soustitre">Vous avez mené l'enquête jusqu'au bout.</p>
+        <button id="btn-recommencer" class="btn btn-secondaire">Retour aux dossiers</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCRAN "DOSSIER EN PRÉPARATION" -->
+  <section id="ecran-prepa" class="ecran">
+    <div class="lecture-wrap">
+      <div class="carte-enquete centre">
+        <span class="tampon">Sous scellés</span>
+        <h2 id="prepa-nom"></h2>
+        <p class="bureau-soustitre">Ce dossier n'a pas encore été instruit.</p>
+        <button id="btn-prepa-retour" class="btn btn-secondaire">Retour aux dossiers</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="histoire.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
