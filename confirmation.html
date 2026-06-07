@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demande envoyée : Pauuse&middot;Playy</title>
+  <meta name="description" content="Votre demande d'achat a bien été envoyée.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="images/logo.png" alt="Pauuse Playy">
+        Pauuse<span class="dot">&middot;</span>Playy
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="/mini-jeux">Les jeux</a>
+        <a href="/equipe">L'équipe</a>
+        <a href="/actualites">Actualités</a>
+        <a href="/ressources">Ressources</a>
+        <a href="/boutique" class="nav-cta">Boutique</a>
+        <a href="/panier" class="nav-cart" aria-label="Panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="nav-cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="team-hero" id="main-content">
+    <div class="container fade-in">
+      <span class="section-label">Étape 3 / 3</span>
+      <h1>Demande <span class="accent-orange">envoyée</span> !</h1>
+      <p>Merci pour votre confiance. Nous vous répondons au plus vite.</p>
+    </div>
+  </section>
+
+  <!-- CONFIRMATION -->
+  <section class="confirmation-section">
+    <div class="container">
+      <div class="confirmation-card fade-in">
+        <div class="confirmation-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h2>Votre demande d'achat est bien reçue</h2>
+        <p>Clément et Olivier vont la traiter dans les plus brefs délais. Voici la suite :</p>
+
+        <ol class="confirmation-steps">
+          <li><strong>Vérification de votre demande</strong> : nous validons les informations et préparons votre facture.</li>
+          <li><strong>Envoi de la facture</strong> : vous recevez un email avec votre facture détaillée et un lien de paiement sécurisé par carte bancaire.</li>
+          <li><strong>Paiement</strong> : vous réglez en ligne en toute sécurité via le lien fourni.</li>
+          <li><strong>Expédition</strong> : dès réception du paiement, nous expédions votre commande avec soin.</li>
+        </ol>
+
+        <p class="confirmation-note">Une question entre-temps&nbsp;? Écrivez-nous à <a href="mailto:clement.cahagne@pauuse.fr">clement.cahagne@pauuse.fr</a>.</p>
+
+        <div class="confirmation-actions">
+          <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+          <a href="/actualites" class="btn btn-outline">Voir les actualités</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo.png" alt="Pauuse Playy">
+          Pauuse<span class="dot">&middot;</span>Playy
+        </div>
+        <div class="footer-links">
+          <a href="/">Accueil</a>
+          <a href="/mini-jeux">Les jeux</a>
+          <a href="/equipe">Équipe</a>
+          <a href="/actualites">Actualités</a>
+          <a href="/ressources">Ressources</a>
+          <a href="/boutique">Boutique</a>
+          <a href="https://www.linkedin.com/company/109237583" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Pauuse&middot;Playy : Le jeu pour concevoir des parcours de formation multimodaux.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="shop.js"></script>
+  <script>
+    // Vider le panier après commande réussie
+    document.addEventListener('DOMContentLoaded', () => {
+      PauuseShop.clearCart();
+    });
+  </script>
+</body>
+</html>

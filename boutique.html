@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique : Pauuse&middot;Playy</title>
+  <meta name="description" content="Procurez-vous la boîte de jeu Mur d'Escalade + Pédago Express.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="images/logo.png" alt="Pauuse Playy">
+        Pauuse<span class="dot">&middot;</span>Playy
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="/mini-jeux">Les jeux</a>
+        <a href="/equipe">L'équipe</a>
+        <a href="/actualites">Actualités</a>
+        <a href="/ressources">Ressources</a>
+        <a href="/boutique" class="nav-cta active">Boutique</a>
+        <a href="/panier" class="nav-cart" aria-label="Panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="nav-cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="team-hero" id="main-content">
+    <div class="container fade-in">
+      <span class="section-label">Boutique</span>
+      <h1>Nos <span class="accent-orange">boîtes de jeu</span> Pauuse&middot;Playy</h1>
+      <p>Découvrez, choisissez, commandez, jouez&nbsp;!</p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="shop-section">
+    <div class="container">
+      <div class="shop-grid">
+
+        <!-- PRODUCT 1 : PACK PHYSIQUE -->
+        <article class="product-card fade-in">
+          <div class="product-gallery">
+            <div class="product-image-main">
+              <img src="images/pack_mur_pedagoexpress/pack1.JPG" alt="Boîte Mur d'Escalade & Pédago Express" id="product1-main" loading="lazy">
+            </div>
+            <div class="product-thumbs" data-target="product1-main">
+              <button class="product-thumb active"><img src="images/pack_mur_pedagoexpress/pack1.JPG" alt="" loading="lazy"></button>
+              <button class="product-thumb"><img src="images/pack_mur_pedagoexpress/pack2.JPG" alt="" loading="lazy"></button>
+              <button class="product-thumb"><img src="images/pack_mur_pedagoexpress/pack3.JPG" alt="" loading="lazy"></button>
+              <button class="product-thumb"><img src="images/pack_mur_pedagoexpress/pack4.JPG" alt="" loading="lazy"></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h2>La Boîte de jeu : Parcours Multimodal</h2>
+            <p class="product-tagline">Jusqu'à 2 équipes en parallèle</p>
+            <p class="product-description">La boîte contient les deux premiers jeux de la collection : <strong>Le Mur d'Escalade</strong> pour bâtir vos architectures de formations multimodales, et <strong>le Pédago Express</strong> pour scénariser un parcours multimodal et sélectionner les activités les plus pertinentes. Animez jusqu'à deux équipes simultanément car chaque jeu est disponible en double exemplaire.</p>
+            <ul class="product-features">
+              <li>2&times; <strong>Mur d'Escalade</strong> : canevas, plateau, cartes Mission, Modalités, Incidents</li>
+              <li>2&times; <strong>Pédago Express</strong> : canevas wagon, cartes Activités &amp; Contrôleurs</li>
+              <li><strong>Fabriqué en France métropolitaine</strong> 🇫🇷</li>
+              <li>Livraison en France métropolitaine</li>
+            </ul>
+            <div class="product-footer">
+              <div class="product-price">
+                <span class="price-amount">199 &euro; <small>TTC</small></span>
+                <span class="price-tax">soit 165,83 &euro; HT &middot; port inclus &middot; TVA 20&nbsp;%</span>
+              </div>
+              <button type="button" class="btn btn-primary" data-add-to-cart="pack-parcours-multimodal">Ajouter au panier</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- INFO BANDEAU -->
+      <div class="shop-info shop-info--single fade-in">
+        <div class="shop-info-item">
+          <h4>Une question ?</h4>
+          <p>Écrivez-nous à <a href="mailto:clement.cahagne@pauuse.fr">clement.cahagne@pauuse.fr</a> : on vous répond au plus vite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo.png" alt="Pauuse Playy">
+          Pauuse<span class="dot">&middot;</span>Playy
+        </div>
+        <div class="footer-links">
+          <a href="/">Accueil</a>
+          <a href="/mini-jeux">Les jeux</a>
+          <a href="/equipe">Équipe</a>
+          <a href="/actualites">Actualités</a>
+          <a href="/ressources">Ressources</a>
+          <a href="/boutique">Boutique</a>
+          <a href="https://www.linkedin.com/company/109237583" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Pauuse&middot;Playy : Le jeu pour concevoir des parcours de formation multimodaux.
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL : ajout au panier + comment ça marche -->
+  <div class="modal-overlay" id="addToCartModal" role="dialog" aria-modal="true" aria-labelledby="addCartTitle">
+    <div class="modal-box modal-box--shop">
+      <button class="modal-close" id="addCartClose" aria-label="Fermer">&times;</button>
+      <div class="add-cart-confirm">
+        <div class="add-cart-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2 id="addCartTitle">Produit ajouté au panier</h2>
+        <p>Voici comment se déroulera la suite de votre commande&nbsp;:</p>
+      </div>
+
+      <ol class="add-cart-steps">
+        <li>
+          <strong>Vous remplissez votre panier</strong>
+          <span>Ajoutez les produits qui vous intéressent.</span>
+        </li>
+        <li>
+          <strong>Vous nous envoyez votre demande</strong>
+          <span>Renseignez vos coordonnées et celles de votre entreprise.</span>
+        </li>
+        <li>
+          <strong>Nous vous transmettons une facture</strong>
+          <span>Avec un lien de paiement sécurisé par carte bancaire.</span>
+        </li>
+        <li>
+          <strong>Nous expédions votre commande</strong>
+          <span>Dès réception du paiement, votre colis part avec soin.</span>
+        </li>
+      </ol>
+
+      <div class="add-cart-actions">
+        <button type="button" class="btn btn-outline" id="addCartContinue">Continuer mes achats</button>
+        <a href="/panier" class="btn btn-primary">Voir mon panier</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="shop.js"></script>
+  <script>
+    // Product gallery thumbnail switcher
+    document.querySelectorAll('.product-thumbs').forEach(thumbs => {
+      const targetId = thumbs.dataset.target;
+      const main = document.getElementById(targetId);
+      thumbs.querySelectorAll('.product-thumb').forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          thumbs.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+          main.src = thumb.querySelector('img').src;
+        });
+      });
+    });
+
+    // Add to cart + modal
+    const modal = document.getElementById('addToCartModal');
+    const closeModal = () => modal.classList.remove('open');
+
+    document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        PauuseShop.addToCart(btn.dataset.addToCart);
+        modal.classList.add('open');
+      });
+    });
+
+    document.getElementById('addCartClose').addEventListener('click', closeModal);
+    document.getElementById('addCartContinue').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>

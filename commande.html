@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes coordonnées : Pauuse&middot;Playy</title>
+  <meta name="description" content="Finalisez votre demande d'achat.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="images/logo.png" alt="Pauuse Playy">
+        Pauuse<span class="dot">&middot;</span>Playy
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="/mini-jeux">Les jeux</a>
+        <a href="/equipe">L'équipe</a>
+        <a href="/actualites">Actualités</a>
+        <a href="/ressources">Ressources</a>
+        <a href="/boutique" class="nav-cta">Boutique</a>
+        <a href="/panier" class="nav-cart" aria-label="Panier">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="nav-cart-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="team-hero" id="main-content">
+    <div class="container fade-in">
+      <span class="section-label">Étape 2 / 3</span>
+      <h1>Vos <span class="accent-orange">coordonnées</span></h1>
+      <p>Renseignez vos informations pour recevoir votre facture et votre lien de paiement.</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="checkout-section">
+    <div class="container">
+      <div id="checkout-content"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo.png" alt="Pauuse Playy">
+          Pauuse<span class="dot">&middot;</span>Playy
+        </div>
+        <div class="footer-links">
+          <a href="/">Accueil</a>
+          <a href="/mini-jeux">Les jeux</a>
+          <a href="/equipe">Équipe</a>
+          <a href="/actualites">Actualités</a>
+          <a href="/ressources">Ressources</a>
+          <a href="/boutique">Boutique</a>
+          <a href="https://www.linkedin.com/company/109237583" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Pauuse&middot;Playy : Le jeu pour concevoir des parcours de formation multimodaux.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="shop.js"></script>
+  <script>
+    function renderCheckout() {
+      const cart = PauuseShop.getCart();
+      const ids = Object.keys(cart);
+      const container = document.getElementById('checkout-content');
+
+      if (ids.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <h2>Votre panier est vide</h2>
+            <p>Ajoutez d'abord des produits avant de passer commande.</p>
+            <a href="/boutique" class="btn btn-primary">Voir la boutique</a>
+          </div>
+        `;
+        return;
+      }
+
+      const totals = PauuseShop.getCartTotal();
+      const promo = PauuseShop.getPromoCode();
+      let itemsRecap = '';
+      let itemsHidden = '';
+      ids.forEach(id => {
+        const p = PauuseShop.PRODUCTS[id];
+        if (!p) return;
+        const qty = cart[id];
+        itemsRecap += `
+          <div class="checkout-recap-item">
+            <span>${qty}&times; ${p.name}</span>
+            <span>${PauuseShop.formatPrice(p.price * qty)}</span>
+          </div>
+        `;
+        itemsHidden += `${qty}× ${p.name} : ${PauuseShop.formatPrice(p.price * qty)} TTC\n`;
+      });
+
+      container.innerHTML = `
+        <div class="checkout-layout">
+          <form class="checkout-form" novalidate>
+            <input type="hidden" name="_recap" value="${itemsHidden.replace(/"/g, '&quot;')}${totals.promo ? `\nSous-total TTC : ${PauuseShop.formatPrice(totals.baseTtc)}\nRéduction (${totals.promo.code}) : -${PauuseShop.formatPrice(totals.discountTtc)}` : ''}\nTotal TTC : ${PauuseShop.formatPrice(totals.ttc)} (dont ${PauuseShop.formatPrice(totals.tva)} de TVA)">
+            ${totals.promo ? `<input type="hidden" name="_promo" value="${totals.promo.code} (${totals.promo.label})">` : ''}
+
+            <fieldset class="checkout-fieldset">
+              <legend>Vos coordonnées</legend>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="prenom">Prénom *</label>
+                  <input type="text" id="prenom" name="Prénom" required>
+                </div>
+                <div class="form-field">
+                  <label for="nom">Nom *</label>
+                  <input type="text" id="nom" name="Nom" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="Email" required>
+                </div>
+                <div class="form-field">
+                  <label for="telephone">Téléphone</label>
+                  <input type="tel" id="telephone" name="Téléphone">
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="checkout-fieldset">
+              <legend>Votre entreprise</legend>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="raison-sociale">Raison sociale *</label>
+                  <input type="text" id="raison-sociale" name="Raison sociale" required>
+                </div>
+                <div class="form-field">
+                  <label for="siret">SIRET</label>
+                  <input type="text" id="siret" name="SIRET">
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="tva">N° TVA intracommunautaire</label>
+                <input type="text" id="tva" name="N° TVA">
+              </div>
+            </fieldset>
+
+            <fieldset class="checkout-fieldset">
+              <legend>Adresse de livraison</legend>
+              <div class="form-field">
+                <label for="adresse">Adresse *</label>
+                <input type="text" id="adresse" name="Adresse" required>
+              </div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="cp">Code postal *</label>
+                  <input type="text" id="cp" name="Code postal" required>
+                </div>
+                <div class="form-field form-field--wide">
+                  <label for="ville">Ville *</label>
+                  <input type="text" id="ville" name="Ville" required>
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="pays">Pays *</label>
+                <input type="text" id="pays" name="Pays" value="France" required>
+              </div>
+            </fieldset>
+
+            <fieldset class="checkout-fieldset">
+              <legend>Message complémentaire (facultatif)</legend>
+              <div class="form-field">
+                <label for="message">Une précision, une question ?</label>
+                <textarea id="message" name="Message" rows="4"></textarea>
+              </div>
+            </fieldset>
+
+            <div class="checkout-submit">
+              <p class="checkout-disclaimer">En validant, votre demande nous est envoyée directement. Nous reviendrons vers vous rapidement avec une facture et un lien de paiement sécurisé par carte bancaire. Aucun débit ne sera effectué à ce stade.</p>
+              <button type="submit" class="btn btn-primary btn-block" id="checkout-submit-btn">Envoyer ma demande d'achat</button>
+              <div id="checkout-error" class="checkout-fallback" hidden>
+                <p><strong>L'envoi automatique a échoué.</strong> Vous pouvez nous envoyer votre demande par email en un clic, tout est prêt.</p>
+                <a href="#" class="btn btn-primary btn-block" id="checkout-mailto-btn">Envoyer par email</a>
+                <button type="button" class="btn btn-outline btn-block" id="checkout-retry-btn">Réessayer l'envoi automatique</button>
+              </div>
+              <a href="/panier" class="cart-continue">&larr; Retour au panier</a>
+            </div>
+          </form>
+
+          <aside class="cart-summary checkout-summary">
+            <h3>Récapitulatif</h3>
+            ${itemsRecap}
+            <div class="cart-summary-divider"></div>
+            ${totals.promo ? `
+            <div class="cart-summary-line cart-summary-strike">
+              <span>Sous-total TTC</span>
+              <span>${PauuseShop.formatPrice(totals.baseTtc)}</span>
+            </div>
+            <div class="cart-summary-line cart-summary-discount">
+              <span>Code <strong>${totals.promo.code}</strong> (${totals.promo.label})</span>
+              <span>− ${PauuseShop.formatPrice(totals.discountTtc)}</span>
+            </div>` : ''}
+            <div class="cart-summary-line">
+              <span>Sous-total HT</span>
+              <span>${PauuseShop.formatPrice(totals.ht)}</span>
+            </div>
+            <div class="cart-summary-line">
+              <span>TVA (20 %)</span>
+              <span>${PauuseShop.formatPrice(totals.tva)}</span>
+            </div>
+            <div class="cart-summary-line cart-summary-total">
+              <span>Total TTC</span>
+              <span>${PauuseShop.formatPrice(totals.ttc)}</span>
+            </div>
+            <p class="cart-summary-note">Port inclus en France métropolitaine</p>
+          </aside>
+        </div>
+      `;
+
+      // ----- Webhook (Google Apps Script) with mailto fallback -----
+      const WEBHOOK_URL = 'https://script.google.com/a/macros/pauuse.fr/s/AKfycbwyhOxMNugdPErbr_aahzxop-Ufpjb6M6bWvssxAnygSP72xnJ3VQBIi4dJkBAl70UePQ/exec';
+
+      const form = container.querySelector('form');
+      if (!form) return;
+      const submitBtn = container.querySelector('#checkout-submit-btn');
+      const errorBlock = container.querySelector('#checkout-error');
+      const mailtoBtn = container.querySelector('#checkout-mailto-btn');
+      const retryBtn = container.querySelector('#checkout-retry-btn');
+
+      const buildEmailBody = () => {
+        const data = new FormData(form);
+        const fields = {};
+        for (const [k, v] of data.entries()) fields[k] = v;
+        const NL = String.fromCharCode(10);
+
+        // ----- Email à Clément (interne) -----
+        const internal = [];
+        internal.push('Bonjour,');
+        internal.push('');
+        internal.push("Voici une nouvelle demande d'achat depuis le site Pauuse·Playy.");
+        internal.push('');
+        internal.push('--- COMMANDE ---');
+        internal.push(fields._recap || '');
+        if (fields._promo) {
+          internal.push('');
+          internal.push('Code promo : ' + fields._promo);
+        }
+        internal.push('');
+        internal.push('--- CONTACT ---');
+        internal.push('Prénom : ' + (fields['Prénom'] || ''));
+        internal.push('Nom : ' + (fields['Nom'] || ''));
+        internal.push('Email : ' + (fields['Email'] || ''));
+        if (fields['Téléphone']) internal.push('Téléphone : ' + fields['Téléphone']);
+        internal.push('');
+        internal.push('--- ENTREPRISE ---');
+        internal.push('Raison sociale : ' + (fields['Raison sociale'] || ''));
+        if (fields['SIRET']) internal.push('SIRET : ' + fields['SIRET']);
+        if (fields['N° TVA']) internal.push('N° TVA intracommunautaire : ' + fields['N° TVA']);
+        internal.push('');
+        internal.push('--- LIVRAISON ---');
+        internal.push('Adresse : ' + (fields['Adresse'] || ''));
+        internal.push('Code postal : ' + (fields['Code postal'] || ''));
+        internal.push('Ville : ' + (fields['Ville'] || ''));
+        internal.push('Pays : ' + (fields['Pays'] || ''));
+        if (fields['Message']) {
+          internal.push('');
+          internal.push('--- MESSAGE ---');
+          internal.push(fields['Message']);
+        }
+
+        // ----- Email de confirmation à l'acheteur -----
+        const customer = [];
+        customer.push('Bonjour ' + (fields['Prénom'] || '') + ',');
+        customer.push('');
+        customer.push("Merci pour votre demande d'achat Pauuse·Playy ! Nous avons bien reçu votre commande et nous revenons vers vous au plus vite avec une facture et un lien de paiement sécurisé par carte bancaire.");
+        customer.push('');
+        customer.push('--- RÉCAPITULATIF DE VOTRE COMMANDE ---');
+        customer.push(fields._recap || '');
+        if (fields._promo) {
+          customer.push('');
+          customer.push('Code promo appliqué : ' + fields._promo);
+        }
+        customer.push('');
+        customer.push('--- LIVRAISON ---');
+        customer.push((fields['Prénom'] || '') + ' ' + (fields['Nom'] || ''));
+        if (fields['Raison sociale']) customer.push(fields['Raison sociale']);
+        customer.push(fields['Adresse'] || '');
+        customer.push((fields['Code postal'] || '') + ' ' + (fields['Ville'] || ''));
+        customer.push(fields['Pays'] || '');
+        customer.push('');
+        customer.push("Aucun débit n'a été effectué à ce stade. Le paiement se fera uniquement lorsque vous validerez le lien de paiement que nous vous enverrons.");
+        customer.push('');
+        customer.push("Pour toute question, vous pouvez répondre à cet email ou nous écrire à clement.cahagne@pauuse.fr.");
+        customer.push('');
+        customer.push('À très vite,');
+        customer.push('Clément & Olivier');
+        customer.push('Pauuse·Playy');
+
+        return {
+          subject: "Demande d'achat Pauuse·Playy : " + (fields['Prénom'] || '') + ' ' + (fields['Nom'] || ''),
+          body: internal.join(NL),
+          replyTo: fields['Email'] || '',
+          customerEmail: fields['Email'] || '',
+          customerSubject: "Votre demande Pauuse·Playy a bien été reçue",
+          customerBody: customer.join(NL)
+        };
+      };
+
+      const buildMailto = () => {
+        const email = buildEmailBody();
+        return 'mailto:clement.cahagne@pauuse.fr?subject=' + encodeURIComponent(email.subject) + '&body=' + encodeURIComponent(email.body);
+      };
+
+      const showError = () => {
+        errorBlock.hidden = false;
+        submitBtn.hidden = true;
+        mailtoBtn.href = buildMailto();
+      };
+
+      const hideError = () => {
+        errorBlock.hidden = true;
+        submitBtn.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Envoyer ma demande d'achat";
+      };
+
+      retryBtn.addEventListener('click', hideError);
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const required = form.querySelectorAll('[required]');
+        for (const field of required) {
+          if (!field.value.trim()) {
+            field.reportValidity();
+            field.focus();
+            return;
+          }
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Envoi en cours…';
+
+        const payload = buildEmailBody();
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload),
+            signal: controller.signal,
+            redirect: 'follow'
+          });
+          clearTimeout(timeoutId);
+          if (!res.ok) throw new Error('Webhook HTTP ' + res.status);
+          const result = await res.json();
+          if (!result.ok) throw new Error('Webhook returned ok=false');
+          window.location.href = '/confirmation';
+        } catch (err) {
+          clearTimeout(timeoutId);
+          console.warn('Webhook submission failed:', err);
+          showError();
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCheckout);
+  </script>
+</body>
+</html>

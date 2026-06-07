@@ -1,0 +1,6 @@
+.gcloudignore
+.git
+.gitignore
+.claude
+.DS_Store
+*.md
