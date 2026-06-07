@@ -11,6 +11,30 @@ let phase = "scene"; // "scene" | "question" | "revelation"
 const $ = (id) => document.getElementById(id);
 const audio = $("audio");
 
+// ---- Routage par URL (ex: /missionpersona/marcel) ----
+// BASE = chemin de base du site (« /missionpersona/ » en prod, « / » en local).
+const BASE = (() => {
+  try {
+    return new URL(document.baseURI).pathname.replace(/[^/]*$/, "");
+  } catch (e) {
+    return "/";
+  }
+})();
+
+function idDepuisURL() {
+  let rest = location.pathname;
+  if (rest.startsWith(BASE)) rest = rest.slice(BASE.length);
+  rest = rest.replace(/index\.html$/, "").replace(/^\/+|\/+$/g, "");
+  return rest; // "" pour l'accueil, sinon l'id de l'affaire
+}
+
+function majURL(id, remplacer) {
+  const url = BASE + (id || "");
+  const etat = { id: id || null };
+  if (remplacer) history.replaceState(etat, "", url);
+  else history.pushState(etat, "", url);
+}
+
 // ---- Navigation entre écrans ----
 function montrerEcran(id) {
   document.querySelectorAll(".ecran").forEach((e) => e.classList.remove("active"));
@@ -49,7 +73,10 @@ function initAccueil() {
 }
 
 // ---- Ouvrir une affaire ----
-function ouvrirHistoire(h) {
+function ouvrirHistoire(h, options) {
+  const opts = options || {};
+  if (opts.url !== false) majURL(h.id, opts.remplacer);
+
   if (h.enPreparation || !h.questions || h.questions.length === 0) {
     $("prepa-nom").textContent = h.nom;
     montrerEcran("ecran-prepa");
@@ -214,17 +241,34 @@ $("btn-reveler").addEventListener("click", () => allerPhase("revelation"));
 $("btn-q-suivante").addEventListener("click", questionSuivante);
 
 $("btn-commencer-enquete").addEventListener("click", demarrerEnquete);
-$("btn-briefing-retour").addEventListener("click", () => montrerEcran("ecran-accueil"));
 
-$("btn-retour").addEventListener("click", () => {
+function retourAccueil() {
   audio.pause();
+  majURL("");
   montrerEcran("ecran-accueil");
-});
-$("btn-recommencer").addEventListener("click", () => {
+}
+$("btn-briefing-retour").addEventListener("click", retourAccueil);
+$("btn-retour").addEventListener("click", retourAccueil);
+$("btn-recommencer").addEventListener("click", retourAccueil);
+$("btn-prepa-retour").addEventListener("click", retourAccueil);
+
+// ---- Bouton précédent/suivant du navigateur ----
+window.addEventListener("popstate", () => {
   audio.pause();
-  montrerEcran("ecran-accueil");
+  appliquerRoute(true);
 });
-$("btn-prepa-retour").addEventListener("click", () => montrerEcran("ecran-accueil"));
+
+// ---- Appliquer la route courante (sans toucher à l'historique) ----
+function appliquerRoute(remplacer) {
+  const id = idDepuisURL();
+  const h = id && HISTOIRES.find((x) => x.id === id);
+  if (h) {
+    ouvrirHistoire(h, { url: false });
+  } else {
+    montrerEcran("ecran-accueil");
+  }
+}
 
 // ---- Démarrage ----
 initAccueil();
+appliquerRoute();
