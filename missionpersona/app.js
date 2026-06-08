@@ -138,7 +138,7 @@ function rendreIdentimetre(rubriqueActive) {
 }
 
 // ---- Forme d'onde du lecteur (construite une fois) ----
-const ONDE_N = 46;
+const ONDE_N = 34;
 function construireOnde() {
   const onde = $("onde");
   if (!onde || onde.childElementCount) return;

@@ -445,14 +445,16 @@ body::before {
 .lecteur-infos { flex: 1; min-width: 0; }
 /* Forme d'onde */
 .onde {
-  display: flex; align-items: center; gap: 3px;
+  display: flex; align-items: center; gap: 2px;
   height: 44px;
+  width: 100%;
+  overflow: hidden;
   cursor: pointer;
   margin-bottom: 8px;
 }
 .onde span {
-  flex: 1;
-  min-width: 2px;
+  flex: 1 1 0;
+  min-width: 0;
   height: 30%;
   border-radius: 2px;
   background: var(--manila-2);
@@ -649,6 +651,12 @@ body::before {
 @media (max-width: 860px) { .grille-dossiers { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 540px) {
   .grille-dossiers { grid-template-columns: 1fr; }
-  .carte-enquete { padding: 24px; }
-  .enquete-entete { flex-wrap: wrap; }
+  .carte-enquete { padding: 22px 18px; }
+  .lecteur { gap: 12px; padding: 14px; }
+  .btn-play { width: 50px; height: 50px; font-size: 16px; }
+  .onde { gap: 1px; height: 38px; }
+  .slate { padding: 10px 13px; }
+  .scene-rec { font-size: 10px; letter-spacing: 0.08em; }
+  .idm-cell .idm-lib { font-size: 9px; }
+  .idm-cell .idm-ico { width: 30px; height: 30px; font-size: 15px; }
 }
