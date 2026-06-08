@@ -70,45 +70,41 @@
 
       <div class="carte-enquete">
 
-        <!-- En-tête commun -->
+        <!-- En-tête commun : suspect + nom + n° d'affaire -->
         <div class="enquete-entete">
           <img id="avatar-enquete" class="avatar-enquete" alt=""
                onerror="this.onerror=null;this.src='portraits/inconnu.svg'">
           <span id="badge-affaire" class="badge-affaire"></span>
-          <div>
-            <h2 id="nom-enquete"></h2>
-            <p id="role-enquete" class="role-enquete"></p>
-          </div>
+          <h2 id="nom-enquete"></h2>
         </div>
 
-        <div class="ligne-meta">
-          <span id="rubrique-chip" class="rubrique-chip"></span>
-          <span id="jauge" class="jauge"></span>
-        </div>
-
+        <!-- N° de question + fil d'Ariane (progression) -->
         <div class="progression">
           <span id="etape-courante"></span>
           <div class="barre"><div id="barre-remplie" class="barre-remplie"></div></div>
         </div>
 
+        <!-- Identimètre : les 5 axes d'enquête -->
+        <div id="identimetre" class="identimetre"></div>
+
         <!-- PHASE 1 : SCÈNE + AUDIO -->
         <div id="phase-scene" class="phase">
-          <div class="slate">
-            <span id="scene-lieu" class="scene-lieu"></span>
-            <span id="scene-duree" class="scene-duree"></span>
-          </div>
+          <div class="lecteur-bloc">
+            <div class="slate">
+              <span id="scene-lieu" class="scene-lieu"></span>
+              <span class="scene-rec"><span class="rec-dot"></span>Pièce sonore</span>
+            </div>
 
-          <div class="lecteur">
-            <button id="btn-play" class="btn-play" aria-label="Lecture / Pause">
-              <span id="icone-play">▶</span>
-            </button>
-            <div class="lecteur-infos">
-              <div class="temps">
-                <span id="temps-actuel">0:00</span>
-                <span id="temps-total">0:00</span>
-              </div>
-              <div class="barre-audio" id="barre-audio">
-                <div id="barre-audio-remplie" class="barre-audio-remplie"></div>
+            <div class="lecteur">
+              <button id="btn-play" class="btn-play" aria-label="Lecture / Pause">
+                <span id="icone-play">▶</span>
+              </button>
+              <div class="lecteur-infos">
+                <div class="onde" id="onde"></div>
+                <div class="temps">
+                  <span id="temps-actuel">0:00</span>
+                  <span id="temps-total">0:00</span>
+                </div>
               </div>
             </div>
           </div>

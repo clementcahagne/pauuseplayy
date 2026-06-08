@@ -55,10 +55,10 @@ function initAccueil() {
     carte.className = "dossier" + (h.enPreparation ? " dossier-prepa" : "");
     carte.innerHTML = `
       <span class="dossier-num">${h.numero}</span>
-      ${h.enPreparation ? '<span class="dossier-scelle">Sous scellés</span>' : ""}
       <div class="dossier-photo">
         <img src="${h.portrait}" alt="${h.nom}"
              onerror="this.onerror=null;this.src='portraits/inconnu.svg'">
+        ${h.enPreparation ? '<span class="dossier-scelle">Sous scellés</span>' : ""}
       </div>
       <div class="dossier-infos">
         <div class="dossier-nom">${h.nom}</div>
@@ -88,7 +88,6 @@ function ouvrirHistoire(h, options) {
   // En-tête de l'écran d'enquête
   $("badge-affaire").textContent = h.numero;
   $("nom-enquete").textContent = h.nom;
-  $("role-enquete").textContent = h.fiche || h.role;
   $("avatar-enquete").src = h.portrait;
 
   // Briefing si disponible, sinon démarrage direct
@@ -124,14 +123,38 @@ function demarrerEnquete() {
   montrerEcran("ecran-lecture");
 }
 
-// ---- Jauge (axe d'enquête) ----
-function rendreJauge(n) {
-  let s = "";
-  for (let i = 1; i <= 5; i++) {
-    s += `<span class="seg ${i <= n ? "on" : ""}"></span>`;
+// ---- Identimètre : les 5 axes (axe courant en valeur, autres grisés) ----
+function rendreIdentimetre(rubriqueActive) {
+  const liste = typeof RUBRIQUES !== "undefined" ? RUBRIQUES : [];
+  $("identimetre").innerHTML = liste
+    .map((r) => {
+      const actif = r === rubriqueActive || r.nom === (rubriqueActive && rubriqueActive.nom);
+      return `<div class="idm-cell ${actif ? "actif" : ""}">
+        <span class="idm-ico">${r.icone}</span>
+        <span class="idm-lib">${r.court || r.nom}</span>
+      </div>`;
+    })
+    .join("");
+}
+
+// ---- Forme d'onde du lecteur (construite une fois) ----
+const ONDE_N = 46;
+function construireOnde() {
+  const onde = $("onde");
+  if (!onde || onde.childElementCount) return;
+  let html = "";
+  for (let i = 0; i < ONDE_N; i++) {
+    // hauteurs déterministes pour un rendu "pièce sonore"
+    const h = 22 + Math.round(Math.abs(Math.sin(i * 1.7) + 0.5 * Math.sin(i * 0.55)) * 60);
+    html += `<span style="height:${Math.min(100, h)}%"></span>`;
   }
-  const prio = n <= 1 ? '<span class="prio-max">Priorité max</span>' : "";
-  return s + prio;
+  onde.innerHTML = html;
+}
+function majOnde(ratio) {
+  const barres = $("onde").children;
+  for (let i = 0; i < barres.length; i++) {
+    barres[i].classList.toggle("on", (i + 0.5) / barres.length <= ratio);
+  }
 }
 
 // ---- Charger la question courante (phase scène) ----
@@ -139,24 +162,20 @@ function chargerQuestion() {
   const q = histoireCourante.questions[qIndex];
   const total = histoireCourante.questions.length;
 
-  // En-tête méta
-  $("rubrique-chip").textContent = `${q.rubrique.icone} ${q.rubrique.nom}`;
-  $("jauge").innerHTML = rendreJauge(q.rubrique.jauge);
+  // N° de question + fil d'Ariane + identimètre
   $("etape-courante").textContent = `Question ${qIndex + 1} / ${total}`;
-  $("barre-remplie").style.width = `${(qIndex / total) * 100}%`;
+  $("barre-remplie").style.width = `${((qIndex + 1) / total) * 100}%`;
+  rendreIdentimetre(q.rubrique);
 
   // Scène
   $("scene-lieu").textContent = q.scene.lieu || "";
-  // La durée réelle est affichée par le lecteur ; pas d'étiquette figée.
-  $("scene-duree").textContent = "";
-  // Le script du podcast n'est pas affiché : l'audio est le contenu de la scène.
 
   // Audio
   audio.src = q.scene.audio;
   audio.load();
   $("temps-actuel").textContent = "0:00";
   $("temps-total").textContent = "0:00";
-  $("barre-audio-remplie").style.width = "0%";
+  majOnde(0);
   majIconePlay(false);
 
   // Question + consigne
@@ -228,9 +247,9 @@ audio.addEventListener("loadedmetadata", () => {
 });
 audio.addEventListener("timeupdate", () => {
   $("temps-actuel").textContent = formatTemps(audio.currentTime);
-  $("barre-audio-remplie").style.width = `${(audio.currentTime / audio.duration) * 100 || 0}%`;
+  majOnde((audio.currentTime / audio.duration) || 0);
 });
-$("barre-audio").addEventListener("click", (e) => {
+$("onde").addEventListener("click", (e) => {
   const rect = e.currentTarget.getBoundingClientRect();
   if (audio.duration) audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
 });
@@ -270,5 +289,6 @@ function appliquerRoute(remplacer) {
 }
 
 // ---- Démarrage ----
+construireOnde();
 initAccueil();
 appliquerRoute();

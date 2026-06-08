@@ -20,11 +20,14 @@ const ENQUETE = {
 };
 
 // --- Axes d'enquête (rubriques) ---
-const R_PERSO  = { icone: "🧑", nom: "Profil personnel",      jauge: 3 };
-const R_PRO    = { icone: "💼", nom: "Profil professionnel",  jauge: 3 };
-const R_CONN   = { icone: "📚", nom: "Niveau de connaissance", jauge: 1 };
-const R_MOTIV  = { icone: "🎯", nom: "Attentes et motivations", jauge: 1 };
-const R_FREINS = { icone: "⚠️", nom: "Freins et pain points",  jauge: 3 };
+const R_PERSO  = { icone: "🧑", nom: "Profil personnel",       court: "Profil perso" };
+const R_PRO    = { icone: "💼", nom: "Profil professionnel",   court: "Profil pro" };
+const R_CONN   = { icone: "📚", nom: "Niveau de connaissance", court: "Connaissance" };
+const R_MOTIV  = { icone: "🎯", nom: "Attentes et motivations", court: "Motivations" };
+const R_FREINS = { icone: "⚠️", nom: "Freins et pain points",  court: "Freins" };
+
+// Ordre des 5 axes pour l'identimètre
+const RUBRIQUES = [R_PERSO, R_PRO, R_CONN, R_MOTIV, R_FREINS];
 
 // ============================================================
 //  AFFAIRE N°01 — MARCEL DUBOIS
