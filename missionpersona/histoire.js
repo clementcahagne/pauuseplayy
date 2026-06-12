@@ -834,7 +834,378 @@ const LEA = {
 };
 
 // ============================================================
-//  AFFAIRES 3 À 6 — à compléter (placeholders)
+//  AFFAIRE N°03 — SOPHIE NGUYEN
+// ============================================================
+const SOPHIE = {
+  id: "sophie",
+  numero: "Affaire n°03",
+  nom: "Sophie Nguyen",
+  role: "Cheffe de projet digital",
+  fiche: "28 ans · PixelWave Agency (35 employés) · 3 ans d'ancienneté",
+  accroche: "15 janvier 2025, 23h47. Elle efface 18 mois de travail d'un clic. Pourquoi son plan de formation n'a-t-il jamais pris ?",
+  portrait: "portraits/Sophie_Nguyen.png",
+  briefing: {
+    securite: "Dossier ouvert — Niveau de priorité : élevé",
+    identite: [
+      ["Nom", "NGUYEN, Sophie"],
+      ["Âge", "28 ans"],
+      ["Profession", "Cheffe de projet digital"],
+      ["Entreprise", "PixelWave Agency (35 employés)"],
+      ["Ancienneté", "3 ans"],
+    ],
+    incident: [
+      "15 janvier 2025, 8h30. Le directeur général de PixelWave ouvre le dossier partagé « Plan de formation 2025 ». Le dossier est vide. Complètement vide. Les 12 modules planifiés, les inscriptions, les budgets validés — tout a disparu.",
+      "Les logs informatiques montrent une suppression massive à 23h47 la veille, depuis le compte de Sophie Nguyen, Cheffe de projet digital, responsable du plan de formation de son équipe depuis un an et demi.",
+      "Confrontée aux faits, Sophie fond en larmes : « J'ai tout supprimé parce que rien ne marchait. RIEN. J'ai passé 6 mois à construire un plan parfait sur le papier, un an à le déployer… et personne ne venait aux formations. »",
+    ],
+    mission: "Comprendre pourquoi le plan de formation de Sophie a échoué malgré un an et demi de travail. Reconstituer les erreurs d'analyse qui l'ont menée à construire un dispositif déconnecté de la réalité de son équipe.",
+  },
+  questions: [
+    // ---------- 1 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie1.mp3",
+        dialogue: [
+          { qui: "", dit: "Sophie se tord les mains nerveusement." },
+          { qui: "Sophie", dit: "Mon équipe ? Oui, je les connais… enfin, je croyais. Il y a des trentenaires, des quarantenaires, quelques seniors. Des profils très différents. Mais sur le papier, j'avais les infos de base : âge, poste, ancienneté. Je pensais que ça suffisait." },
+        ],
+      },
+      question: "Au-delà des données démographiques, quelles caractéristiques personnelles de votre public pourraient influencer leur rapport à la formation ?",
+      consigne: "Allez au-delà de l'âge et du poste. Pensez aux habitudes d'apprentissage, au rapport à la technologie, aux contraintes personnelles (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : L'ILLUSION DES DONNÉES DÉMOGRAPHIQUES",
+        texte: "Sophie avait un fichier Excel impeccable : âges, postes, dates d'embauche. Mais elle ignorait la phobie des formations en groupe de Françoise, l'impossibilité pour Julien de rester assis plus d'une heure, les contraintes familiales de Nadia. Les données froides ne racontent pas l'humain derrière le poste.",
+        indice: "Les données démographiques ne suffisent pas. Le vécu personnel façonne le rapport à l'apprentissage.",
+      },
+    },
+    // ---------- 2 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie2.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur affiche l'organigramme de PixelWave." },
+          { qui: "Inspecteur", dit: "Sophie, décrivez-moi votre équipe. Pas les noms. Les MÉTIERS. Ce qu'ils font vraiment au quotidien." },
+          { qui: "", dit: "Sophie hésite longuement." },
+          { qui: "Sophie", dit: "Eh bien… il y a des graphistes, des développeurs, des UX designers, un community manager… Ils font… du digital ?" },
+        ],
+      },
+      question: "Quelle est la fonction exacte de votre public et quelles sont ses missions quotidiennes concrètes ?",
+      consigne: "Décrivez le métier RÉEL de VOS apprenants avec précision. « Ils font du digital » n'est pas une réponse. Détaillez les tâches concrètes (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : ÉQUIPE HÉTÉROGÈNE AUX MÉTIERS RADICALEMENT DIFFÉRENTS",
+        texte: "L'équipe mêlait graphistes print migrant vers le digital, développeurs juniors, UX designers, community manager, chefs de projet et freelances tournants. Sophie a mis ces 15 profils dans le même « plan de formation digital » : autant donner le même médicament à des patients ayant des maladies différentes.",
+        indice: "Une équipe n'est pas un bloc homogène. Chaque métier a des besoins de formation spécifiques.",
+      },
+    },
+    // ---------- 3 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie3.mp3",
+        dialogue: [
+          { qui: "Sophie", dit: "Je leur ai envoyé un questionnaire en ligne pour connaître leurs besoins. Sur 15 personnes, j'ai eu… 3 réponses. Les 12 autres n'ont même pas ouvert le mail." },
+          { qui: "", dit: "Elle soupire." },
+          { qui: "Sophie", dit: "Alors j'ai décidé toute seule. J'ai regardé les tendances du marché — IA, no-code, UX writing — et j'ai construit le plan là-dessus. Logique, non ?" },
+        ],
+      },
+      question: "Comment recueillez-vous les besoins réels de votre public ? Les consultez-vous directement ?",
+      consigne: "Questionnez votre méthode de recueil des besoins. Un questionnaire non rempli n'est pas un silence, c'est un message (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "ANALYSE : BESOINS DÉCIDÉS PAR LE HAUT, PAS PAR LE TERRAIN",
+        texte: "Sophie a construit le plan sur les tendances du marché et les souhaits de la direction, pas sur le terrain. Les 12 non-réponses au questionnaire signifiaient « On n'y croit pas ». Résultat : de l'IA pour des graphistes qui avaient d'abord besoin de Figma, du no-code pour des développeurs qui trouvaient ça insultant.",
+        indice: "Un plan de formation construit sans consultation terrain est un plan déconnecté.",
+      },
+    },
+    // ---------- 4 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie4.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur montre le calendrier de l'agence." },
+          { qui: "Inspecteur", dit: "Regardez ces dates. Vos formations étaient planifiées les lundis de 9h à 17h. Mais votre équipe… elle faisait quoi le lundi ?" },
+          { qui: "", dit: "Sophie blêmit." },
+          { qui: "Sophie", dit: "Le lundi… c'est le jour des livraisons clients. C'est le jour le plus chargé de la semaine. Oh non…" },
+        ],
+      },
+      question: "Quelles sont les contraintes opérationnelles et organisationnelles de votre public (charge de travail, saisonnalité, disponibilité) ?",
+      consigne: "Identifiez les moments où VOS apprenants sont RÉELLEMENT disponibles, pas seulement sur le papier. Contraintes de production, pics d'activité, réunions récurrentes… (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "ANALYSE : FORMATION PLANIFIÉE AU PIRE MOMENT",
+        texte: "Le lundi, jour des livraisons clients, était le seul jour où PERSONNE ne pouvait se libérer. Sophie l'avait choisi « parce que c'est motivant ». Résultat : 80 % d'absentéisme. Sophie y a vu un boycott ; l'équipe y a vu la preuve qu'elle ignorait leur quotidien.",
+        indice: "Planifier une formation sans connaître le rythme opérationnel, c'est programmer un échec.",
+      },
+    },
+    // ---------- 5 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie5.mp3",
+        dialogue: [
+          { qui: "Sophie", dit: "Il y avait aussi le problème des freelances. J'avais 2 freelances qui changeaient tous les 2-3 mois. Je les incluais dans le plan, mais ils partaient avant la fin. Et les nouveaux arrivaient sans avoir suivi le début…" },
+        ],
+      },
+      question: "Quel est le taux de rotation de votre public ? Avez-vous des profils temporaires, saisonniers ou en transition ?",
+      consigne: "Évaluez la stabilité de VOS apprenants. Un public qui change impacte la continuité pédagogique et le format de la formation (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "ANALYSE : PUBLIC MOUVANT, PLAN FIGÉ",
+        texte: "Sophie avait conçu un plan linéaire sur 12 mois, mais entre les freelances qui tournaient chaque trimestre et les départs en cours d'année, le groupe n'était jamais le même d'une session à l'autre. Un public instable exige un plan modulaire, pas séquentiel.",
+        indice: "Un plan linéaire pour un public mouvant est condamné à l'échec.",
+      },
+    },
+    // ---------- 6 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie6.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Sophie, qui décide des formations chez PixelWave ? Vous ? Le directeur ? Les collaborateurs ?" },
+          { qui: "Sophie", dit: "Moi, en théorie. Mais le directeur voulait absolument de l'IA. Les managers voulaient des soft skills. Et les collaborateurs… personne ne leur a demandé." },
+        ],
+      },
+      question: "Qui décide de la formation de votre public ? Quelle est la chaîne de décision et où se situe le pouvoir réel ?",
+      consigne: "Identifiez tous les décideurs : commanditaires, managers, RH, apprenants eux-mêmes. Leurs intérêts convergent-ils ? (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "ANALYSE : TROP DE DÉCIDEURS, AUCUNE COHÉRENCE",
+        texte: "Le directeur voulait de l'« innovant », les managers de l'« utile », et les collaborateurs n'avaient jamais voix au chapitre. À vouloir satisfaire tout le monde, le plan ne satisfaisait personne.",
+        indice: "Quand le commanditaire, le manager et l'apprenant n'ont pas les mêmes objectifs, le plan de formation est un compromis qui ne sert personne.",
+      },
+    },
+    // ---------- 7 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie7.mp3",
+        dialogue: [
+          { qui: "Sophie", dit: "Je savais que certains étaient débutants et d'autres confirmés. Mais j'ai fait UN SEUL programme. Pour tout le monde. Même niveau, même rythme." },
+          { qui: "Sophie", dit: "Les débutants étaient largués dès la deuxième heure. Les confirmés s'ennuyaient dès la première." },
+        ],
+      },
+      question: "Le niveau de connaissance de votre public est-il homogène ou hétérogène ? Comment gérez-vous les écarts ?",
+      consigne: "Évaluez la diversité des niveaux au sein de VOS apprenants. Un groupe hétérogène nécessite une différenciation pédagogique (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : HÉTÉROGÉNÉITÉ IGNORÉE",
+        texte: "Des graphistes seniors sans aucune base digitale face à des développeurs juniors ultra à l'aise techniquement : un seul programme pour ces deux extrêmes garantissait que personne ne serait au bon niveau.",
+        indice: "L'hétérogénéité des niveaux est la première variable à analyser avant de concevoir un programme.",
+      },
+    },
+    // ---------- 8 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie8.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Avez-vous testé le niveau de votre équipe AVANT de lancer les formations ?" },
+          { qui: "", dit: "Sophie, gênée." },
+          { qui: "Sophie", dit: "Non. Je me suis fiée à… mon intuition. Et aux fiches de poste." },
+        ],
+      },
+      question: "Disposez-vous d'un diagnostic initial des compétences de votre public ? Comment évaluez-vous leur point de départ ?",
+      consigne: "Un diagnostic préalable est indispensable. Sans lui, vous construisez dans le flou (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : ABSENCE DE DIAGNOSTIC = VOL À L'AVEUGLE",
+        texte: "Sophie a présupposé les niveaux à partir des intitulés de poste. Or un « graphiste senior » peut être expert en Photoshop et ignorer Figma. Un simple test de 15 minutes en amont aurait révélé les écarts.",
+        indice: "Présupposer un niveau sans le mesurer, c'est prescrire un traitement sans diagnostic.",
+      },
+    },
+    // ---------- 9 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie9.mp3",
+        dialogue: [
+          { qui: "Sophie", dit: "Quand je leur ai annoncé le programme, ils m'ont regardée avec des yeux vides. Aucune réaction. Ni enthousiasme, ni rejet. Juste… rien." },
+          { qui: "Sophie", dit: "J'aurais dû comprendre que « rien », c'est pire que « non »." },
+        ],
+      },
+      question: "Qu'est-ce qui motiverait RÉELLEMENT votre public à s'investir dans la formation ? Quel bénéfice concret en retirent-ils ?",
+      consigne: "Identifiez les leviers de motivation RÉELS de VOS apprenants — pas ce que vous aimeriez, ce qui les fait vraiment bouger (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : AUCUN BÉNÉFICE PERÇU = ZÉRO ENGAGEMENT",
+        texte: "L'équipe ne voyait pas ce qu'elle avait à gagner : aucun lien entre les formations et les projets à livrer. Sophie n'avait jamais explicité le « pourquoi » de chaque module. Sans bénéfice perçu, l'engagement est nul.",
+        indice: "La question n'est pas « Quelle formation proposer ? » mais « Pourquoi cette formation changerait-elle quelque chose pour EUX ? »",
+      },
+    },
+    // ---------- 10 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie10.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Ont-ils exprimé des préférences de format ?" },
+          { qui: "Sophie", dit: "Oui ! Marc, le graphiste senior, m'a dit : « Moi je veux juste qu'on me montre Figma en 2 heures, pas qu'on me fasse une formation de 3 jours sur le design thinking. » Et Clara, la dev junior, voulait un mentor, pas un cours magistral." },
+        ],
+      },
+      question: "Votre public préfère-t-il un format court ou long ? Théorique ou pratique ? Accompagné ou autonome ?",
+      consigne: "Explorez les préférences de FORMAT de VOS apprenants. Le meilleur contenu dans le mauvais format sera rejeté (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : FORMAT IMPOSÉ VS FORMAT DÉSIRÉ",
+        texte: "Sophie imposait des journées de 7h en présentiel ; l'équipe réclamait des micro-formats de 1-2h et du mentorat individuel. Un restaurant gastronomique pour des gens qui voulaient du street food rapide et ciblé.",
+        indice: "Le format est aussi important que le contenu. Un mauvais format tue le meilleur programme.",
+      },
+    },
+    // ---------- 11 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie11.mp3",
+        dialogue: [
+          { qui: "", dit: "Sophie, les yeux rouges." },
+          { qui: "Sophie", dit: "Le pire ? Marc m'a dit : « Sophie, on n'avait rien demandé. Tu nous as imposé un truc dont on n'a pas besoin, au pire moment de l'année, dans un format qui ne nous convient pas. Et tu t'étonnes qu'on ne vienne pas ? » Il avait raison." },
+        ],
+      },
+      question: "Comment impliquez-vous votre public dans la conception de leur formation ? Ont-ils un pouvoir de décision ?",
+      consigne: "Évaluez le degré de co-construction possible avec VOS apprenants. Plus ils participent, plus ils s'investissent (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : FORMATION DESCENDANTE = FORMATION REJETÉE",
+        texte: "Sophie a tout conçu seule, sans jamais impliquer l'équipe. Un atelier de 30 minutes, un vote sur les formats, un choix des créneaux auraient suffi à en faire « leur » formation, pas « celle de Sophie ».",
+        indice: "Co-construire la formation avec les apprenants n'est pas une perte de temps, c'est un investissement dans l'engagement.",
+      },
+    },
+    // ---------- 12 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie12.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Vos collaborateurs avaient-ils déjà vécu de mauvaises expériences de formation ?" },
+          { qui: "Sophie", dit: "L'année d'avant, la direction avait imposé une formation « Management agile » de 2 jours. Le formateur lisait ses slides. Personne n'a rien retenu. Tout le monde en est ressorti en disant : « Encore 2 jours de perdus. » Et moi, j'ai débarqué 6 mois plus tard avec un nouveau plan de formation…" },
+        ],
+      },
+      question: "Votre public a-t-il vécu de mauvaises expériences de formation ? Comment cela affecte-t-il leur perception ?",
+      consigne: "Les mauvaises expériences passées créent des résistances profondes. Identifiez l'historique de formation de VOS apprenants (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : TRAUMATISME FORMATIONNEL COLLECTIF",
+        texte: "Trois formations imposées en 2 ans, toutes perçues comme inutiles : l'équipe a classé le plan de Sophie dans la catégorie « encore une perte de temps ». Ce n'est pas elle qu'ils rejetaient, c'est la formation imposée d'en haut.",
+        indice: "Les mauvaises expériences passées empoisonnent les futures. Il faut d'abord réparer la confiance.",
+      },
+    },
+    // ---------- 13 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie13.mp3",
+        dialogue: [
+          { qui: "Sophie", dit: "Et puis il y avait la charge de travail. L'agence était en sous-effectif chronique. Quand je bloquais une journée de formation, ça signifiait une journée de production en moins. Les managers me disaient : « Sophie, on ne peut pas se permettre de perdre une journée. »" },
+        ],
+      },
+      question: "La charge de travail de votre public leur permet-elle réellement de se former ? Quel est le coût d'opportunité ?",
+      consigne: "Évaluez si VOS apprenants ont RÉELLEMENT le temps de se former. Le temps « libéré » est-il vraiment libéré ? (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : SURCHARGE = FORMATION IMPOSSIBLE",
+        texte: "L'équipe travaillait à 120 % : chaque journée de formation signifiait des heures supplémentaires à rattraper. Former sans alléger la charge, c'est faire courir un marathon avec un sac de 30 kg sur le dos.",
+        indice: "Si le temps de formation n'est pas « protégé » dans l'agenda, la formation n'existe pas.",
+      },
+    },
+    // ---------- 14 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie14.mp3",
+        dialogue: [
+          { qui: "Sophie", dit: "Certains avaient peur. Françoise, ma graphiste senior, m'a confié : « Si je vais à la formation Figma et que je n'y arrive pas, tout le monde saura que je suis larguée. Je préfère ne pas y aller. »" },
+        ],
+      },
+      question: "Votre public a-t-il des craintes liées à l'image de soi ? La formation peut-elle révéler des lacunes qu'ils préfèrent cacher ?",
+      consigne: "Identifiez les peurs « sociales » de VOS apprenants : peur du jugement, de l'incompétence révélée, du regard des pairs (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : LA FORMATION COMME MENACE IDENTITAIRE",
+        texte: "Pour Françoise, réputée « meilleure graphiste de l'agence », suivre une formation Figma en débutante revenait à exposer publiquement ses lacunes. Plus on est expert, plus la posture de débutant est insupportable.",
+        indice: "Pour les profils expérimentés, la formation peut menacer l'identité professionnelle. Sécurisez l'espace d'apprentissage.",
+      },
+    },
+    // ---------- 15 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie15.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Des obstacles pratiques ou logistiques ?" },
+          { qui: "Sophie", dit: "Les freelances n'avaient pas accès à la plateforme. Deux collaborateurs en télétravail ne pouvaient pas venir les jours en présentiel. Et le WiFi de la salle de formation plantait une fois sur deux." },
+        ],
+      },
+      question: "Quels obstacles pratiques ou logistiques pourraient empêcher votre public de participer (accès, matériel, localisation, contraintes techniques) ?",
+      consigne: "Listez les freins CONCRETS : accès aux outils, déplacements, équipement, connexion, compatibilité des agendas… (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : OBSTACLES LOGISTIQUES INVISIBLES",
+        texte: "Freelances sans accès VPN, télétravailleurs exclus du présentiel, WiFi défaillant, licences manquantes : ces « détails » non vérifiés ont transformé une formation déjà fragile en fiasco complet.",
+        indice: "Les obstacles logistiques semblent anodins mais sont des tueurs silencieux de formation.",
+      },
+    },
+    // ---------- 16 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 7",
+        audio: "audio/sophie/sophie16.mp3",
+        dialogue: [
+          { qui: "", dit: "Sophie inspire profondément." },
+          { qui: "Sophie", dit: "Vous voulez savoir pourquoi j'ai TOUT supprimé à 23h47 ? Ce soir-là, j'ai reçu un email du directeur. Objet : « Bilan formation 2024 ». Taux de participation : 15 %. Taux de satisfaction : non mesuré. Impact sur la performance : inconnu. Dix-huit mois de travail. 15 % de participation. J'ai regardé l'écran. J'ai sélectionné tout le dossier du plan 2025. Et j'ai appuyé sur Supprimer." },
+          { qui: "Sophie", dit: "Ce n'était pas de la destruction. C'était de la honte. Pas celle de l'apprenante qui galère — celle de la conceptrice qui a failli." },
+        ],
+      },
+      question: "Si votre formation échouait, quelles en seraient les causes les plus probables du point de vue de votre public ?",
+      consigne: "Inversez la perspective : imaginez l'ÉCHEC de votre formation. Listez les causes que VOS apprenants identifieraient. Ce sont vos risques prioritaires (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "DÉNOUEMENT : LE SYNDROME DE LA CONCEPTRICE AVEUGLE",
+        texte: "Sophie n'était pas incompétente : elle était consciencieuse, organisée, méthodique. Mais elle a conçu son plan depuis son bureau, avec des données froides, sans jamais aller sur le terrain ni demander : « De quoi as-tu VRAIMENT besoin ? ». Un dispositif parfait en théorie, catastrophique en pratique, parce qu'elle ne connaissait pas son public.",
+        indice: "On ne conçoit pas une formation POUR un public sans la concevoir AVEC lui.",
+        finale: true,
+      },
+    },
+  ],
+  resolution: {
+    mobile: {
+      resume: "Méconnaissance profonde du public cible + conception descendante déconnectée du terrain.",
+      texte: "Sophie a supprimé le plan de formation non par malveillance mais par désespoir face à un échec qu'elle ne comprenait pas — parce qu'elle n'avait jamais pris le temps de comprendre son public.",
+    },
+    circonstances: [
+      { titre: "Absence de méthode de recueil des besoins", texte: "Personne ne lui a appris à consulter son public avant de concevoir." },
+      { titre: "Pression hiérarchique sur le contenu", texte: "La direction imposait des thèmes « tendance » sans lien avec les besoins réels." },
+      { titre: "Équipe hétérogène non segmentée", texte: "15 profils radicalement différents traités comme un groupe homogène." },
+      { titre: "Historique de formations ratées", texte: "L'équipe avait déjà perdu confiance dans le concept même de formation organisée." },
+      { titre: "Contraintes opérationnelles ignorées", texte: "La surcharge de travail rendait toute formation impraticable." },
+      { titre: "Aucun diagnostic préalable", texte: "Le plan a été construit sur des hypothèses, pas sur des données." },
+    ],
+    verdict: [
+      "Sophie n'est pas une mauvaise conceptrice.",
+      "Sophie est une conceptrice qui a oublié la première étape : connaître son public.",
+      "La suppression du dossier n'est pas la cause, c'est le symptôme.",
+      "La cause : un dispositif de formation conçu POUR un public, mais SANS ce public.",
+    ],
+    mission: {
+      intro: "Vous avez reconstitué le profil complet de l'équipe de Sophie en 16 questions.",
+      sousTitre: "Maintenant, faites le parallèle avec VOS apprenants :",
+      etapes: [
+        "Relisez votre fiche d'enquête complétée.",
+        "Identifiez les erreurs de Sophie que vous pourriez commettre.",
+        "Rédigez un portrait narratif de VOS apprenants (5-8 lignes).",
+      ],
+    },
+    questionEquipe: "Quelles actions concrètes allez-vous mener AVANT de concevoir votre formation pour éviter le syndrome de Sophie ?",
+    questionEquipeNote: "Notez 2-3 décisions concrètes au dos de votre fiche.",
+  },
+};
+
+// ============================================================
+//  AFFAIRES 4 À 6 — à compléter (placeholders)
 // ============================================================
 const PLACEHOLDER = (id, numero, nom, role, accroche, portrait) => ({
   id, numero, nom, role, accroche, portrait,
@@ -845,12 +1216,11 @@ const PLACEHOLDER = (id, numero, nom, role, accroche, portrait) => ({
 const HISTOIRES = [
   MARCEL,
   LEA,
-  PLACEHOLDER("amina", "Affaire n°03", "Amina Diallo", "Dossier à instruire",
+  SOPHIE,
+  PLACEHOLDER("amina", "Affaire n°04", "Amina Diallo", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Amina_Diallo.png"),
-  PLACEHOLDER("karim", "Affaire n°04", "Karim Benali", "Dossier à instruire",
+  PLACEHOLDER("karim", "Affaire n°05", "Karim Benali", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Karim_Benali.png"),
-  PLACEHOLDER("sophie", "Affaire n°05", "Sophie Nguyen", "Dossier à instruire",
-    "Identité enregistrée. L'enquête reste à mener.", "portraits/Sophie_Nguyen.png"),
   PLACEHOLDER("thomas", "Affaire n°06", "Thomas Lefèvre", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Thomas_Lefevre.png"),
 ];
