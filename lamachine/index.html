@@ -1,0 +1,1764 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAF5EC" />
+<title>La Machine — Pauuse·Playy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:     #FAF5EC;
+    --paper-2:   #F3ECDF;
+    --card:      #FFFFFF;
+    --taupe:     #CFC7B8;
+    --taupe-2:   #C2B9A8;
+    --ink:       #221B16;
+    --ink-soft:  #4A4138;
+    --dim:       #6E6357;
+    --mute:      #9C9083;
+    --pink:      #D45EB4;
+    --pink-deep: #9C2E7B;
+    --pink-soft: #F3CBE7;
+    --pink-pale: #FBEAF5;
+    --crt:       #16110F;
+    --crt-pink:  #FF9FDE;
+    --crt-grid:  rgba(240,140,212,.18);
+    --shadow-ink: 4px 4px 0 var(--ink);
+    --circuit: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><g fill='none' stroke='%23F3CBE7' stroke-width='3'><path d='M20 20h34v22'/><path d='M100 34H74'/><path d='M28 100V74h26'/><path d='M100 86v14H86'/></g><g fill='%23F3CBE7'><circle cx='20' cy='20' r='5'/><circle cx='54' cy='42' r='5'/><circle cx='74' cy='34' r='5'/><circle cx='100' cy='34' r='5'/><circle cx='28' cy='100' r='5'/><circle cx='54' cy='74' r='5'/><circle cx='86' cy='100' r='5'/><circle cx='100' cy='86' r='5'/></g></svg>");
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+  body {
+    background:
+      repeating-linear-gradient(45deg,  rgba(212,94,180,.045) 0 1px, transparent 1px 10px),
+      repeating-linear-gradient(-45deg, rgba(212,94,180,.045) 0 1px, transparent 1px 10px),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'Shantell Sans', 'Comic Sans MS', cursive, system-ui, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .mono { font-family: 'Space Mono', ui-monospace, Menlo, monospace; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input { font-family: inherit; }
+  :focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; border-radius: 6px; }
+
+  /* Format paysage : gabarit téléphone à l'horizontale */
+  .app { max-width: 980px; margin: 0 auto; padding: 16px 18px 60px; }
+
+  /* ---------- Panneaux « bande dessinée » ---------- */
+  .panel {
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: var(--shadow-ink);
+  }
+  .frame {
+    background: var(--taupe);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    box-shadow: 5px 5px 0 var(--ink);
+    position: relative;
+  }
+  .rivets::before, .rivets::after {
+    content: ""; position: absolute; top: 10px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--pink); border: 2px solid var(--ink);
+  }
+  .rivets::before { left: 10px; }
+  .rivets::after  { right: 10px; }
+
+  /* ---------- Écrans CRT ---------- */
+  .crt {
+    background: var(--crt);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    position: relative; overflow: hidden;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.04), inset 0 6px 18px rgba(0,0,0,.55);
+  }
+  .crt::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-linear-gradient(90deg, var(--crt-grid) 0 1px, transparent 1px 20px),
+      repeating-linear-gradient(0deg,  var(--crt-grid) 0 1px, transparent 1px 20px);
+  }
+  .crt::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px);
+  }
+  .crt > * { position: relative; z-index: 1; }
+
+  /* ---------- Topbar ---------- */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; margin-bottom: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-logo {
+    width: 52px; height: 58px; flex: none;
+    display: grid; place-items: center;
+  }
+  .brand-logo svg { width: 100%; height: 100%; }
+  .brand-title { font-weight: 800; font-size: 21px; line-height: 1; letter-spacing: .3px; }
+  .brand-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--dim); margin-top: 5px;
+    text-transform: uppercase; letter-spacing: 1.2px;
+  }
+  .icon-btn {
+    background: var(--card); border: 2px solid var(--ink);
+    padding: 9px 16px; border-radius: 999px; font-size: 13px;
+    font-weight: 600; color: var(--ink-soft);
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform .15s, box-shadow .15s;
+    min-height: 44px;
+  }
+  .icon-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); color: var(--ink); }
+  .icon-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+
+  /* ---------- Screens ---------- */
+  .screen { display: none; animation: fade .28s ease; }
+  .screen.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--pink-deep); font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+  }
+
+  /* ---------- Boutons ---------- */
+  .btn {
+    padding: 13px 24px; border-radius: 12px;
+    font-weight: 700; font-size: 14px; letter-spacing: .5px;
+    text-transform: uppercase;
+    background: var(--card); color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: var(--shadow-ink);
+    transition: transform .15s, box-shadow .15s;
+    min-height: 48px;
+  }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+  .btn-primary { background: var(--pink); }
+  .btn-ghost { background: var(--paper); color: var(--ink-soft); }
+  .btn-big { padding: 16px 32px; font-size: 15px; }
+  .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: var(--shadow-ink); }
+
+  /* ============================================== */
+  /* ÉCRAN 1 — AMORÇAGE                             */
+  /* ============================================== */
+  .hero {
+    border: 2px solid var(--ink); border-radius: 18px;
+    background:
+      var(--circuit) right -20px bottom -20px / 180px no-repeat,
+      linear-gradient(160deg, var(--pink-pale), var(--card) 65%);
+    box-shadow: 5px 5px 0 var(--ink);
+    padding: 26px 24px;
+    margin-bottom: 22px;
+    display: grid; grid-template-columns: 1fr; gap: 16px; align-items: center;
+  }
+  .hero h1 { font-size: clamp(25px, 6vw, 32px); line-height: 1.08; margin: 0 0 12px; font-weight: 800; }
+  .hero p { color: var(--ink-soft); margin: 0; max-width: 640px; line-height: 1.6; font-size: 15px; }
+  .hero-robot { width: 104px; height: 130px; margin: 0 auto; }
+  .hero-robot svg { width: 100%; height: 100%; }
+
+  .boot-card {
+    background: var(--taupe);
+    border: 2px solid var(--ink); border-radius: 20px;
+    box-shadow: 5px 5px 0 var(--ink);
+    padding: 26px 22px; max-width: 540px; margin: 0 auto;
+    text-align: center; position: relative;
+  }
+  .boot-inner {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 14px; padding: 24px 20px;
+    background-image: var(--circuit);
+    background-position: left -30px top -30px;
+    background-size: 150px;
+    background-repeat: no-repeat;
+  }
+  .boot-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--dim); letter-spacing: 1.6px; font-weight: 700;
+    text-transform: uppercase; display: block; margin-bottom: 16px;
+  }
+  .boot-input-row {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin-bottom: 22px;
+  }
+  .boot-step {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--pink-pale); border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    font-size: 28px; font-weight: 800; color: var(--ink);
+    transition: transform .15s, box-shadow .15s; line-height: 1;
+  }
+  .boot-step:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+  .boot-step:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+  .boot-input {
+    width: 132px; height: 92px; text-align: center;
+    background: var(--crt); border: 2px solid var(--ink);
+    border-radius: 14px; color: var(--crt-pink);
+    font-size: 54px; font-weight: 700; font-family: 'Space Mono', monospace;
+    text-shadow: 0 0 16px rgba(255,159,222,.55);
+    -moz-appearance: textfield;
+  }
+  .boot-input::-webkit-outer-spin-button,
+  .boot-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .boot-readout {
+    background: var(--paper); border: 2px solid var(--ink);
+    border-radius: 12px; padding: 4px 16px; margin-bottom: 24px;
+  }
+  .readout-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 11px 0; border-bottom: 2px dashed var(--taupe);
+    font-size: 13.5px;
+  }
+  .readout-row:last-child { border-bottom: none; }
+  .readout-label { color: var(--ink-soft); text-align: left; }
+  .readout-value { font-weight: 800; font-size: 15px; color: var(--pink-deep); white-space: nowrap; }
+
+  /* ============================================== */
+  /* ÉCRAN 2 — TABLEAU DE BORD                      */
+  /* ============================================== */
+  .hub-jauge-card {
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+  .hub-jauge-inner {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 12px; padding: 20px 18px;
+  }
+  .hub-jauge-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px; margin-bottom: 26px; flex-wrap: wrap;
+  }
+  .hub-jauge-title {
+    font-size: 14px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--ink);
+  }
+  .hub-jauge-readout { font-size: 14px; color: var(--ink-soft); }
+  .hub-jauge-readout strong { color: var(--pink-deep); font-size: 19px; font-weight: 800; }
+  .jauge-track {
+    position: relative;
+    display: grid; gap: 5px; height: 36px;
+    margin-bottom: 8px;
+  }
+  .jauge-cell {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 7px; transition: background .35s ease;
+  }
+  .jauge-cell.win {
+    background:
+      radial-gradient(circle at 30% 35%, rgba(255,255,255,.5) 0 3px, transparent 4px),
+      var(--pink);
+  }
+  .jauge-cell.loss {
+    background: repeating-linear-gradient(45deg, var(--ink) 0 4px, #4A4138 4px 8px);
+  }
+  .jauge-marker {
+    position: absolute; top: -8px; bottom: -8px; width: 3px;
+    background: var(--ink); z-index: 2;
+  }
+  .jauge-marker::after {
+    content: "SEUIL 75 %"; position: absolute; top: -19px; left: 50%;
+    transform: translateX(-50%); white-space: nowrap;
+    font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700;
+    color: var(--ink); letter-spacing: 1px;
+    background: var(--pink-soft); border: 1.5px solid var(--ink);
+    border-radius: 4px; padding: 1px 5px;
+  }
+  .jauge-foot {
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    color: var(--dim); margin-top: 16px;
+  }
+
+  .hub-row {
+    display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px;
+  }
+  .hub-panel { padding: 20px; }
+  .hub-panel-label {
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
+    color: var(--dim); letter-spacing: 1.6px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .cumul-screen { padding: 18px 16px; text-align: center; }
+  .cumul-value {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(42px, 8vw, 66px); font-weight: 700; line-height: 1;
+    color: var(--crt-pink); font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 22px rgba(255,159,222,.6);
+  }
+  .cumul-unit { font-size: 12.5px; color: var(--dim); margin-top: 10px; line-height: 1.45; }
+
+  .streak-flame {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 40px; font-weight: 800; line-height: 1; color: var(--ink);
+  }
+  .streak-flame .sf-num { font-size: 50px; color: var(--pink-deep); }
+  .streak-flame svg { width: 36px; height: 36px; flex: none; }
+  .streak-sub { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+  .streak-palier {
+    margin-top: 14px; padding-top: 14px; border-top: 2px dashed var(--taupe);
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.55;
+  }
+  .streak-palier b { color: var(--pink-deep); }
+  .grace-tag {
+    display: inline-block; margin-top: 10px;
+    background: var(--pink-pale); border: 2px solid var(--ink);
+    color: var(--ink); border-radius: 999px; padding: 5px 13px;
+    font-size: 12.5px; font-weight: 700;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  .sauts-list { display: flex; flex-direction: column; gap: 8px; }
+  .saut-row {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 12px; align-items: center;
+    background: var(--card); border: 2px solid var(--ink);
+    border-left-width: 8px;
+    border-radius: 10px; padding: 11px 14px; font-size: 14px;
+  }
+  .saut-row.win-row  { border-left-color: var(--pink); }
+  .saut-row.loss-row { border-left-color: var(--ink); background: var(--paper-2); }
+  .saut-row.pending  { border-style: dashed; border-left-width: 2px; background: transparent; }
+  .saut-num {
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+    color: var(--mute); width: 24px;
+  }
+  .saut-name { font-weight: 600; }
+  .saut-row.pending .saut-name { color: var(--mute); font-weight: 400; font-style: italic; }
+  .saut-status { font-family: 'Space Mono', monospace; font-size: 11.5px; font-weight: 700; }
+  .saut-row.win-row .saut-status { color: var(--pink-deep); }
+  .saut-row.loss-row .saut-status { color: var(--ink); }
+
+  .hub-cta { text-align: center; margin-top: 24px; }
+
+  /* ============================================== */
+  /* ÉCRAN 3 — SÉLECTION                            */
+  /* ============================================== */
+  .section-title {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; margin: 4px 4px 12px;
+  }
+  .section-title h2 {
+    font-size: 17px; font-weight: 800; margin: 0;
+    text-transform: uppercase; letter-spacing: .8px; color: var(--ink);
+  }
+  .section-title small {
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--pink-deep);
+  }
+  .select-hint {
+    color: var(--ink-soft); font-size: 13.5px; margin: 0 4px 16px; line-height: 1.55;
+  }
+  .activity-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;
+  }
+  .activity-card {
+    background:
+      var(--circuit) right -38px bottom -38px / 110px no-repeat,
+      var(--card);
+    border: 2px solid var(--ink); border-radius: 12px;
+    box-shadow: var(--shadow-ink);
+    padding: 14px 13px 12px;
+    text-align: left; position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+    gap: 10px; min-height: 96px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .activity-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .activity-card:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+  .activity-card .tag {
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
+    color: var(--pink-deep); letter-spacing: 1px;
+  }
+  .activity-card .nm { font-weight: 600; font-size: 14.5px; line-height: 1.3; }
+  .activity-card .badge {
+    align-self: flex-start;
+    background: var(--pink-pale); border: 1.5px solid var(--ink);
+    color: var(--ink-soft); font-size: 10.5px; font-weight: 700;
+    padding: 3px 9px; border-radius: 999px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ============================================== */
+  /* ÉCRAN 4 — SAUT TEMPOREL                        */
+  /* ============================================== */
+  .play-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+    color: var(--pink-deep); letter-spacing: 1.8px; text-transform: uppercase;
+    text-align: center; margin-bottom: 6px;
+  }
+  .play-activity-name {
+    text-align: center; font-size: 25px; font-weight: 800;
+    margin-bottom: 16px; line-height: 1.15;
+  }
+  .play-console {
+    padding: 16px;
+    margin-bottom: 18px;
+  }
+  .play-screen { padding: 18px 16px 20px; }
+  .charge-block { text-align: center; }
+  .charge-value {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(44px, 13vmin, 88px); font-weight: 700; line-height: 1;
+    color: var(--crt-pink); font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 26px rgba(255,159,222,.65);
+  }
+  .charge-label {
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
+    color: rgba(255,255,255,.55); letter-spacing: 2.4px; text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .charge-grace {
+    display: inline-block; margin-top: 10px;
+    background: var(--pink-pale); border: 2px solid var(--ink);
+    color: var(--ink); border-radius: 999px; padding: 4px 13px;
+    font-size: 12px; font-weight: 700;
+  }
+  .charge-bar {
+    height: 10px; background: rgba(255,255,255,.10);
+    border: 1.5px solid rgba(255,255,255,.25);
+    border-radius: 999px; overflow: hidden; margin-top: 16px;
+  }
+  .charge-bar-fill {
+    height: 100%; width: 100%;
+    background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--crt-pink));
+    transition: width .1s linear;
+  }
+  .play-meters {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 16px; gap: 12px;
+  }
+  .meter { text-align: center; min-width: 96px; }
+  .meter-label {
+    font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700;
+    color: rgba(255,255,255,.5); letter-spacing: 1.6px; text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .meter-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px; font-weight: 700; line-height: 1.1;
+    color: #FFF; font-variant-numeric: tabular-nums;
+  }
+  .meter.timer .meter-value { color: var(--crt-pink); text-shadow: 0 0 14px rgba(255,159,222,.5); }
+  .meter.timer.grace .meter-value { color: #FFD9F1; }
+  .meter.timer.urgent .meter-value { color: #FF5FA8; animation: pulse 1s infinite; }
+  .meter.attempts .meter-value { color: #FFF; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+  .picto-grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 11px; margin-bottom: 16px;
+  }
+  .picto-tile {
+    background: var(--card);
+    border: 2px solid var(--ink); border-radius: 14px;
+    box-shadow: 3px 3px 0 var(--ink);
+    padding: 14px 8px;
+    display: grid; place-items: center;
+    transition: transform .12s, box-shadow .12s, background .12s;
+    user-select: none; cursor: pointer; aspect-ratio: 1 / 1;
+    position: relative;
+  }
+  .picto-tile:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+  .picto-tile:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--ink); }
+  .picto-tile .pic-svg { width: 62%; height: 62%; color: var(--ink); transition: transform .12s; }
+  .picto-tile.selected {
+    background:
+      var(--circuit) center / 130px,
+      var(--pink-pale);
+    border-color: var(--pink-deep);
+    box-shadow: 3px 3px 0 var(--pink-deep);
+  }
+  .picto-tile.selected .pic-svg { transform: scale(1.1); }
+  .picto-tile.selected::after {
+    content: "✓"; position: absolute; top: -9px; right: -9px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--pink); border: 2px solid var(--ink);
+    color: var(--ink); font-size: 13px; font-weight: 800;
+    display: grid; place-items: center;
+  }
+
+  .feedback {
+    margin: 4px 0 14px; min-height: 56px;
+    display: flex; flex-direction: column; gap: 6px;
+    align-items: center; justify-content: center; text-align: center;
+  }
+  .feedback .machine {
+    font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.4px; color: var(--dim); text-transform: uppercase;
+  }
+  .feedback .verdict { font-size: 18px; font-weight: 800; }
+  .feedback.error .verdict { color: var(--ink); }
+  .feedback.success .verdict { color: var(--pink-deep); }
+  .play-actions { display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
+  .shake { animation: shake .35s; }
+  @keyframes shake {
+    10%,90% { transform: translateX(-2px); }
+    20%,80% { transform: translateX(4px); }
+    30%,50%,70% { transform: translateX(-6px); }
+    40%,60% { transform: translateX(6px); }
+  }
+
+  /* ============================================== */
+  /* VERDICT                                        */
+  /* ============================================== */
+  .verdict-box {
+    border: 2px solid var(--ink); border-radius: 22px;
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 34px 24px; text-align: center;
+    background:
+      var(--circuit) left -40px top -40px / 200px no-repeat,
+      var(--card);
+  }
+  .verdict-box.win { background-color: var(--pink-pale); }
+  .verdict-box.lose {
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 2px, transparent 2px 14px),
+      #2A2320;
+    color: var(--paper);
+  }
+  .verdict-robot { width: 110px; height: 138px; margin: 0 auto 8px; }
+  .verdict-robot svg { width: 100%; height: 100%; }
+  .verdict-title {
+    font-size: clamp(30px, 5vw, 48px); font-weight: 800; line-height: 1.05; margin: 0 0 10px;
+  }
+  .win .verdict-title { color: var(--pink-deep); }
+  .lose .verdict-title { color: var(--pink-soft); }
+  .verdict-date {
+    font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700;
+    color: var(--dim); letter-spacing: 1px; margin-bottom: 14px;
+  }
+  .lose .verdict-date { color: var(--taupe); }
+  .verdict-tagline {
+    color: var(--ink-soft); max-width: 560px; margin: 0 auto 26px;
+    font-size: 15px; line-height: 1.6;
+  }
+  .lose .verdict-tagline { color: var(--taupe); }
+  .verdict-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px; max-width: 680px; margin: 0 auto 8px;
+  }
+  .verdict-stat {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 14px; padding: 16px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .lose .verdict-stat { box-shadow: 3px 3px 0 rgba(0,0,0,.6); }
+  .verdict-stat .vs-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700;
+    color: var(--dim); letter-spacing: 1.4px; text-transform: uppercase;
+  }
+  .verdict-stat .vs-value { font-size: 28px; font-weight: 800; margin-top: 4px; color: var(--ink); }
+  .vs-ratio .vs-value { color: var(--pink-deep); }
+  .vs-honor .vs-value { color: var(--pink-deep); }
+
+  .cahier { margin-top: 30px; text-align: left; color: var(--ink); }
+  .lose .cahier { color: var(--paper); }
+  .cahier h3 {
+    font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 800; margin: 0 0 6px;
+  }
+  .cahier-sub { font-size: 12.5px; color: var(--dim); margin: 0 0 14px; }
+  .lose .cahier-sub { color: var(--taupe); }
+  .cahier-legend {
+    display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 16px;
+    padding: 12px 14px; background: var(--card);
+    border: 2px solid var(--ink); border-radius: 10px; color: var(--ink-soft);
+  }
+  .cahier-legend span { font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
+  .leg-ic, .rc-ic { width: 16px; height: 16px; flex: none; color: var(--ink); }
+  .cahier-item {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 12px; padding: 13px 16px; margin-bottom: 9px; color: var(--ink);
+  }
+  .cahier-item-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 10px; margin-bottom: 8px;
+  }
+  .cahier-item-name { font-weight: 700; font-size: 15px; }
+  .cahier-item-tag { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
+  .cahier-item.won .cahier-item-tag { color: var(--pink-deep); }
+  .cahier-item.lost .cahier-item-tag { color: var(--ink-soft); }
+  .cahier-res { display: flex; flex-wrap: wrap; gap: 6px; }
+  .res-chip {
+    background: var(--paper); border: 1.5px solid var(--ink);
+    border-radius: 8px; padding: 5px 10px; font-size: 12.5px; color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+
+  /* ---------- Modal ---------- */
+  .modal-back {
+    position: fixed; inset: 0; background: rgba(34,27,22,.55);
+    display: none; align-items: center; justify-content: center;
+    z-index: 50; padding: 16px; backdrop-filter: blur(4px);
+    overflow-y: auto;
+  }
+  .modal-back.active { display: flex; }
+  .modal {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 16px; box-shadow: 6px 6px 0 var(--ink);
+    padding: 24px; max-width: 480px; width: 100%;
+    margin: auto;
+  }
+  .modal-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700;
+    color: var(--pink-deep); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .modal h3 { margin: 0 0 8px; font-size: 19px; font-weight: 800; }
+  .modal p { color: var(--ink-soft); margin: 0 0 18px; font-size: 14px; line-height: 1.6; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* ---------- Préparation du saut (pop-up 10 s) ---------- */
+  .prep-back {
+    position: fixed; inset: 0; background: rgba(34,27,22,.72);
+    display: none; align-items: center; justify-content: center;
+    z-index: 60; padding: 16px; backdrop-filter: blur(5px);
+    overflow-y: auto;
+  }
+  .prep-back.active { display: flex; }
+  .prep-card {
+    background: var(--card); border: 2px solid var(--ink);
+    border-radius: 20px; box-shadow: 6px 6px 0 var(--ink);
+    padding: 30px 28px; max-width: 560px; width: 100%;
+    text-align: center;
+    background-image: var(--circuit);
+    background-position: right -45px top -45px;
+    background-size: 160px;
+    background-repeat: no-repeat;
+    margin: auto;
+  }
+  /* Écrans peu hauts (téléphone paysage) : pop-up en deux colonnes */
+  @media (max-height: 500px) {
+    .prep-card {
+      max-width: 660px; padding: 20px 24px;
+      display: grid; column-gap: 24px; row-gap: 4px;
+      grid-template-columns: 1.35fr 1fr;
+      grid-template-areas:
+        "eyebrow eyebrow"
+        "title   ready"
+        "desc    count"
+        "desc    label"
+        "desc    bar"
+        "desc    button";
+      align-items: center; text-align: left;
+    }
+    .prep-eyebrow { grid-area: eyebrow; margin-bottom: 6px; }
+    .prep-title { grid-area: title; font-size: 21px; margin: 0 0 6px; }
+    .prep-desc { grid-area: desc; font-size: 13.5px; line-height: 1.55; margin: 0; align-self: start; }
+    .prep-ready { grid-area: ready; font-size: 14px; margin: 0; text-align: center; }
+    .prep-countdown { grid-area: count; font-size: 46px; justify-self: center; }
+    .prep-count-label { grid-area: label; margin: 4px 0 6px; text-align: center; }
+    .prep-bar { grid-area: bar; margin-bottom: 10px; }
+    #prep-cancel { grid-area: button; justify-self: center; padding: 10px 20px; min-height: 44px; }
+  }
+  .prep-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+    color: var(--pink-deep); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .prep-title {
+    font-size: clamp(23px, 4vw, 30px); font-weight: 800; line-height: 1.12;
+    margin: 0 0 14px;
+  }
+  .prep-desc {
+    color: var(--ink-soft); line-height: 1.62; font-size: 14.5px;
+    margin: 0 0 18px; text-align: left;
+  }
+  .prep-ready {
+    font-size: 17px; font-weight: 800; color: var(--pink-deep);
+    margin: 0 0 12px;
+  }
+  .prep-countdown {
+    font-family: 'Space Mono', monospace;
+    font-size: 64px; font-weight: 700; line-height: 1;
+    color: var(--pink-deep); font-variant-numeric: tabular-nums;
+    display: inline-block;
+  }
+  .prep-countdown.tick { animation: prep-pop .32s ease; }
+  @keyframes prep-pop { from { transform: scale(.65); opacity: .35; } to { transform: scale(1); opacity: 1; } }
+  .prep-count-label {
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
+    color: var(--dim); letter-spacing: 1.4px; text-transform: uppercase;
+    margin: 8px 0 16px;
+  }
+  .prep-bar {
+    height: 8px; background: var(--paper-2); border: 2px solid var(--ink);
+    border-radius: 999px; overflow: hidden; margin-bottom: 22px;
+  }
+  .prep-bar-fill { height: 100%; width: 100%; background: var(--pink); }
+
+  /* ---------- Disposition paysage (deux colonnes) ---------- */
+  .play-layout { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }
+  .play-side { display: flex; flex-direction: column; }
+  @media (min-width: 640px) {
+    .play-layout { grid-template-columns: 1.05fr 1fr; }
+    .play-console { margin-bottom: 0; position: sticky; top: 12px; }
+    #screen-boot.active { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; align-items: stretch; }
+    #screen-boot .hero { margin-bottom: 0; }
+    #screen-boot .boot-card { margin: 0; display: flex; }
+    #screen-boot .boot-inner { width: 100%; display: flex; flex-direction: column; justify-content: center; }
+    .hub-row { grid-template-columns: 1.25fr 1fr; }
+  }
+
+  /* ---------- Écrans peu hauts (téléphone en paysage) ---------- */
+  @media (max-height: 500px) {
+    .app { padding-top: 12px; }
+    .topbar { margin-bottom: 12px; }
+    .brand-logo { width: 40px; height: 46px; }
+    .play-activity-name { font-size: 21px; margin-bottom: 10px; }
+    .play-screen { padding: 12px 14px 14px; }
+    .meter-value { font-size: 23px; }
+    .hero { padding: 18px 20px; }
+    .hero-robot { display: none; }
+  }
+
+  /* ---------- Responsive (très petits écrans) ---------- */
+  @media (max-width: 400px) {
+    .play-activity-name { font-size: 21px; }
+    .meter-value { font-size: 23px; }
+  }
+
+  /* ---------- Rotation forcée sur mobile portrait ---------- */
+  .rotate-overlay {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background:
+      repeating-linear-gradient(45deg,  rgba(212,94,180,.045) 0 1px, transparent 1px 10px),
+      repeating-linear-gradient(-45deg, rgba(212,94,180,.045) 0 1px, transparent 1px 10px),
+      var(--paper);
+    place-items: center; text-align: center; padding: 32px;
+  }
+  @media (orientation: portrait) and (hover: none) and (pointer: coarse) {
+    .rotate-overlay { display: grid; }
+  }
+  .ro-robot { width: 84px; height: 104px; margin: 0 auto 14px; }
+  .ro-robot svg { width: 100%; height: 100%; }
+  .ro-phone {
+    position: relative; width: 54px; height: 88px;
+    border: 4px solid var(--ink); border-radius: 12px;
+    background: var(--card); box-shadow: 4px 4px 0 var(--ink);
+    margin: 0 auto 22px;
+    animation: ro-rot 2s ease-in-out infinite alternate;
+  }
+  .ro-phone::after {
+    content: ""; position: absolute; left: 50%; bottom: 6px;
+    transform: translateX(-50%);
+    width: 14px; height: 4px; border-radius: 999px; background: var(--ink);
+  }
+  @keyframes ro-rot {
+    0%, 30% { transform: rotate(0deg); }
+    75%, 100% { transform: rotate(90deg); }
+  }
+  .ro-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .ro-sub { color: var(--ink-soft); font-size: 15px; line-height: 1.55; max-width: 300px; margin: 0 auto; }
+
+  /* ---------- Accessibilité : mouvement réduit ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .topbar, .screen:not(.active), .verdict-grid, .hub-cta, .verdict-robot,
+    .verdict-tagline, .modal-back, .prep-back, .no-print { display: none !important; }
+    .verdict-box { border: none; box-shadow: none; padding: 0; background: #fff; color: #000; }
+    .cahier-item, .cahier-legend, .res-chip { border-color: #999; background: #fff; box-shadow: none; color: #000; }
+    .verdict-title, .cahier h3, .cahier-item-name { color: #000; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Bibliothèque SVG : mascotte robot CRT + éclair -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="robot" viewBox="0 0 120 150">
+      <line x1="60" y1="14" x2="60" y2="32" stroke="#221B16" stroke-width="3"/>
+      <circle cx="60" cy="10" r="6" fill="#D45EB4" stroke="#221B16" stroke-width="2.5"/>
+      <rect x="46" y="30" width="28" height="10" rx="3" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+      <rect x="16" y="38" width="88" height="62" rx="12" fill="#CFC7B8" stroke="#221B16" stroke-width="3"/>
+      <rect x="25" y="46" width="70" height="46" rx="7" fill="#16110F" stroke="#221B16" stroke-width="2"/>
+      <g stroke="#F08CD4" stroke-width="1.4" opacity=".55">
+        <line x1="25" y1="58" x2="95" y2="58"/><line x1="25" y1="69" x2="95" y2="69"/><line x1="25" y1="80" x2="95" y2="80"/>
+        <line x1="43" y1="46" x2="43" y2="92"/><line x1="60" y1="46" x2="60" y2="92"/><line x1="77" y1="46" x2="77" y2="92"/>
+      </g>
+      <polyline points="29,70 42,70 48,57 55,84 61,62 66,75 72,69 91,69"
+        stroke="#FFFFFF" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="40" y="100" width="40" height="9" rx="4.5" fill="#D45EB4" stroke="#221B16" stroke-width="2.5"/>
+      <rect x="46" y="109" width="28" height="15" rx="6" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+      <path d="M52 124 h16 a8 8 0 0 1 -16 0 z" fill="#D45EB4" stroke="#221B16" stroke-width="2.5"/>
+      <path d="M46 112 L28 126" stroke="#221B16" stroke-width="3" fill="none"/>
+      <path d="M74 112 L92 126" stroke="#221B16" stroke-width="3" fill="none"/>
+      <circle cx="26" cy="129" r="5" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+      <circle cx="94" cy="129" r="5" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="robot-flat" viewBox="0 0 120 150">
+      <line x1="60" y1="14" x2="60" y2="32" stroke="#221B16" stroke-width="3"/>
+      <circle cx="60" cy="10" r="6" fill="#D45EB4" stroke="#221B16" stroke-width="2.5"/>
+      <rect x="46" y="30" width="28" height="10" rx="3" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+      <rect x="16" y="38" width="88" height="62" rx="12" fill="#CFC7B8" stroke="#221B16" stroke-width="3"/>
+      <rect x="25" y="46" width="70" height="46" rx="7" fill="#16110F" stroke="#221B16" stroke-width="2"/>
+      <g stroke="#F08CD4" stroke-width="1.4" opacity=".3">
+        <line x1="25" y1="58" x2="95" y2="58"/><line x1="25" y1="69" x2="95" y2="69"/><line x1="25" y1="80" x2="95" y2="80"/>
+        <line x1="43" y1="46" x2="43" y2="92"/><line x1="60" y1="46" x2="60" y2="92"/><line x1="77" y1="46" x2="77" y2="92"/>
+      </g>
+      <line x1="29" y1="70" x2="91" y2="70" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/>
+      <rect x="40" y="100" width="40" height="9" rx="4.5" fill="#D45EB4" stroke="#221B16" stroke-width="2.5"/>
+      <rect x="46" y="109" width="28" height="15" rx="6" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+      <path d="M52 124 h16 a8 8 0 0 1 -16 0 z" fill="#D45EB4" stroke="#221B16" stroke-width="2.5"/>
+      <path d="M46 112 L30 122" stroke="#221B16" stroke-width="3" fill="none"/>
+      <path d="M74 112 L90 122" stroke="#221B16" stroke-width="3" fill="none"/>
+      <circle cx="28" cy="125" r="5" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+      <circle cx="92" cy="125" r="5" fill="#CFC7B8" stroke="#221B16" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="spark" viewBox="0 0 24 24">
+      <path d="M13 2 L5 14 h6 l-2 8 8-12 h-6 z" fill="#D45EB4" stroke="#221B16" stroke-width="1.6" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- Pictos des 8 ressources — pièces de machine, encre noire -->
+    <symbol id="i-chip" viewBox="0 0 48 48">
+      <path d="M13 7h22l8 8v18l-8 8H13l-8-8V15z" fill="currentColor"/>
+      <path d="M15.5 11.5h17l6 6v13l-6 6h-17l-6-6v-13z" fill="none" stroke="#fff" stroke-width="2.2"/>
+      <rect x="19.5" y="19.5" width="9" height="9" fill="none" stroke="#fff" stroke-width="2.2"/>
+      <g stroke="#fff" stroke-width="2.2" fill="none">
+        <path d="M9.5 24h10M28.5 24h10"/>
+        <path d="M19.5 19.5l-5-5M28.5 19.5l5-5M19.5 28.5l-5 5M28.5 28.5l5 5"/>
+      </g>
+    </symbol>
+    <symbol id="i-tri" viewBox="0 0 48 48">
+      <g stroke="currentColor" stroke-width="3" fill="none">
+        <path d="M24 9.5v7"/>
+        <path d="M11.5 32l6-4.5"/>
+        <path d="M36.5 32l-6-4.5"/>
+      </g>
+      <path d="M9 16h30L24 41.5z" fill="currentColor"/>
+      <path d="M14.8 20.3h18.4L24 36.2z" fill="none" stroke="#fff" stroke-width="2.2"/>
+      <circle cx="24" cy="7" r="5" fill="currentColor"/><circle cx="24" cy="7" r="1.9" fill="#fff"/>
+      <circle cx="8.5" cy="34.5" r="5" fill="currentColor"/><circle cx="8.5" cy="34.5" r="1.9" fill="#fff"/>
+      <circle cx="39.5" cy="34.5" r="5" fill="currentColor"/><circle cx="39.5" cy="34.5" r="1.9" fill="#fff"/>
+    </symbol>
+    <symbol id="i-cpu" viewBox="0 0 48 48">
+      <g fill="currentColor">
+        <rect x="14.5" y="4" width="3.2" height="7"/><rect x="19.6" y="4" width="3.2" height="7"/>
+        <rect x="24.7" y="4" width="3.2" height="7"/><rect x="29.8" y="4" width="3.2" height="7"/>
+        <rect x="14.5" y="37" width="3.2" height="7"/><rect x="19.6" y="37" width="3.2" height="7"/>
+        <rect x="24.7" y="37" width="3.2" height="7"/><rect x="29.8" y="37" width="3.2" height="7"/>
+        <rect x="4" y="14.5" width="7" height="3.2"/><rect x="4" y="19.6" width="7" height="3.2"/>
+        <rect x="4" y="24.7" width="7" height="3.2"/><rect x="4" y="29.8" width="7" height="3.2"/>
+        <rect x="37" y="14.5" width="7" height="3.2"/><rect x="37" y="19.6" width="7" height="3.2"/>
+        <rect x="37" y="24.7" width="7" height="3.2"/><rect x="37" y="29.8" width="7" height="3.2"/>
+        <rect x="12" y="12" width="24" height="24"/>
+      </g>
+      <rect x="15.5" y="15.5" width="17" height="17" fill="none" stroke="#fff" stroke-width="2.2"/>
+    </symbol>
+    <symbol id="i-cam" viewBox="0 0 48 48">
+      <circle cx="24" cy="19" r="14.5" fill="currentColor"/>
+      <circle cx="24" cy="19" r="8" fill="none" stroke="#fff" stroke-width="2.6"/>
+      <circle cx="24" cy="19" r="4" fill="none" stroke="#fff" stroke-width="2.2"/>
+      <path d="M13 40l5.5-7h11L35 40z" fill="currentColor"/>
+      <rect x="11" y="40" width="26" height="4.5" rx="2" fill="currentColor"/>
+      <path d="M18.5 38.5l3.5-4h4l3.5 4z" fill="none" stroke="#fff" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="i-antenna" viewBox="0 0 48 48">
+      <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+        <path d="M12.5 15.5a14.5 14.5 0 0 1 23 0"/>
+        <path d="M7.5 10.5a21 21 0 0 1 33 0"/>
+        <path d="M15 21a9 9 0 0 1 5-5.5"/>
+        <path d="M33 21a9 9 0 0 0-5-5.5"/>
+      </g>
+      <circle cx="24" cy="22" r="4.6" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M21.8 26h4.4v10h-4.4z" fill="currentColor"/>
+      <path d="M9 45l15-10 15 10z" fill="currentColor"/>
+      <path d="M16.5 42.2l7.5-5 7.5 5z" fill="none" stroke="#fff" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="i-plug" viewBox="0 0 48 48">
+      <g fill="currentColor">
+        <rect x="13" y="3" width="5.5" height="13" rx="2.7"/>
+        <rect x="21.2" y="1" width="5.5" height="15" rx="2.7"/>
+        <rect x="29.5" y="3" width="5.5" height="13" rx="2.7"/>
+        <path d="M11 18h26v8l-5 5v6l-5 6h-6l-5-6v-6l-5-5z"/>
+        <rect x="21.2" y="43" width="5.5" height="5" rx="2.4"/>
+      </g>
+      <path d="M14.5 21.5h19v5.2l-4.8 4.8v5.4L25.3 40h-2.6l-3.4-3.1v-5.4l-4.8-4.8z" fill="none" stroke="#fff" stroke-width="2"/>
+      <path d="M26 23l-6.5 8.5h4l-2 7.5 6.5-9h-4z" fill="#fff"/>
+    </symbol>
+    <symbol id="i-fan" viewBox="0 0 48 48">
+      <rect x="5" y="5" width="38" height="38" rx="3" fill="currentColor"/>
+      <circle cx="24" cy="24" r="13.5" fill="#fff"/>
+      <g fill="currentColor">
+        <circle cx="24" cy="24" r="2.6"/>
+        <path d="M24 20.8c-1-5.5 2.2-8.8 6.3-7.9-.5 4.6-3.1 6.9-6.3 7.9z"/>
+        <path d="M27.2 24c5.5-1 8.8 2.2 7.9 6.3-4.6-.5-6.9-3.1-7.9-6.3z"/>
+        <path d="M24 27.2c1 5.5-2.2 8.8-6.3 7.9.5-4.6 3.1-6.9 6.3-7.9z"/>
+        <path d="M20.8 24c-5.5 1-8.8-2.2-7.9-6.3 4.6.5 6.9 3.1 7.9 6.3z"/>
+      </g>
+    </symbol>
+    <symbol id="i-pad" viewBox="0 0 48 48">
+      <rect x="9" y="8" width="30" height="35" rx="5" fill="currentColor"/>
+      <rect x="19" y="3.5" width="10" height="9" fill="currentColor"/>
+      <rect x="13.5" y="14.5" width="21" height="24" fill="none" stroke="#fff" stroke-width="2.2"/>
+      <g stroke="#fff" stroke-width="1.8" fill="none">
+        <path d="M17 19.5h14M17 23h14M17 26.5h14M17 30h14"/>
+        <path d="M17 34.5h4.5M26.5 34.5h4.5"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <div class="app">
+
+    <header class="topbar no-print">
+      <div class="brand">
+        <div class="brand-logo"><svg><use href="#robot"/></svg></div>
+        <div>
+          <div class="brand-title">La Machine</div>
+          <div class="brand-sub">Pauuse·Playy · Console de saut</div>
+        </div>
+      </div>
+      <button class="icon-btn" id="btn-reset">↺ Réinitialiser</button>
+    </header>
+
+    <!-- ============ ÉCRAN 1 — AMORÇAGE ============ -->
+    <section class="screen active" id="screen-boot">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">PROTOCOLE 1947–C · INITIALISATION DU PORTAIL</div>
+          <h1>Initiez la boucle temporelle.</h1>
+          <p>La Machine doit calibrer le portail. Renseignez <strong>N</strong>, le nombre d'activités de votre déroulé pédagogique à traiter dans cette partie. Chaque saut réussi fait avancer la jauge de retour à l'instant T d'un cran (1/N).</p>
+        </div>
+        <div class="hero-robot"><svg><use href="#robot"/></svg></div>
+      </div>
+
+      <div class="boot-card rivets">
+        <div class="boot-inner">
+          <label class="boot-label" for="boot-N">N · activités du déroulé</label>
+          <div class="boot-input-row">
+            <button class="boot-step" id="boot-minus" aria-label="Diminuer N">−</button>
+            <input class="boot-input" type="number" id="boot-N" min="1" max="35" value="8" inputmode="numeric" />
+            <button class="boot-step" id="boot-plus" aria-label="Augmenter N">+</button>
+          </div>
+          <div class="boot-readout">
+            <div class="readout-row">
+              <span class="readout-label">Valeur d'un cran de la jauge</span>
+              <span class="readout-value" id="boot-cran">12,5 %</span>
+            </div>
+            <div class="readout-row">
+              <span class="readout-label">Sauts à réussir (ratio &gt; 75 %)</span>
+              <span class="readout-value" id="boot-seuil">7 sur 8</span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-big" id="btn-init">Initier la boucle →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ÉCRAN 2 — TABLEAU DE BORD ============ -->
+    <section class="screen" id="screen-hub">
+      <div class="eyebrow" id="hub-eyebrow">TABLEAU DE BORD · SAUT 1 / 8</div>
+
+      <div class="frame rivets hub-jauge-card">
+        <div class="hub-jauge-inner">
+          <div class="hub-jauge-head">
+            <span class="hub-jauge-title">Jauge de retour à l'instant T</span>
+            <span class="hub-jauge-readout"><strong id="jauge-wins">0</strong> <span id="jauge-of">/ 8 sauts réussis</span> · <strong id="jauge-pct">0 %</strong></span>
+          </div>
+          <div class="jauge-track" id="jauge-track"></div>
+          <div class="jauge-foot" id="jauge-foot">La Machine reprend la production si le ratio reste sous 75 %.</div>
+        </div>
+      </div>
+
+      <div class="hub-row">
+        <div class="panel hub-panel">
+          <div class="hub-panel-label">Score d'honneur cumulé</div>
+          <div class="crt cumul-screen">
+            <div class="cumul-value" id="cumul-value">0</div>
+          </div>
+          <div class="cumul-unit">points · Score(t) figés + bonus de série encaissés</div>
+        </div>
+        <div class="panel hub-panel">
+          <div class="hub-panel-label">Série en cours</div>
+          <div class="streak-flame"><svg><use href="#spark"/></svg><span class="sf-num" id="streak-num">0</span></div>
+          <div class="streak-sub" id="streak-sub">aucune victoire consécutive</div>
+          <div class="streak-palier" id="streak-palier"></div>
+        </div>
+      </div>
+
+      <div class="panel hub-panel" style="margin-bottom:16px">
+        <div class="hub-panel-label">Liste des sauts</div>
+        <div class="sauts-list" id="sauts-list"></div>
+      </div>
+
+      <div class="hub-cta">
+        <button class="btn btn-primary btn-big" id="btn-next-jump">Saut suivant →</button>
+      </div>
+    </section>
+
+    <!-- ============ ÉCRAN 3 — SÉLECTION ============ -->
+    <section class="screen" id="screen-select">
+      <div class="section-title">
+        <h2>Sélectionnez l'activité du saut</h2>
+        <small id="select-progress">SAUT 1 / 8</small>
+      </div>
+      <p class="select-hint">
+        Posez la carte Activité sur la Console, puis choisissez-la ici. Un descriptif s'affiche
+        pendant <strong>15 s</strong> — temps de relecture — avant que La Machine n'initialise le saut et lance le chrono.
+        Stratégie : commencez par les activités les mieux maîtrisées pour amorcer une série bonus.
+      </p>
+      <div class="activity-grid" id="activity-grid"></div>
+      <div style="text-align:center;margin-top:24px">
+        <button class="btn btn-ghost" id="btn-back-hub">↶ Retour au tableau de bord</button>
+      </div>
+    </section>
+
+    <!-- ============ ÉCRAN 4 — SAUT TEMPOREL ============ -->
+    <section class="screen" id="screen-play">
+      <div class="play-eyebrow" id="play-eyebrow">SAUT 1 / 8 · ACTIVITÉ EN COURS</div>
+      <div class="play-activity-name" id="play-name">—</div>
+
+      <div class="play-layout">
+      <div class="frame rivets play-console">
+        <div class="crt play-screen">
+          <div class="charge-block">
+            <div class="charge-value" id="play-charge">5000</div>
+            <div class="charge-label">Charge quantique</div>
+            <div class="charge-grace" id="charge-grace" style="display:none">Fenêtre de grâce — charge gelée à 5 000</div>
+            <div class="charge-bar"><div class="charge-bar-fill" id="charge-bar"></div></div>
+          </div>
+          <div class="play-meters">
+            <div class="meter timer" id="meter-timer">
+              <div class="meter-value" id="play-timer">5:00</div>
+              <div class="meter-label">Temps restant</div>
+            </div>
+            <div class="meter attempts">
+              <div class="meter-value" id="play-attempts">3 / 3</div>
+              <div class="meter-label">Essais restants</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="play-side">
+      <div class="picto-grid" id="picto-grid"></div>
+
+      <div class="feedback" id="feedback">
+        <div class="machine">LA MACHINE ATTEND VOTRE CODE…</div>
+      </div>
+
+      <div class="play-actions">
+        <button class="btn btn-ghost" id="btn-abandon">Abandonner le saut</button>
+        <button class="btn btn-primary" id="btn-validate">Valider le code</button>
+      </div>
+      </div><!-- /play-side -->
+      </div><!-- /play-layout -->
+    </section>
+
+    <!-- ============ VERDICT ============ -->
+    <section class="screen" id="screen-verdict">
+      <div class="verdict-box" id="verdict-box">
+        <div class="verdict-robot"><svg><use href="#robot" id="verdict-robot-use"/></svg></div>
+        <div class="eyebrow" id="verdict-eyebrow" style="text-align:center">PROTOCOLE 1947–C · VERDICT TEMPOREL</div>
+        <h1 class="verdict-title" id="verdict-title">—</h1>
+        <div class="verdict-date mono" id="verdict-date">—</div>
+        <p class="verdict-tagline" id="verdict-tagline">—</p>
+
+        <div class="verdict-grid">
+          <div class="verdict-stat vs-jumps">
+            <div class="vs-label">Sauts réussis</div>
+            <div class="vs-value" id="verdict-jumps">0 / 0</div>
+          </div>
+          <div class="verdict-stat vs-ratio">
+            <div class="vs-label">Ratio</div>
+            <div class="vs-value" id="verdict-ratio">0 %</div>
+          </div>
+          <div class="verdict-stat vs-honor">
+            <div class="vs-label">Score d'honneur</div>
+            <div class="vs-value" id="verdict-honor">0</div>
+          </div>
+        </div>
+
+        <div class="cahier" id="cahier"></div>
+
+        <div class="hub-cta no-print">
+          <button class="btn btn-ghost" id="btn-print">Imprimer le cahier</button>
+          <button class="btn btn-primary" id="btn-new-game">Nouvelle partie</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-back" id="modal">
+    <div class="modal">
+      <div class="modal-eyebrow" id="modal-eyebrow"></div>
+      <h3 id="modal-title">—</h3>
+      <p id="modal-body">—</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="modal-cancel">Annuler</button>
+        <button class="btn btn-primary" id="modal-ok">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rotation forcée : mobile tenu en portrait -->
+  <div class="rotate-overlay" role="status" aria-live="polite">
+    <div>
+      <div class="ro-robot"><svg><use href="#robot"/></svg></div>
+      <div class="ro-phone" aria-hidden="true"></div>
+      <div class="ro-title">Tournez votre téléphone</div>
+      <div class="ro-sub">La Machine fonctionne en mode paysage. Pivotez l'écran pour initier la boucle.</div>
+    </div>
+  </div>
+
+  <!-- Préparation du saut -->
+  <div class="prep-back" id="prep">
+    <div class="prep-card">
+      <div class="prep-eyebrow" id="prep-eyebrow">PRÉPARATION DU SAUT</div>
+      <h2 class="prep-title" id="prep-title">—</h2>
+      <p class="prep-desc" id="prep-desc">—</p>
+      <div class="prep-ready">Prêts à identifier les ressources nécessaires ?</div>
+      <div class="prep-countdown" id="prep-count">15</div>
+      <div class="prep-count-label">Initialisation de La Machine — le chrono démarre ensuite</div>
+      <div class="prep-bar"><div class="prep-bar-fill" id="prep-bar"></div></div>
+      <button class="btn btn-ghost" id="prep-cancel">↶ Retour</button>
+    </div>
+  </div>
+
+<script>
+// ===================================================================
+// DATA — 8 ressources à produire (les NOMS ne sont jamais affichés
+// en jeu, uniquement sur le verdict / cahier de production)
+// ===================================================================
+const TYPOLOGIES = [
+  { id:'CO', icon:'i-chip',    label:"Consignes (d'activité)" },
+  { id:'SC', icon:'i-tri',     label:'Scénario & fiche de rôle' },
+  { id:'LI', icon:'i-cpu',     label:'Livrable apprenant' },
+  { id:'MD', icon:'i-cam',     label:'Média pédagogique' },
+  { id:'BD', icon:'i-antenna', label:'Bibliothèque de documents' },
+  { id:'MT', icon:'i-plug',    label:'Mémo apprenant & outil de transfert' },
+  { id:'MA', icon:'i-fan',     label:"Matériel d'animation" },
+  { id:'DB', icon:'i-pad',     label:'Outil de débriefing, évaluation & feedback' },
+];
+const TYPO_BY_ID = Object.fromEntries(TYPOLOGIES.map(t => [t.id, t]));
+
+const ACTIVITIES = [
+  { name:'Brainstorming', codes:['CO','LI','MD','MA','DB'],
+    desc:"La technique du brainstorming stimule la créativité du groupe en générant un maximum d'idées, sans censure, et en un minimum de temps. Elle se divise en deux phases : divergence pour créer librement et convergence pour sélectionner, trier et synthétiser." },
+  { name:'Codéveloppement express', codes:['CO','SC','LI','MA','DB'],
+    desc:"Le codéveloppement express est une méthode d'intelligence collective où un participant présente un problème auquel le groupe aide à trouver des solutions rapidement en suivant un processus précis. Cette approche favorise l'entraide et nécessite un respect strict du timing et des rôles." },
+  { name:"Commentaire sur le travail d'un pair", codes:['CO','LI','DB'],
+    desc:"L'évaluation constructive du travail d'un pair développe les compétences d'analyse et de feedback. Elle nécessite des règles et des consignes claires. Utilisée de manière asynchrone sur une plateforme LMS, elle permet de donner et recevoir du feedback efficacement." },
+  { name:"Consultation d'une FAQ", codes:['BD','MT','MA'],
+    desc:"La FAQ (questions fréquemment posées) permet aux apprenants de trouver rapidement des réponses de manière autonome. Elle doit être construite à partir des questions posées précédemment. Bien qu'impersonnelle, elle offre une disponibilité 24/7." },
+  { name:"Création d'une carte mentale", codes:['CO','LI','MD'],
+    desc:"La création d'une carte mentale (mind map), par les apprenants, est un exercice visuel pour structurer la pensée et mémoriser des informations. Elle stimule la créativité et permet de comparer différentes structures d'information." },
+  { name:'Débat', codes:['CO','SC','LI','MA','DB'],
+    desc:"Le débat est une discussion entre participants, sur un sujet défini, favorisant l'écoute, les retours d'expérience et l'esprit critique. Le formateur joue le rôle de modérateur pour garantir une discussion constructive et synthétique." },
+  { name:'Défi/micro-action', codes:['CO','LI','MA','MT'],
+    desc:"Le défi ou micro-action est une tâche rapide à réaliser en moins de 10 minutes, ancrant l'apprentissage dans la pratique professionnelle. Il favorise le transfert immédiat des compétences, mais nécessite un suivi pour maintenir la motivation." },
+  { name:"Écoute d'un podcast", codes:['CO','LI','BD','DB'],
+    desc:"L'écoute de podcasts est idéale pour l'apprentissage en mobilité, favorisant la mémorisation et la réflexion. L'interaction est limitée, mais elle peut être enrichie par des discussions en forum ou des quiz." },
+  { name:'Enquête terrain', codes:['CO','LI','DB'],
+    desc:"L'enquête est une activité interactive où les participants collectent des informations, sur le terrain ou sur le net, pour résoudre une problématique. Elle nécessite une grille d'interview ou un questionnaire simple à utiliser sur le terrain." },
+  { name:'Étude de cas', codes:['CO','SC','LI','DB'],
+    desc:"L'étude de cas consiste en une analyse approfondie d'une situation réelle ou fictive, dans laquelle les participants identifient des problèmes et proposent des solutions, en appliquant des méthodes et des concepts vus dans la formation." },
+  { name:'Exercice', codes:['CO','LI','DB'],
+    desc:"L'exercice est une tâche pratique effectuée individuellement ou en groupe pour appliquer de nouvelles notions, les mettre en pratique et consolider l'apprentissage. Il nécessite des consignes claires et un temps de correction collective." },
+  { name:"Exploration d'un logiciel", codes:['CO','LI','MA'],
+    desc:"La découverte d'un logiciel ou d'une application permet un apprentissage autonome par essais et erreurs. Les apprenants découvrent les fonctionnalités à leur rythme. Un minimum de guidage est nécessaire pour éviter la confusion." },
+  { name:'Exposé magistral', codes:['MD','MT'],
+    desc:"L'exposé magistral est une activité efficace pour transmettre des connaissances théoriques à un large public. Il s'appuie sur des visuels, des anecdotes et des exemples concrets, mais peut entraîner une perte d'attention au-delà de 20 minutes." },
+  { name:'Exposé participant', codes:['CO','LI','MD','DB'],
+    desc:"Cette activité consiste en une présentation courte par les apprenants sur un sujet défini, favorisant la maîtrise du fond et de la forme. Elle nécessite un cadre précis et un feedback constructif suivant des critères précisés à l'avance." },
+  { name:'Jeu de piste', codes:['CO','SC','LI','MA'],
+    desc:"Le jeu de piste est un ensemble d'énigmes à résoudre en équipe, favorisant l'apprentissage et la collaboration. Idéal pour l'intégration, il nécessite une organisation logistique importante, en intérieur ou en extérieur." },
+  { name:'Jeu de rôle', codes:['CO','SC','LI','MA','DB'],
+    desc:"Le jeu de rôle permet aux participants d'incarner des personnages pour développer des compétences dans un cadre défini et sécurisé. Il nécessite des consignes claires, un briefing, un débriefing essentiel et une rotation des rôles." },
+  { name:'Jeu de société', codes:['CO','LI','MA','DB'],
+    desc:"Le jeu de société est une activité pédagogique engageante qui utilise des jeux de plateau ou de cartes pour aborder des concepts ou des situations complexes. Il nécessite un débriefing approfondi pour relier le jeu aux objectifs d'apprentissage." },
+  { name:'Journal de bord réflexif', codes:['CO','LI','DB'],
+    desc:"Le journal de bord réflexif est un écrit personnel permettant aux apprenants de consigner leurs réflexions et apprentissages. Il favorise la métacognition et l'ancrage des acquis, sous format physique ou numérique." },
+  { name:"L'exposition", codes:['CO','LI','MA','DB'],
+    desc:"L'exposition consiste à inviter les apprenants à mettre en valeur leurs productions sous la forme d'une exposition organisée comme au musée, physique ou virtuelle. Elle transforme les apprenants en auteurs et commissaires de leurs savoirs." },
+  { name:"Lecture d'article/livre blanc", codes:['CO','LI','BD','DB'],
+    desc:"La lecture autonome de documents textuels permet d'approfondir un sujet à son rythme. Elle favorise l'acquisition de connaissances théoriques, mais nécessite discipline et des questions clés pour guider l'apprentissage." },
+  { name:'Pitch', codes:['CO','LI','MA','DB'],
+    desc:"L'exercice de « Pitch » consiste en une présentation orale courte pour convaincre un auditoire, développant la synthèse et la persuasion. Il impose des contraintes de temps pour favoriser la clarté. Il peut être stressant pour certains." },
+  { name:"Plan d'action personnel", codes:['CO','LI','MT'],
+    desc:"Le plan d'action personnel permet à l'apprenant de formaliser des actions concrètes post-formation pour appliquer et suivre ses acquis. Il doit être réaliste ; un suivi est nécessaire pour éviter qu'il ne reste inactif." },
+  { name:'Post sur un forum', codes:['CO','LI','MA'],
+    desc:"Contribuer à un forum en ligne favorise l'apprentissage par les pairs et le partage d'expériences. Les formateurs posent des questions ouvertes pour engager les apprenants. Nécessite une modération constructive." },
+  { name:'Projet « Fil Rouge »', codes:['CO','LI','DB'],
+    desc:"Le projet fil rouge est une activité où les apprenants développent, tout au long de leur parcours, un projet personnel ou professionnel cohérent. Il évolue étape par étape et sert de support concret d'appropriation et d'évaluation." },
+  { name:'Prototypage', codes:['CO','LI','MA','DB'],
+    desc:"Le prototypage consiste à créer une version simplifiée d'un produit pour tester rapidement une idée. Cela favorise la créativité et le feedback entre groupes. L'accent est mis sur la matérialisation rapide des idées avec des matériaux simples." },
+  { name:'Quiz', codes:['CO','DB'],
+    desc:"Le quiz est une série de questions (ludiques) pour évaluer rapidement les connaissances. Utilisable en début ou fin de session, il favorise l'ancrage. Il évalue principalement la mémorisation et la compréhension." },
+  { name:'Quiz auto-corrigé', codes:['MA','DB'],
+    desc:"Le quiz auto-corrigé est un questionnaire en ligne offrant un feedback immédiat pour tester ses connaissances et se positionner. Il permet une auto-évaluation sans pression, mais se limite à des connaissances factuelles." },
+  { name:'Recherche documentaire', codes:['CO','LI','BD'],
+    desc:"L'activité de recherche documentaire consiste à collecter, analyser et partager des informations pour développer l'autonomie et l'esprit critique. Il est essentiel de fournir des sources fiables et de demander un livrable précis." },
+  { name:'Serious Game / Simulation', codes:['SC','MA','DB'],
+    desc:"Le serious game est une activité interactive qui simule un environnement professionnel, permettant de réagir à des situations scénarisées et d'en observer les conséquences. Il est immersif, mais coûteux à développer." },
+  { name:'Sous la loupe', codes:['CO','SC','LI','DB'],
+    desc:"Un groupe réalise une activité pendant qu'un second l'observe avec une grille d'analyse. Une restitution collective suit, favorisant l'observation critique et la rétroaction multi-perspectives." },
+  { name:'Synthèse co-construite', codes:['CO','LI','MD'],
+    desc:"L'élaboration collective d'un résumé des points clés favorise l'ancrage mémoriel et l'alignement du groupe. Utiliser des supports visuels collaboratifs est recommandé. Idéale pour clôturer une séance." },
+  { name:'Vidéo (création)', codes:['CO','LI','MD','DB'],
+    desc:"Les apprenants réalisent une vidéo pour synthétiser leurs apprentissages, développant des compétences numériques, de communication et de synthèse. Nécessite des équipements simples et des logiciels de montage." },
+  { name:'Vidéo (diffusion)', codes:['CO','LI','BD','DB'],
+    desc:"Le visionnage d'un extrait vidéo est une activité puissante pour illustrer des propos et susciter des émotions. Il est conseillé de choisir des extraits courts et de débriefer les points clefs à la fin." },
+  { name:'Wiki / Glossaire collaboratif', codes:['CO','LI','MA'],
+    desc:"La création d'un wiki ou d'un glossaire collaboratif renforce la compréhension des concepts clés par la co-construction d'une base de connaissances. Nécessite une animation et une relecture du formateur." },
+  { name:'World Café', codes:['CO','LI','MD','MA','DB'],
+    desc:"Le World Café est une activité d'intelligence collective où les participants discutent en petits groupes tournants. Elle favorise l'émergence de solutions créatives et nécessite une logistique précise." },
+];
+
+// ===================================================================
+// CONFIG
+// ===================================================================
+const START_CHARGE = 5000;
+const BASE_DURATION = 300;          // 5 min de décompte de charge
+const DECAY = START_CHARGE / BASE_DURATION; // ≈ 16,67 pts/s
+const MAX_ATTEMPTS = 3;
+const WIN_RATIO = 0.75;
+const TICK_MS = 100;
+
+// streak -> récompense (temps du prochain saut, points cumul)
+function streakReward(streak) {
+  if (streak < 2) return { time:0,   pts:0 };
+  if (streak === 2) return { time:30,  pts:500 };
+  if (streak === 3) return { time:60,  pts:1000 };
+  return { time:120, pts:1500 }; // 4+
+}
+// palier à venir pour l'affichage
+function nextPalier(streak) {
+  if (streak < 2) return { at:2, time:30,  pts:500 };
+  if (streak < 3) return { at:3, time:60,  pts:1000 };
+  if (streak < 4) return { at:4, time:120, pts:1500 };
+  return { maxed:true, time:120, pts:1500 };
+}
+function minWinsFor(N) { return Math.floor(WIN_RATIO * N) + 1; }
+
+// ===================================================================
+// STATE
+// ===================================================================
+const STORAGE_KEY = 'lamachine_v3';
+const defaultState = () => ({
+  N: null,
+  processed: 0,
+  wins: 0,
+  cumScore: 0,
+  streak: 0,
+  nextTimeBonus: 0,
+  history: [],   // {idx,name,codes,picked,won,points,attempts}
+});
+let state = loadState();
+let lastShownCumul = 0;
+
+function loadState() {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultState();
+    return Object.assign(defaultState(), JSON.parse(raw));
+  } catch { return defaultState(); }
+}
+function saveState() {
+  try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+}
+
+// ===================================================================
+// SCREENS
+// ===================================================================
+const screens = {
+  boot:    document.getElementById('screen-boot'),
+  hub:     document.getElementById('screen-hub'),
+  select:  document.getElementById('screen-select'),
+  play:    document.getElementById('screen-play'),
+  verdict: document.getElementById('screen-verdict'),
+};
+function show(name) {
+  Object.values(screens).forEach(s => s.classList.remove('active'));
+  screens[name].classList.add('active');
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+// ===================================================================
+// ÉCRAN 1 — AMORÇAGE
+// ===================================================================
+const bootInput = document.getElementById('boot-N');
+function clampN(v) { v = Math.round(v||0); return Math.min(35, Math.max(1, v)); }
+function refreshBoot() {
+  const N = clampN(parseInt(bootInput.value, 10));
+  const cran = (100 / N);
+  document.getElementById('boot-cran').textContent =
+    cran.toLocaleString('fr-FR', { maximumFractionDigits:1 }) + ' %';
+  document.getElementById('boot-seuil').textContent = `${minWinsFor(N)} sur ${N}`;
+}
+bootInput.oninput = refreshBoot;
+bootInput.onblur = () => { bootInput.value = clampN(parseInt(bootInput.value,10)); refreshBoot(); };
+document.getElementById('boot-minus').onclick = () => { bootInput.value = clampN(parseInt(bootInput.value,10)-1); refreshBoot(); };
+document.getElementById('boot-plus').onclick  = () => { bootInput.value = clampN(parseInt(bootInput.value,10)+1); refreshBoot(); };
+document.getElementById('btn-init').onclick = () => {
+  state = defaultState();
+  state.N = clampN(parseInt(bootInput.value, 10));
+  lastShownCumul = 0;
+  saveState();
+  renderHub();
+  show('hub');
+};
+
+// ===================================================================
+// ÉCRAN 2 — TABLEAU DE BORD
+// ===================================================================
+function renderHub() {
+  const N = state.N;
+  document.getElementById('hub-eyebrow').textContent =
+    `TABLEAU DE BORD · SAUT ${Math.min(state.processed+1, N)} / ${N}`;
+
+  // jauge
+  const track = document.getElementById('jauge-track');
+  track.style.gridTemplateColumns = `repeat(${N}, 1fr)`;
+  track.innerHTML = '';
+  // chaque saut traité remplit une case dans l'ordre chronologique
+  for (let i=0; i<N; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'jauge-cell';
+    const h = state.history[i];
+    if (h) cell.classList.add(h.won ? 'win' : 'loss');
+    track.appendChild(cell);
+  }
+  const marker = document.createElement('div');
+  marker.className = 'jauge-marker';
+  marker.style.left = (WIN_RATIO * 100) + '%';
+  track.appendChild(marker);
+
+  const pct = N ? (state.wins / N * 100) : 0;
+  document.getElementById('jauge-wins').textContent = state.wins;
+  document.getElementById('jauge-of').textContent = `/ ${N} sauts réussis`;
+  document.getElementById('jauge-pct').textContent = pct.toLocaleString('fr-FR',{maximumFractionDigits:0}) + ' %';
+  document.getElementById('jauge-foot').textContent =
+    `Seuil de victoire : ${minWinsFor(N)} sauts sur ${N} (ratio > 75 %). ${state.processed}/${N} sauts traités.`;
+
+  // cumul (compte animé)
+  animateNumber(document.getElementById('cumul-value'), lastShownCumul, state.cumScore, 650);
+  lastShownCumul = state.cumScore;
+
+  // série
+  document.getElementById('streak-num').textContent = state.streak;
+  document.getElementById('streak-sub').textContent =
+    state.streak === 0 ? 'aucune victoire consécutive'
+    : state.streak === 1 ? '1 victoire consécutive'
+    : `${state.streak} victoires consécutives`;
+  const np = nextPalier(state.streak);
+  let palierHtml;
+  if (np.maxed) {
+    palierHtml = `Palier maximal atteint · chaque victoire : <b>+120 s</b> & <b>+1 500 pts</b>.`;
+  } else {
+    palierHtml = `Prochain palier — <b>${np.at} victoires</b> : <b>+${np.time} s</b> offertes & <b>+${np.pts.toLocaleString('fr-FR')} pts</b>.`;
+  }
+  if (state.nextTimeBonus > 0) {
+    palierHtml += `<div class="grace-tag">Prochain saut : +${state.nextTimeBonus} s de fenêtre de grâce</div>`;
+  }
+  document.getElementById('streak-palier').innerHTML = palierHtml;
+
+  // liste des sauts
+  const list = document.getElementById('sauts-list');
+  list.innerHTML = '';
+  for (let i=0; i<N; i++) {
+    const h = state.history[i];
+    const row = document.createElement('div');
+    if (h) {
+      row.className = 'saut-row ' + (h.won ? 'win-row' : 'loss-row');
+      row.innerHTML = `
+        <span class="saut-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="saut-name">${h.name}</span>
+        <span class="saut-status">${h.won ? '✓ remportée · +'+h.points.toLocaleString('fr-FR') : '✗ époque verrouillée'}</span>`;
+    } else {
+      row.className = 'saut-row pending';
+      row.innerHTML = `
+        <span class="saut-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="saut-name">Saut ${i+1} — à venir</span>
+        <span class="saut-status" style="color:var(--mute)">en attente</span>`;
+    }
+    list.appendChild(row);
+  }
+
+  // bouton
+  const btn = document.getElementById('btn-next-jump');
+  if (state.processed >= N) {
+    btn.textContent = 'Voir le verdict de La Machine →';
+  } else {
+    btn.textContent = state.processed === 0 ? 'Initier le premier saut →' : 'Saut suivant →';
+  }
+}
+document.getElementById('btn-next-jump').onclick = () => {
+  if (state.processed >= state.N) { renderVerdict(); show('verdict'); }
+  else { renderSelect(); show('select'); }
+};
+
+function animateNumber(el, from, to, dur) {
+  const t0 = performance.now();
+  function step(now) {
+    const k = Math.min(1, (now - t0) / dur);
+    const eased = 1 - Math.pow(1-k, 3);
+    el.textContent = Math.round(from + (to-from)*eased).toLocaleString('fr-FR');
+    if (k < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ===================================================================
+// ÉCRAN 3 — SÉLECTION
+// ===================================================================
+function renderSelect() {
+  document.getElementById('select-progress').textContent =
+    `SAUT ${state.processed+1} / ${state.N}`;
+  const grid = document.getElementById('activity-grid');
+  grid.innerHTML = '';
+  ACTIVITIES.forEach((a, idx) => {
+    const plays = state.history.filter(h => h.idx === idx);
+    const badge = plays.length
+      ? `<span class="badge">déjà joué ×${plays.length}</span>` : '';
+    const card = document.createElement('button');
+    card.className = 'activity-card';
+    card.innerHTML = `
+      <span class="tag">#${String(idx+1).padStart(2,'0')}</span>
+      <span class="nm">${a.name}</span>
+      ${badge}`;
+    card.onclick = () => openPrep(idx);
+    grid.appendChild(card);
+  });
+}
+document.getElementById('btn-back-hub').onclick = () => { renderHub(); show('hub'); };
+
+// --- Préparation du saut : descriptif + compte à rebours 10 s ---
+let prepTimer = null, prepCount = 0, prepIdx = null;
+const PREP_SECONDS = 15;
+
+function openPrep(idx) {
+  prepIdx = idx;
+  const a = ACTIVITIES[idx];
+  document.getElementById('prep-eyebrow').textContent =
+    `ACTIVITÉ #${String(idx+1).padStart(2,'0')} · PRÉPARATION DU SAUT`;
+  document.getElementById('prep-title').textContent = a.name;
+  document.getElementById('prep-desc').textContent = a.desc;
+  prepCount = PREP_SECONDS;
+  const countEl = document.getElementById('prep-count');
+  countEl.textContent = prepCount;
+
+  document.getElementById('prep').classList.add('active');
+
+  // barre qui se vide linéairement sur 10 s
+  const bar = document.getElementById('prep-bar');
+  bar.style.transition = 'none';
+  bar.style.width = '100%';
+  void bar.offsetWidth;
+  bar.style.transition = `width ${PREP_SECONDS}s linear`;
+  bar.style.width = '0%';
+
+  prepTimer = setInterval(() => {
+    prepCount--;
+    if (prepCount <= 0) {
+      clearInterval(prepTimer); prepTimer = null;
+      document.getElementById('prep').classList.remove('active');
+      const i = prepIdx; prepIdx = null;
+      startActivity(i);
+    } else {
+      countEl.textContent = prepCount;
+      countEl.classList.remove('tick'); void countEl.offsetWidth; countEl.classList.add('tick');
+    }
+  }, 1000);
+}
+function closePrep() {
+  if (prepTimer) { clearInterval(prepTimer); prepTimer = null; }
+  document.getElementById('prep').classList.remove('active');
+  prepIdx = null;
+}
+document.getElementById('prep-cancel').onclick = closePrep;
+
+// ===================================================================
+// ÉCRAN 4 — SAUT TEMPOREL
+// ===================================================================
+let play = null;
+
+function startActivity(idx) {
+  const act = ACTIVITIES[idx];
+  const bonus = state.nextTimeBonus; // 0/30/60/120
+  play = {
+    idx, act, bonus,
+    startedAt: performance.now(),
+    charge: START_CHARGE,
+    attempts: 0,
+    picked: new Set(),
+    settled: false,
+    timer: null,
+  };
+  document.getElementById('play-eyebrow').textContent =
+    `SAUT ${state.processed+1} / ${state.N} · ACTIVITÉ EN COURS`;
+  document.getElementById('play-name').textContent = act.name;
+  document.getElementById('play-attempts').textContent = `${MAX_ATTEMPTS} / ${MAX_ATTEMPTS}`;
+  renderPictos();
+  setFeedback('LA MACHINE ATTEND VOTRE CODE…', null, null);
+  document.getElementById('btn-validate').disabled = false;
+  show('play');
+  play.timer = setInterval(tick, TICK_MS);
+  tick();
+}
+
+function tick() {
+  if (!play || play.settled) return;
+  const elapsed = (performance.now() - play.startedAt) / 1000;
+  const total = BASE_DURATION + play.bonus;
+  const remaining = Math.max(0, total - elapsed);
+  const effT = Math.max(0, elapsed - play.bonus);
+  play.charge = Math.max(0, Math.round(START_CHARGE - DECAY * effT));
+
+  document.getElementById('play-charge').textContent = play.charge.toLocaleString('fr-FR');
+  document.getElementById('play-timer').textContent = formatMSS(remaining);
+  document.getElementById('charge-bar').style.width = (play.charge / START_CHARGE * 100) + '%';
+
+  // fenêtre de grâce : minuteur > 5 min restantes => charge gelée
+  const grace = remaining > BASE_DURATION + 0.001;
+  document.getElementById('charge-grace').style.display = grace ? '' : 'none';
+  const tm = document.getElementById('meter-timer');
+  tm.classList.toggle('grace', grace);
+  tm.classList.toggle('urgent', !grace && remaining <= 60);
+
+  if (remaining <= 0) settleActivity(false, 'timeout');
+}
+function formatMSS(sec) {
+  const s = Math.ceil(sec);
+  return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+}
+
+function renderPictos() {
+  const grid = document.getElementById('picto-grid');
+  grid.innerHTML = '';
+  TYPOLOGIES.forEach(t => {
+    const tile = document.createElement('div');
+    tile.className = 'picto-tile';
+    tile.dataset.id = t.id;
+    tile.innerHTML = `<svg class="pic-svg" aria-hidden="true"><use href="#${t.icon}"/></svg>`;
+    tile.setAttribute('role', 'button');
+    tile.setAttribute('aria-label', t.label);
+    tile.onclick = () => {
+      if (!play || play.settled) return;
+      if (play.picked.has(t.id)) { play.picked.delete(t.id); tile.classList.remove('selected'); }
+      else { play.picked.add(t.id); tile.classList.add('selected'); }
+    };
+    grid.appendChild(tile);
+  });
+}
+
+function setFeedback(machineMsg, verdict, cls) {
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback' + (cls ? ' '+cls : '');
+  fb.innerHTML = `<div class="machine">${machineMsg}</div>` +
+    (verdict ? `<div class="verdict">${verdict}</div>` : '');
+}
+function shake() {
+  const g = document.getElementById('picto-grid');
+  g.classList.add('shake');
+  setTimeout(() => g.classList.remove('shake'), 380);
+}
+
+document.getElementById('btn-validate').onclick = () => {
+  if (!play || play.settled) return;
+  const expected = new Set(play.act.codes);
+  let good=0, bad=0, missing=0;
+  play.picked.forEach(id => { if (expected.has(id)) good++; else bad++; });
+  expected.forEach(id => { if (!play.picked.has(id)) missing++; });
+
+  if (bad === 0 && missing === 0) { settleActivity(true); return; }
+
+  play.attempts++;
+  const left = MAX_ATTEMPTS - play.attempts;
+  document.getElementById('play-attempts').textContent = `${left} / ${MAX_ATTEMPTS}`;
+  shake();
+  const verdictTxt = `${good} bon${good>1?'s':''} · ${bad} mauvais`;
+
+  if (play.attempts >= MAX_ATTEMPTS) {
+    setFeedback('✗ TROIS CODES ERRONÉS — ÉPOQUE VERROUILLÉE.', verdictTxt, 'error');
+    setTimeout(() => settleActivity(false, 'errors'), 950);
+  } else {
+    setFeedback(`✗ CODE REJETÉ — ${left} ESSAI${left>1?'S':''} RESTANT${left>1?'S':''}`, verdictTxt, 'error');
+  }
+};
+
+function settleActivity(won, reason) {
+  if (!play || play.settled) return;
+  play.settled = true;
+  clearInterval(play.timer);
+  document.getElementById('btn-validate').disabled = true;
+
+  const points = won ? play.charge : 0;
+  state.history.push({
+    idx: play.idx, name: play.act.name, codes: [...play.act.codes],
+    picked: [...play.picked], won, points, attempts: play.attempts,
+  });
+  state.processed++;
+
+  let streakPts = 0;
+  if (won) {
+    state.wins++;
+    state.cumScore += points;
+    const newStreak = state.streak + 1;
+    const rw = streakReward(newStreak);
+    streakPts = rw.pts;
+    state.cumScore += streakPts;
+    state.streak = newStreak;
+    state.nextTimeBonus = rw.time;
+  } else {
+    state.streak = 0;
+    state.nextTimeBonus = 0;
+  }
+  saveState();
+
+  if (won) {
+    let v = `+${points.toLocaleString('fr-FR')} pts de Charge`;
+    if (streakPts > 0) v += ` · +${streakPts.toLocaleString('fr-FR')} pts bonus série`;
+    setFeedback('✓ CODE VALIDÉ — SAUT RÉUSSI, LA MACHINE S\'INCLINE.', v, 'success');
+  } else {
+    const r = reason === 'errors' ? 'TROIS CODES ERRONÉS'
+            : reason === 'timeout' ? 'CHARGE QUANTIQUE ÉPUISÉE'
+            : 'SAUT ABANDONNÉ';
+    setFeedback(`✗ ${r} — ÉPOQUE VERROUILLÉE PAR LA MACHINE.`, 'Série remise à 0', 'error');
+  }
+
+  setTimeout(() => {
+    if (state.processed >= state.N) { renderVerdict(); show('verdict'); }
+    else { renderHub(); show('hub'); }
+  }, 1900);
+}
+
+document.getElementById('btn-abandon').onclick = () => {
+  if (!play || play.settled) return;
+  openModal({
+    title:'Abandonner ce saut ?',
+    body:"La Machine verrouillera cette époque : 0 point, série remise à 0.",
+    ok:'Abandonner',
+    onOk:() => settleActivity(false, 'abandon'),
+  });
+};
+
+// ===================================================================
+// VERDICT
+// ===================================================================
+function renderVerdict() {
+  const N = state.N, wins = state.wins;
+  const ratio = N ? (wins / N * 100) : 0;
+  const win = ratio > WIN_RATIO * 100;
+
+  const box = document.getElementById('verdict-box');
+  box.classList.remove('win','lose');
+  box.classList.add(win ? 'win' : 'lose');
+
+  // mascotte : pouls vivant en cas de victoire, ligne plate sinon
+  document.getElementById('verdict-robot-use').setAttribute('href', win ? '#robot' : '#robot-flat');
+
+  const today = new Date().toLocaleDateString('fr-FR',
+    { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+  document.getElementById('verdict-eyebrow').textContent = win
+    ? "PROTOCOLE 1947–C · BOUCLE RÉSOLUE" : "PROTOCOLE 1947–C · BOUCLE ÉCHOUÉE";
+  document.getElementById('verdict-title').textContent = win
+    ? "Retour à l'instant T" : "Équipe piégée dans le passé";
+  document.getElementById('verdict-date').textContent = win
+    ? `INSTANT T RÉTABLI · ${today}` : `ARCHIVES SCELLÉES · ÉPOQUE DE BLOCAGE`;
+  document.getElementById('verdict-tagline').textContent = win
+    ? "La pédagogie humaine est préservée. Vous avez prouvé, saut après saut, que la production reste entre vos mains — La Machine se retire."
+    : "Le ratio de sauts réussis est resté sous le seuil des 75 %. La Machine s'empare de la production pédagogique du futur. Relancez une boucle pour reprendre la main.";
+
+  document.getElementById('verdict-jumps').textContent = `${wins} / ${N}`;
+  document.getElementById('verdict-ratio').textContent = ratio.toLocaleString('fr-FR',{maximumFractionDigits:0}) + ' %';
+  document.getElementById('verdict-honor').textContent = state.cumScore.toLocaleString('fr-FR');
+
+  // cahier de production
+  const cahier = document.getElementById('cahier');
+  if (!state.history.length) { cahier.innerHTML = ''; return; }
+  const legend = TYPOLOGIES.map(t => `<span><svg class="leg-ic" aria-hidden="true"><use href="#${t.icon}"/></svg>${t.label}</span>`).join('');
+  const items = state.history.map((h, i) => {
+    const res = h.codes.map(c => {
+      const t = TYPO_BY_ID[c];
+      return `<span class="res-chip"><svg class="rc-ic" aria-hidden="true"><use href="#${t.icon}"/></svg>${t.label}</span>`;
+    }).join('');
+    return `
+      <div class="cahier-item ${h.won ? 'won' : 'lost'}">
+        <div class="cahier-item-head">
+          <span class="cahier-item-name">${String(i+1).padStart(2,'0')} · ${h.name}</span>
+          <span class="cahier-item-tag">${h.won ? '✓ remportée · '+h.points.toLocaleString('fr-FR')+' pts' : '✗ époque verrouillée'}</span>
+        </div>
+        <div class="cahier-res">${res}</div>
+      </div>`;
+  }).join('');
+  cahier.innerHTML = `
+    <h3>Cahier de production consolidé</h3>
+    <p class="cahier-sub">Ressources à produire pour chaque activité du déroulé (8 ressources de la Matrice des productions).</p>
+    <div class="cahier-legend">${legend}</div>
+    ${items}`;
+}
+document.getElementById('btn-print').onclick = () => window.print();
+document.getElementById('btn-new-game').onclick = () => {
+  openModal({
+    title:'Nouvelle partie ?',
+    body:"La boucle actuelle sera effacée et le portail recalibré.",
+    ok:'Nouvelle partie',
+    onOk:() => { state = defaultState(); lastShownCumul = 0; saveState(); refreshBoot(); show('boot'); },
+  });
+};
+
+// ===================================================================
+// RESET
+// ===================================================================
+document.getElementById('btn-reset').onclick = () => {
+  openModal({
+    title:'Réinitialiser la partie ?',
+    body:'Toute la progression (jauge, cumul, série, historique) sera effacée.',
+    ok:'Réinitialiser',
+    onOk:() => { state = defaultState(); lastShownCumul = 0; saveState(); refreshBoot(); show('boot'); },
+  });
+};
+
+// ===================================================================
+// MODAL
+// ===================================================================
+function openModal({ eyebrow='', title, body, ok='OK', cancel='Annuler', onOk }) {
+  const back = document.getElementById('modal');
+  const eb = document.getElementById('modal-eyebrow');
+  eb.textContent = eyebrow; eb.style.display = eyebrow ? '' : 'none';
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').textContent = body;
+  const okBtn = document.getElementById('modal-ok');
+  const cancelBtn = document.getElementById('modal-cancel');
+  okBtn.textContent = ok;
+  cancelBtn.style.display = cancel ? '' : 'none';
+  if (cancel) cancelBtn.textContent = cancel;
+  back.classList.add('active');
+  const close = () => back.classList.remove('active');
+  okBtn.onclick = () => { close(); if (onOk) onOk(); };
+  cancelBtn.onclick = close;
+  back.onclick = (e) => { if (e.target === back) close(); };
+}
+
+// ===================================================================
+// BOOT — reprise de session
+// ===================================================================
+(function init() {
+  refreshBoot();
+  if (state.N == null) { show('boot'); return; }
+  lastShownCumul = state.cumScore;
+  if (state.processed >= state.N) { renderVerdict(); show('verdict'); }
+  else { renderHub(); show('hub'); }
+})();
+</script>
+</body>
+</html>
