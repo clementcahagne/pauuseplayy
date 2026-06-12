@@ -63,7 +63,7 @@ const MARCEL = {
       scene: {
         lieu: "Interrogatoire — Salle 3",
         duree: "2 min 50",
-        audio: "audio/MARCEL1.mp3",
+        audio: "audio/marcel/MARCEL1.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur ouvre le dossier. Marcel, 52 ans, est assis face à vous. Costume-cravate froissé, lunettes de lecture pendues au cou. Il soupire et croise les bras." },
           { qui: "Marcel", dit: "Écoutez, je ne suis pas un criminel. Je suis juste... fatigué. Fatigué de devoir tout réapprendre à mon âge." },
@@ -82,7 +82,7 @@ const MARCEL = {
       rubrique: R_PERSO,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL2.mp3",
+        audio: "audio/marcel/MARCEL2.mp3",
         dialogue: [
           { qui: "", dit: "Marcel desserre sa cravate et fixe ses mains." },
           { qui: "Marcel", dit: "Vous savez ce qui me manque le plus ? Les formations d'avant. On était dans une vraie salle. Avec un tableau blanc, des gens en chair et en os. On pouvait lever la main sans cliquer sur un bouton. On pouvait parler pendant la pause-café, pas dans un « chat ». C'était... humain." },
@@ -103,7 +103,7 @@ const MARCEL = {
       rubrique: R_PRO,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL3.mp3",
+        audio: "audio/marcel/MARCEL3.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur pousse une photo vers Marcel : c'est lui en 1997, lors d'une formation technique, entouré d'ouvriers souriants." },
           { qui: "Inspecteur", dit: "27 ans d'ancienneté chez TechnoPlast. Vous étiez un pilier. Parlez-moi de votre métier, avant... l'incident." },
@@ -124,7 +124,7 @@ const MARCEL = {
       rubrique: R_PRO,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL4.mp3",
+        audio: "audio/marcel/MARCEL4.mp3",
         dialogue: [
           { qui: "", dit: "Marcel tape doucement du poing sur la table." },
           { qui: "Marcel", dit: "Mais vous comprenez pas ! Comment vous voulez que je montre un réglage de machine sur une webcam ? Comment je fais pour vérifier que le stagiaire a bien compris le geste de sécurité si je le vois sur un écran 10×10 cm ?!" },
@@ -145,7 +145,7 @@ const MARCEL = {
       rubrique: R_CONN,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL5.MP3",
+        audio: "audio/marcel/MARCEL5.MP3",
         dialogue: [
           { qui: "", dit: "L'inspecteur ouvre un nouveau dossier." },
           { qui: "Inspecteur", dit: "Marcel, parlons formation. Avant mars 2024, aviez-vous déjà suivi des formations en ligne ? Des webinaires ? Des modules e-learning ?" },
@@ -166,7 +166,7 @@ const MARCEL = {
       rubrique: R_CONN,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL6.mp3",
+        audio: "audio/marcel/MARCEL6.mp3",
         dialogue: [
           { qui: "", dit: "Marcel se redresse, l'air gêné. Il évite le regard de l'inspecteur." },
           { qui: "Marcel", dit: "Bon, OK, je l'avoue. J'avais des... idées fausses. Je croyais vraiment que former en ligne, c'était juste allumer sa caméra et lire un PowerPoint. Je pensais que c'était forcément moins bien que le présentiel." },
@@ -187,7 +187,7 @@ const MARCEL = {
       rubrique: R_CONN,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL7.mp3",
+        audio: "audio/marcel/MARCEL7.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur montre une capture d'écran : Marcel lors d'une visioconférence, le regard perdu, la bouche ouverte." },
           { qui: "Inspecteur", dit: "8 mars 2024. Formation « Animer en distanciel - Niveau 1 ». On vous voit lever physiquement la main devant votre écran... sans cliquer sur le bouton « Lever la main ». Vous avez aussi parlé pendant 10 minutes en pensant que votre micro était activé. Il était coupé." },
@@ -208,7 +208,7 @@ const MARCEL = {
       rubrique: R_CONN,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL8.mp3",
+        audio: "audio/marcel/MARCEL8.mp3",
         dialogue: [
           { qui: "", dit: "Marcel baisse la voix, presque en murmurant." },
           { qui: "Marcel", dit: "Le soir du 8 mars, je suis rentré chez moi. J'ai dit à ma femme que j'étais fatigué et je me suis enfermé dans le salon. J'ai allumé mon ordinateur. J'ai cherché sur YouTube : « Comment utiliser Teams pour les nuls »." },
@@ -229,7 +229,7 @@ const MARCEL = {
       rubrique: R_CONN,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL9.mp3",
+        audio: "audio/marcel/MARCEL9.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur se penche en avant, le ton plus doux." },
           { qui: "Inspecteur", dit: "Marcel, soyons honnêtes. Sur une échelle de 0 à 10, où situez-vous votre niveau sur « animer une formation en ligne » AVANT l'incident du 12 mars ?" },
@@ -250,7 +250,7 @@ const MARCEL = {
       rubrique: R_MOTIV,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL10.mp3",
+        audio: "audio/marcel/MARCEL10.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur change de ton, plus empathique." },
           { qui: "Inspecteur", dit: "Marcel, pourquoi avoir accepté cette formation « Transition Digitale » ? Vous auriez pu dire non. Faire valoir votre ancienneté. Négocier." },
@@ -271,7 +271,7 @@ const MARCEL = {
       rubrique: R_MOTIV,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL11.mp3",
+        audio: "audio/marcel/MARCEL11.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur insiste." },
           { qui: "Inspecteur", dit: "D'accord, c'était obligatoire. Mais Marcel, au fond de vous, qu'espériez-vous tirer de cette formation ? Un bénéfice ? Une compétence ?" },
@@ -292,7 +292,7 @@ const MARCEL = {
       rubrique: R_MOTIV,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL12.mp3",
+        audio: "audio/marcel/MARCEL12.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur ne lâche pas." },
           { qui: "Inspecteur", dit: "Mais Marcel, il devait bien y avoir QUELQUE CHOSE. Un tout petit bénéfice, même caché. Personne ne fait quelque chose sans aucune motivation." },
@@ -315,7 +315,7 @@ const MARCEL = {
       rubrique: R_MOTIV,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL13.mp3",
+        audio: "audio/marcel/MARCEL13.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur pousse vers Marcel le programme de la formation : 3 pages A4, densément remplies." },
           { qui: "", dit: "PROGRAMME — « DEVENIR FORMATEUR DIGITAL - NIVEAU 1 » · Durée : 3 jours intensifs (21 heures) · JOUR 1 : Maîtriser Teams, Miro, Klaxoon (7h) · JOUR 2 : Créer des modules interactifs et scénariser (7h) · JOUR 3 : Animer en classe virtuelle - Mise en pratique (7h)" },
@@ -336,7 +336,7 @@ const MARCEL = {
       rubrique: R_MOTIV,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL14.mp3",
+        audio: "audio/marcel/MARCEL14.mp3",
         dialogue: [
           { qui: "", dit: "Marcel se redresse, regarde l'inspecteur droit dans les yeux. Sa voix tremble légèrement." },
           { qui: "Marcel", dit: "Vous voulez savoir ce que j'attendais VRAIMENT du formateur ? Une seule chose. Qu'il me dise : « C'est normal de galérer. On va y aller doucement. Vous avez le droit de ne pas savoir. » Juste ça. Juste cette phrase." },
@@ -357,7 +357,7 @@ const MARCEL = {
       rubrique: R_FREINS,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL15.mp3",
+        audio: "audio/marcel/MARCEL15.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur pose deux dossiers sur la table : « Cybersécurité - 2019 » et « Animer en distanciel - 8 mars 2024 »." },
           { qui: "Inspecteur", dit: "Deux formations. Deux mauvais souvenirs. Ça laisse des traces, non ?" },
@@ -380,7 +380,7 @@ const MARCEL = {
       rubrique: R_FREINS,
       scene: {
         lieu: "Interrogatoire — Salle 3",
-        audio: "audio/MARCEL16.mp3",
+        audio: "audio/marcel/MARCEL16.mp3",
         dialogue: [
           { qui: "", dit: "L'inspecteur referme lentement le dossier. Silence. Puis :" },
           { qui: "Inspecteur", dit: "Dernière question, Marcel. LE JOUR J. Le 12 mars 2024, 9h05. Vous êtes dans la salle serveur. Vous avez la main sur la prise. Vous allez débrancher. Pourquoi CE JOUR-LÀ ? Pourquoi MAINTENANT ? Qu'est-ce qui s'est passé dans votre tête ?" },
@@ -401,7 +401,374 @@ const MARCEL = {
 };
 
 // ============================================================
-//  AFFAIRES 2 À 6 — à compléter (placeholders)
+//  AFFAIRE N°02 — LÉA MARTINEZ
+// ============================================================
+const LEA = {
+  id: "lea",
+  numero: "Affaire n°02",
+  nom: "Léa Martinez",
+  role: "Chef de Projet Digital",
+  fiche: "29 ans · FastGrow (scale-up tech, 85 employés) · 18 mois d'ancienneté",
+  accroche: "Certifiée à 94 %… en gérant 5 écrans à la fois. A-t-elle vraiment appris quelque chose ?",
+  portrait: "portraits/Lea_Martinez.png",
+  briefing: {
+    securite: "Dossier classé — Niveau de sécurité : Confidentiel",
+    identite: [
+      ["Nom", "MARTINEZ, Léa"],
+      ["Âge", "29 ans"],
+      ["Profession", "Chef de Projet Digital"],
+      ["Entreprise", "FastGrow (scale-up tech, 85 employés)"],
+      ["Ancienneté", "18 mois"],
+    ],
+    incident: [
+      "23 avril 2024, 14h37. Léa Martinez obtient sa certification « Management Agile - Niveau Expert » avec un score de 94 %. Temps de formation déclaré : 35 heures sur 3 semaines. Taux de complétion : 100 %.",
+      "Problème : les logs de connexion révèlent des anomalies troublantes. Pendant les sessions de formation en ligne, Léa était aussi connectée à 3 visioconférences simultanées (clients, équipe, COMEX), à Slack (147 messages envoyés), à 2 Google Docs partagés et à son CRM (17 fiches clients mises à jour).",
+      "L'analyse des quiz révèle des réponses étrangement… parfaites. Trop parfaites. Suspectes. Interrogée, Léa assume : « Oui, j'ai fait plusieurs choses en même temps. Et alors ? J'ai validé la formation, non ? J'ai mon certificat. Mission accomplie. »",
+    ],
+    mission: "Reconstituer le profil de Léa pour comprendre comment une professionnelle brillante et ultra-performante en est venue à « hacker » son propre apprentissage… au point de ne plus rien apprendre du tout.",
+  },
+  questions: [
+    // ---------- 1 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea1.mp3",
+        dialogue: [
+          { qui: "", dit: "Léa entre dans la salle, iPhone à la main, AirPods autour du cou. Elle s'assoit avec assurance, croise les jambes. Tailleur moderne, vernis impeccable. Elle jette un œil à sa montre connectée." },
+          { qui: "Léa", dit: "Bon, on a combien de temps ? J'ai un call à 15h. Enfin, deux calls en fait. Simultanés. Mais je gère." },
+          { qui: "", dit: "Elle sourit, mi-provocation, mi-fatigue." },
+        ],
+      },
+      question: "Quelle est la tranche d'âge majoritaire de votre public cible ?",
+      consigne: "Notez la tranche d'âge de VOS apprenants sur votre fiche d'enquête (section 🧑 Profil personnel). Cela influence leur rapport au temps, à la productivité, au multi-tâches.",
+      revelation: {
+        titre: "PROFIL : GÉNÉRATION HYPER-CONNECTÉE",
+        texte: "Léa, 29 ans, est une « digital native hyperactive » : pour elle, le multi-tâches est un signe de performance et l'attente une perte de temps intolérable. Elle jongle en permanence entre onglets, écrans et conversations Slack. Se concentrer deux heures sur une seule chose lui semble impossible, voire du gaspillage.",
+        indice: "L'âge définit un rapport au temps et à l'attention.",
+      },
+    },
+    // ---------- 2 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea2.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur observe Léa qui consulte discrètement son téléphone sous la table." },
+          { qui: "Inspecteur", dit: "Léa, posez ce téléphone. Vous êtes ici pour répondre à des questions." },
+          { qui: "", dit: "Léa lève les yeux, surprise." },
+          { qui: "Léa", dit: "Mais je vous écoute ! Je peux faire les deux. Je fais toujours les deux. Enfin… les cinq, en fait. Je gère 12 projets en parallèle. Le multi-tâches, c'est ma vie." },
+        ],
+      },
+      question: "Quelles sont les habitudes de consommation de contenu de votre public (lecture linéaire, vidéo accélérée, audio en marchant, survol rapide) ?",
+      consigne: "Identifiez COMMENT vos apprenants consomment l'information au quotidien. Cela révèle leur capacité d'attention et leur mode d'apprentissage naturel (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : CONSOMMATION FRAGMENTÉE ET ACCÉLÉRÉE",
+        texte: "Léa regarde ses vidéos en vitesse ×1.5 ou ×2, écoute des podcasts uniquement en bougeant, lit les articles en diagonale et préfère les résumés Blinkist aux livres entiers. Elle survole tout pour extraire l'essentiel en un minimum de temps. Elle a désappris la lecture lente et l'attention soutenue : son cerveau est câblé pour le zapping permanent.",
+        indice: "Une génération habituée à la fragmentation de l'attention.",
+      },
+    },
+    // ---------- 3 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea3.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur se penche en avant." },
+          { qui: "Inspecteur", dit: "Léa, quand avez-vous pris des vacances pour la dernière fois ? De vraies vacances. Sans ordinateur. Sans téléphone pro." },
+          { qui: "", dit: "Léa réfléchit. Longtemps. Trop longtemps." },
+          { qui: "Léa", dit: "Euh… je crois que c'était… attends, non, même là-bas j'avais pris mon laptop. Donc… jamais ? Enfin, je sais pas. J'aime pas m'arrêter. J'ai l'impression de perdre le contrôle." },
+        ],
+      },
+      question: "Votre public est-il plutôt autonome ou a-t-il besoin d'être guidé ? Quel est son rapport à la discipline personnelle ?",
+      consigne: "Évaluez si VOS apprenants sont capables de s'auto-discipliner ou s'ils ont besoin de cadre externe, de contraintes, de deadlines imposées (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : HYPER-AUTONOME MAIS SANS RÉGULATION INTERNE",
+        texte: "Léa est très autonome professionnellement, mais incapable de s'arrêter : aucune pause spontanée, aucune limite entre vie pro et perso, une culpabilité massive dès qu'elle ne « fait rien ». Son autonomie est devenue une prison, et le « temps mort » la terrifie. Suivre une formation exigeant deux heures d'attention pleine lui est physiquement impossible.",
+        indice: "L'autonomie sans régulation mène au burn-out et à l'incapacité d'apprendre en profondeur.",
+      },
+    },
+    // ---------- 4 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea4.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur sort le CV de Léa." },
+          { qui: "Inspecteur", dit: "Chef de Projet Digital chez FastGrow. Qu'est-ce que ça veut dire concrètement ? Qu'est-ce que vous FAITES, au quotidien ?" },
+          { qui: "", dit: "Léa sourit, fière." },
+          { qui: "Léa", dit: "Je gère 12 projets en parallèle. Lancement d'app, refonte de site, campagnes marketing, migrations techniques. Je coordonne les devs, les designers, les commerciaux. Je fais les points clients. J'anime les rétros. Je… je fais tout, en fait." },
+        ],
+      },
+      question: "Quelle est la fonction ou le métier exact de votre public ?",
+      consigne: "Soyez ultra-précis sur le métier de VOS apprenants : missions, livrables, interactions. Ne notez pas « manager » mais « manager de quoi, avec qui, dans quel contexte » (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : CHEF D'ORCHESTRE SURCHARGÉ",
+        texte: "Chef de projet digital dans une scale-up en hyper-croissance, Léa gère 12 projets simultanés et coordonne des équipes transverses (développeurs, designers, commerciaux) tout en suivant 8 clients. Elle enchaîne 6 à 8 réunions par jour, parfois en parallèle, et éteint les crises en continu. Un métier de flux, fait de micro-tâches urgentes, qui l'a câblée en mode « réactif-rapide », jamais « réflexif-lent ».",
+        indice: "Son métier façonne un mode cognitif incompatible avec l'apprentissage profond.",
+      },
+    },
+    // ---------- 5 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea5.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur montre une capture d'écran de l'agenda de Léa : des blocs de 30 min, 15 min, même 10 min. Aucun espace vide." },
+          { qui: "Inspecteur", dit: "Votre agenda, le 23 avril. Jour où vous étiez censée suivre la formation « Management Agile ». Je vois 11 réunions. 11. Comment avez-vous fait ?" },
+          { qui: "", dit: "Léa hausse les épaules." },
+          { qui: "Léa", dit: "J'ai ouvert 4 fenêtres sur mon écran. Formation en haut à gauche, réunion client en haut à droite, Slack en bas à gauche, Google Doc en bas à droite. Classique." },
+        ],
+      },
+      question: "Quel est le rythme de l'activité professionnelle de votre public (stable, imprévisible, saisonnier, en pic permanent) ?",
+      consigne: "Décrivez le rythme réel du travail de VOS apprenants. Un rythme haché et urgent rend l'apprentissage posé quasi impossible (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : RYTHME CHAOTIQUE ET URGENCE PERMANENTE",
+        texte: "Aucune journée type, des interruptions constantes (Slack, emails, appels) et des urgences en cascade : un bug bloque un projet, déclenche une réunion de crise, génère un nouveau planning. Sa plus longue plage de concentration dépasse rarement 45 minutes. Bloquer deux heures pour se former, sans être interrompue ni culpabiliser pendant que des projets brûlent, est tout simplement impossible.",
+        indice: "Le rythme professionnel empêche physiquement l'engagement dans une formation linéaire.",
+      },
+    },
+    // ---------- 6 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea6.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur affiche une liste." },
+          { qui: "Inspecteur", dit: "Vos outils de travail quotidiens. J'en compte… 23. Vingt-trois applications différentes que vous utilisez CHAQUE JOUR. Comment vous gérez ça ?" },
+          { qui: "", dit: "Léa rit." },
+          { qui: "Léa", dit: "Ah ça ? C'est rien. J'ai 47 onglets ouverts en ce moment sur Chrome. Et 3 navigateurs différents. Normal." },
+        ],
+      },
+      question: "Quels outils et logiciels votre public utilise-t-il au quotidien dans son travail ?",
+      consigne: "Listez TOUS les outils que VOS apprenants manipulent quotidiennement. Plus la liste est longue, plus leur attention est fragmentée (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : HYPERCONNEXION NUMÉRIQUE TOTALE",
+        texte: "Léa utilise chaque jour des dizaines d'outils : Slack (8 espaces), 3 boîtes Gmail, Teams, Discord, Notion, Trello, Asana, la suite Google, Miro, Figma, HubSpot, Mixpanel, Zoom… Résultat implacable : environ 73 notifications par heure, 15 secondes d'attention avant interruption, un cerveau en surveillance permanente. Ultra-compétente techniquement, mais une attention pulvérisée en mille fragments.",
+        indice: "Maîtrise technique ≠ capacité d'attention. L'hyperconnexion détruit la concentration profonde.",
+      },
+    },
+    // ---------- 7 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea7.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur montre un graphique : la charge de travail de Léa sur 6 mois. La courbe ne descend jamais en dessous de 120 %." },
+          { qui: "Inspecteur", dit: "120 % de charge. Depuis 18 mois. Sans interruption. Comment c'est possible ?" },
+          { qui: "", dit: "Léa soupire." },
+          { qui: "Léa", dit: "Parce que je dis jamais non. On me demande un projet, je dis oui. On me demande d'aider sur un truc, je dis oui. On me propose une formation obligatoire, je dis oui. Et je m'arrange." },
+        ],
+      },
+      question: "Quelles sont les contraintes de temps de votre public (disponibilité réelle, planning surchargé, temps protégé ou non) ?",
+      consigne: "Soyez honnêtes : VOS apprenants ont-ils VRAIMENT du temps dédié pour se former ? Ou doivent-ils « caser » la formation entre deux urgences ? (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : ZÉRO TEMPS DISPONIBLE RÉEL",
+        texte: "Aucun temps protégé, aucune décharge de projets, aucun relais pendant les trois semaines de formation : Léa devait se former « en plus » d'une charge à 120 %. Le message implicite de l'entreprise : « Forme-toi, mais continue à tout livrer. Débrouille-toi. » Le multi-tâches n'était pas un vice, mais sa seule stratégie de survie.",
+        indice: "Sans temps réellement libéré, toute formation est condamnée à être survolée.",
+      },
+    },
+    // ---------- 8 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea8.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur montre un email du manager de Léa, envoyé le 22 avril à 18h37 : « Léa, j'ai vu que tu es en formation cette semaine. Cool ! Mais n'oublie pas le rendu client jeudi. Et le point avec les devs demain matin. Merci ! »" },
+          { qui: "", dit: "Léa lit l'email et lève les yeux au ciel." },
+          { qui: "Léa", dit: "Vous voyez ? « Cool que tu te formes… mais surtout n'arrête rien. » C'est toujours comme ça." },
+        ],
+      },
+      question: "Existe-t-il un manque de soutien managérial ou d'encouragement de la hiérarchie pour se former ?",
+      consigne: "Identifiez si VOS apprenants bénéficient d'un soutien RÉEL (temps libéré, encouragements, valorisation) ou si la formation est vue comme une contrainte périphérique (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : INJONCTION PARADOXALE MANAGÉRIALE",
+        texte: "Le discours RH affirme que « la formation continue est une priorité stratégique ». La réalité de terrain dit l'inverse : aucun projet déprogrammé, aucun délai décalé, un manager qui sollicite pendant les sessions, aucune reconnaissance si la formation est validée. Léa a donc traité la formation comme on le lui demandait implicitement : une case à cocher, pas un apprentissage.",
+        indice: "Le discours RH vs la réalité managériale créent des apprenants-tricheurs malgré eux.",
+      },
+    },
+    // ---------- 9 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea9.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur ouvre le dossier pédagogique de Léa." },
+          { qui: "Inspecteur", dit: "Formation « Management Agile - Niveau Expert ». Score : 94 %. Quiz : 100 % de bonnes réponses. Vous avez même corrigé une erreur dans un exercice. Vous êtes brillante, Léa." },
+          { qui: "", dit: "Léa sourit." },
+          { qui: "Léa", dit: "Merci. J'avais déjà fait 3 formations sur l'agilité avant celle-là. J'ai lu 5 bouquins sur Scrum. Je pratique au quotidien depuis 2 ans. Alors oui, je maîtrisais déjà 80 % du contenu." },
+        ],
+      },
+      question: "Quel est le niveau de connaissance actuel de votre public sur le sujet de votre formation (débutant, intermédiaire, avancé) ?",
+      consigne: "Évaluez honnêtement : VOS apprenants partent-ils de zéro ou ont-ils déjà des bases solides ? Cela change radicalement votre approche pédagogique (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : NIVEAU AVANCÉ, FORMATION TROP BASIQUE",
+        texte: "Avant la formation, Léa maîtrisait déjà 80 % du contenu : certification Scrum Master, cinq livres lus, deux ans de pratique quotidienne. Elle l'a suivie par pure obligation RH et pour fournir un certificat à un client, faute de test de positionnement. Résultat : 35 heures à réviser ce qu'elle savait déjà. Son « hack » via l'IA était moins une fraude qu'un raccourci face à un processus jugé absurde.",
+        indice: "Former quelqu'un qui sait déjà = gaspillage de temps perçu, donc stratégies de contournement.",
+      },
+    },
+    // ---------- 10 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea10.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur se cale dans sa chaise." },
+          { qui: "Inspecteur", dit: "Léa, pourquoi avoir suivi cette formation ? Vous saviez déjà tout." },
+          { qui: "", dit: "Léa soupire." },
+          { qui: "Léa", dit: "Parce que j'avais pas le choix. La RH a envoyé un mail : « Formation obligatoire pour tous les chefs de projet. Date limite : 30 avril. » Après, un client nous a demandé de prouver qu'on avait des certifs agiles dans l'équipe pour valider un contrat. Donc… obligation × 2." },
+        ],
+      },
+      question: "Pourquoi votre public souhaite-t-il suivre cette formation (obligation, curiosité, évolution de carrière, résolution de problème) ?",
+      consigne: "Identifiez la VRAIE raison qui pousse VOS apprenants à s'inscrire. Obligation ≠ motivation intrinsèque (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : DOUBLE OBLIGATION, ZÉRO MOTIVATION INTRINSÈQUE",
+        texte: "Les raisons de Léa sont purement externes : une obligation RH sous deadline et une exigence client (des certifications agiles pour signer un contrat). Aucun désir personnel d'approfondir un sujet qu'elle maîtrise, aucun problème concret à résoudre. Sa motivation réelle : 0 sur 10. Elle a suivi la formation comme on remplit une déclaration d'impôts : sans le choix, en espérant que ça aille vite.",
+        indice: "Formation obligatoire + contenu déjà maîtrisé = recette parfaite pour le désengagement.",
+      },
+    },
+    // ---------- 11 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea11.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur insiste." },
+          { qui: "Inspecteur", dit: "OK, c'était obligatoire. Mais qu'espériez-vous en RETIRER ? Un bénéfice ? Une compétence ? Une reconnaissance ?" },
+          { qui: "", dit: "Léa réfléchit à peine." },
+          { qui: "Léa", dit: "Le certificat. Point. J'avais besoin du PDF à envoyer au client. C'est tout ce qui comptait. Le contenu ? Peu importe. L'apprentissage ? Peu importe. Juste : obtenir le certificat le plus vite possible." },
+        ],
+      },
+      question: "Votre public valorise-t-il davantage le diplôme/certificat ou les compétences réellement acquises ?",
+      consigne: "Identifiez ce qui MOTIVE réellement VOS apprenants : le papier (badge, certificat, titre) ou la compétence concrète ? Cela change tout à votre approche (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : CERTIFICAT > COMPÉTENCE",
+        texte: "Léa ne valorisait que le certificat : preuve pour le client, ligne sur LinkedIn, validation RH, argument commercial. La compétence, elle l'avait déjà et n'y voyait aucune utilité, faute de temps comme de reconnaissance. La formation est devenue un jeu vidéo : un badge à débloquer, un temps à optimiser, un cheat code (l'IA pour les quiz). Pas de la malhonnêteté, juste l'« optimisation » d'un processus jugé inutile.",
+        indice: "Quand le certificat devient la seule valeur, l'apprentissage disparaît.",
+      },
+    },
+    // ---------- 12 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea12.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur montre les logs de connexion de Léa." },
+          { qui: "Inspecteur", dit: "Vous avez validé la formation en 3 semaines. Programme officiel : 6 semaines. Vous avez fait 2× plus vite. Pourquoi cette urgence ?" },
+          { qui: "", dit: "Léa rit." },
+          { qui: "Léa", dit: "Parce que 6 semaines, c'était beaucoup trop long ! J'avais 12 projets qui avançaient, des clients qui attendaient. Je pouvais pas me permettre de « perdre » 2h par semaine pendant 6 semaines. Alors j'ai optimisé." },
+        ],
+      },
+      question: "Votre public souhaite-t-il un apprentissage rapide ou approfondi ? Ont-ils besoin de résultats visibles rapidement pour rester motivés ?",
+      consigne: "Évaluez la tolérance de VOS apprenants à l'investissement temps et leur besoin de « quick wins » (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : URGENCE PERMANENTE, APPRENTISSAGE SACRIFIÉ",
+        texte: "Léa voulait du « fast learning » : des modules de 15-20 minutes, une validation immédiate, l'essentiel sans la profondeur, le tout bouclé en 3 semaines au lieu de 6. La formation proposait l'inverse : modules d'1h30, exercices de réflexion, approfondissements théoriques. Face à ce décalage, elle a choisi le contournement — IA, multi-tâches et survol systématique.",
+        indice: "Le rythme de la formation doit s'aligner sur le rythme de vie des apprenants, sinon ils trichent.",
+      },
+    },
+    // ---------- 13 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea13.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur change de ton, plus direct." },
+          { qui: "Inspecteur", dit: "Léa, soyons clairs. Vous avez utilisé ChatGPT pour répondre aux quiz. Vous étiez en visio avec des clients pendant les modules. Vous n'avez pas VRAIMENT suivi cette formation. Pourquoi ?" },
+          { qui: "", dit: "Léa se raidit." },
+          { qui: "Léa", dit: "Parce que personne ne m'a demandé d'apprendre. On m'a demandé de VALIDER. Nuance." },
+        ],
+      },
+      question: "Quels sont les critères de réussite de votre public pour considérer que la formation est utile ?",
+      consigne: "Identifiez ce que VOS apprenants considèrent comme « réussite » : avoir le certificat ? Savoir faire concrètement ? Résoudre un problème ? (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : RÉUSSITE = VALIDATION, PAS APPRENTISSAGE",
+        texte: "Pour Léa, réussir = certificat obtenu, temps optimisé, aucun projet retardé, client satisfait. Apprendre, approfondir ou échanger ne comptait pas. Elle a appliqué à la formation la logique de ses projets : identifier l'objectif, prendre le chemin le plus court, livrer, passer au suivant. Le système valorisait le certificat sans vérifier l'apprentissage ; elle a optimisé le système.",
+        indice: "Si le système valorise le certificat sans vérifier l'apprentissage, les apprenants optimisent le système, pas l'apprentissage.",
+      },
+    },
+    // ---------- 14 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea14.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur sort un email que Léa a envoyé à une collègue, le 18 avril : « Sarah, cette formation est chiante à mourir. C'est que de la théorie. Rien de concret. Je connais déjà tout. Vivement que ce soit fini. »" },
+          { qui: "", dit: "Léa rougit légèrement." },
+          { qui: "Léa", dit: "OK, j'avoue. C'était nul. Enfin… pas nul. Mais inadapté. Pour moi en tout cas." },
+        ],
+      },
+      question: "Votre public préfère-t-il la théorie, la pratique, ou un mix des deux ? Ont-ils besoin d'applicabilité immédiate ?",
+      consigne: "Identifiez le format pédagogique qui ENGAGE vraiment VOS apprenants : théorie ? Cas pratiques ? Mises en situation ? (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : BESOIN D'ULTRA-PRATICITÉ, REJET DE LA THÉORIE",
+        texte: "Léa attendait des cas concrets, des outils actionnables (templates, checklists), des retours d'expérience, du micro-learning : 1 problème = 1 solution = 10 minutes. La formation offrait l'histoire de l'agilité, la philosophie du manifeste et des exercices introspectifs. Elle fonctionne en mode « problème → solution » : elle n'a pas besoin de savoir pourquoi l'agilité marche, mais comment mieux l'appliquer.",
+        indice: "Pour les profils opérationnels pressés, théorie = temps perdu. Seule la praticité immédiate a de la valeur.",
+      },
+    },
+    // ---------- 15 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea15.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur se penche en avant, ton plus doux." },
+          { qui: "Inspecteur", dit: "Léa, vous semblez fatiguée. Depuis combien de temps vivez-vous à ce rythme ?" },
+          { qui: "", dit: "Léa hésite, puis :" },
+          { qui: "Léa", dit: "18 mois. Depuis que j'ai rejoint FastGrow. Au début c'était excitant. Maintenant… je sais plus trop. Parfois j'ai l'impression de courir sans savoir pourquoi. Mais si je m'arrête, tout s'effondre." },
+        ],
+      },
+      question: "Quelles sont les contraintes de temps et de disponibilité mentale de votre public ? Sont-ils en surcharge cognitive ?",
+      consigne: "Évaluez honnêtement : VOS apprenants ont-ils la BANDE PASSANTE mentale pour apprendre ? Ou sont-ils déjà en surchauffe ? (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : SURCHARGE COGNITIVE CHRONIQUE",
+        texte: "Léa présente les signes d'un burn-out latent : fatigue chronique, incapacité à déconnecter, attention épuisée, culpabilité permanente. En surcharge, le cerveau passe en mode « survie » et privilégie les automatismes, les raccourcis (ChatGPT) et la rapidité ; l'apprentissage profond devient biologiquement impossible. Léa n'a pas choisi de ne pas apprendre : son cerveau n'en avait pas la capacité.",
+        indice: "On ne peut pas former quelqu'un dont le cerveau est déjà en surchauffe. Il faut d'abord créer de l'espace mental.",
+      },
+    },
+    // ---------- 16 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 5",
+        audio: "audio/lea/lea16.mp3",
+        dialogue: [
+          { qui: "", dit: "L'inspecteur referme le dossier. Silence." },
+          { qui: "Inspecteur", dit: "Dernière question, Léa. Le 23 avril, à 14h37, vous cliquez sur « Valider le test final ». Score : 94 %. Certification obtenue. Vous fermez l'onglet. Et ensuite ?" },
+          { qui: "", dit: "Léa regarde par la fenêtre." },
+          { qui: "Léa", dit: "Ensuite ? J'ai ouvert Slack. J'ai répondu à 12 messages en retard. J'ai rejoint une réunion qui avait déjà commencé. Et j'ai continué. Comme d'habitude." },
+          { qui: "", dit: "Elle marque une pause." },
+          { qui: "Léa", dit: "Je me suis même pas dit « bravo, t'as réussi ». Je me suis juste dit « ouf, c'est fait, next »." },
+        ],
+      },
+      question: "Quels sont les « tue-motivations » qui pourraient faire abandonner ou dévaluer la formation aux yeux de votre public ?",
+      consigne: "Identifiez les OBSTACLES FATALS pour VOS apprenants : qu'est-ce qui les ferait décrocher complètement ou les pousserait à « juste valider » sans s'investir ? (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "MOBILE DU CRIME : UN SYSTÈME QUI VALORISE LA PERFORMANCE, PAS L'APPRENTISSAGE",
+        texte: "Léa finit par l'avouer : elle ne se souvient de rien, incapable de citer trois concepts clés. Elle a le certificat, mais n'a rien appris — et personne ne s'en est aperçu. Personne ne lui a demandé ce qu'elle allait appliquer ; juste « Tu as le certificat ? Parfait, envoie-le au client. » Elle n'est pas une tricheuse, mais le produit d'un système qui lui a appris que l'efficacité prime sur l'apprentissage, valider sur comprendre, le certificat sur la compétence. L'inspecteur conclut : « Vous n'êtes pas une criminelle, mais une apprenante sacrifiée. La vraie question n'est pas pourquoi vous avez triché, mais pourquoi le système rend la triche plus rationnelle que l'apprentissage. »",
+        indice: "Le coupable n'est pas l'apprenante, mais un système qui rend la triche plus rationnelle que l'apprentissage.",
+        finale: true,
+      },
+    },
+  ],
+};
+
+// ============================================================
+//  AFFAIRES 3 À 6 — à compléter (placeholders)
 // ============================================================
 const PLACEHOLDER = (id, numero, nom, role, accroche, portrait) => ({
   id, numero, nom, role, accroche, portrait,
@@ -411,12 +778,11 @@ const PLACEHOLDER = (id, numero, nom, role, accroche, portrait) => ({
 
 const HISTOIRES = [
   MARCEL,
-  PLACEHOLDER("amina", "Affaire n°02", "Amina Diallo", "Dossier à instruire",
+  LEA,
+  PLACEHOLDER("amina", "Affaire n°03", "Amina Diallo", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Amina_Diallo.png"),
-  PLACEHOLDER("karim", "Affaire n°03", "Karim Benali", "Dossier à instruire",
+  PLACEHOLDER("karim", "Affaire n°04", "Karim Benali", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Karim_Benali.png"),
-  PLACEHOLDER("lea", "Affaire n°04", "Léa Martinez", "Dossier à instruire",
-    "Identité enregistrée. L'enquête reste à mener.", "portraits/Lea_Martinez.png"),
   PLACEHOLDER("sophie", "Affaire n°05", "Sophie Nguyen", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Sophie_Nguyen.png"),
   PLACEHOLDER("thomas", "Affaire n°06", "Thomas Lefèvre", "Dossier à instruire",
