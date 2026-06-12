@@ -145,14 +145,62 @@
     </div>
   </section>
 
-  <!-- ÉCRAN DE FIN -->
+  <!-- ÉCRAN DE RÉSOLUTION (final riche) -->
+  <section id="ecran-resolution" class="ecran">
+    <div class="lecture-wrap">
+      <button id="btn-reso-retour" class="btn-retour">‹ Retour aux dossiers</button>
+
+      <div class="carte-enquete">
+        <div class="reso-tete">
+          <span class="tampon tampon-classe">Affaire classée</span>
+          <div class="reso-tete-id">
+            <span id="reso-affaire" class="badge-affaire"></span>
+            <h2 id="reso-nom"></h2>
+          </div>
+        </div>
+
+        <div class="reso-section">
+          <span class="brief-bloc-titre">🔍 Mobile du crime</span>
+          <p id="reso-mobile-resume" class="reso-mobile-resume"></p>
+          <p id="reso-mobile-texte" class="reso-texte"></p>
+        </div>
+
+        <div class="reso-section">
+          <span class="brief-bloc-titre">⚖️ Circonstances atténuantes</span>
+          <ol id="reso-circonstances" class="reso-circ"></ol>
+        </div>
+
+        <div class="reso-section">
+          <span class="brief-bloc-titre">📌 Verdict pédagogique</span>
+          <div id="reso-verdict" class="reso-verdict"></div>
+        </div>
+
+        <div class="reso-section reso-mission">
+          <span class="brief-bloc-titre">🎯 Votre mission est accomplie</span>
+          <p id="reso-mission-intro" class="reso-texte"></p>
+          <p id="reso-mission-soustitre" class="reso-soustitre"></p>
+          <ol id="reso-mission-etapes" class="reso-etapes"></ol>
+        </div>
+
+        <div class="reso-section reso-question">
+          <span class="brief-bloc-titre">💭 Question finale pour votre équipe</span>
+          <p id="reso-question" class="reso-question-txt"></p>
+          <p id="reso-question-note" class="reso-note"></p>
+        </div>
+
+        <button id="btn-recommencer" class="btn btn-principal">Retour aux dossiers</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCRAN DE FIN (générique, si pas de résolution) -->
   <section id="ecran-fin" class="ecran">
     <div class="lecture-wrap">
       <div class="carte-enquete centre">
         <span class="tampon tampon-classe">Affaire classée</span>
         <h2>Dossier refermé</h2>
         <p class="bureau-soustitre">Vous avez mené l'enquête jusqu'au bout.</p>
-        <button id="btn-recommencer" class="btn btn-secondaire">Retour aux dossiers</button>
+        <button id="btn-fin-retour" class="btn btn-secondaire">Retour aux dossiers</button>
       </div>
     </div>
   </section>

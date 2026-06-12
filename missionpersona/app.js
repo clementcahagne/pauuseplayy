@@ -219,9 +219,32 @@ function questionSuivante() {
   qIndex++;
   if (qIndex < histoireCourante.questions.length) {
     allerPhase("scene");
+  } else if (histoireCourante.resolution) {
+    remplirResolution(histoireCourante);
+    montrerEcran("ecran-resolution");
   } else {
     montrerEcran("ecran-fin");
   }
+}
+
+// ---- Écran de résolution (final) ----
+function remplirResolution(h) {
+  const r = h.resolution;
+  $("reso-affaire").textContent = h.numero;
+  $("reso-nom").textContent = h.nom;
+  $("reso-mobile-resume").textContent = r.mobile.resume;
+  $("reso-mobile-texte").textContent = r.mobile.texte;
+  $("reso-circonstances").innerHTML = r.circonstances
+    .map((c) => `<li><span class="circ-titre">${c.titre}</span><span class="circ-txt">${c.texte}</span></li>`)
+    .join("");
+  $("reso-verdict").innerHTML = (Array.isArray(r.verdict) ? r.verdict : [r.verdict])
+    .map((v) => `<p>${v}</p>`)
+    .join("");
+  $("reso-mission-intro").textContent = r.mission.intro;
+  $("reso-mission-soustitre").textContent = r.mission.sousTitre;
+  $("reso-mission-etapes").innerHTML = r.mission.etapes.map((e) => `<li>${e}</li>`).join("");
+  $("reso-question").textContent = r.questionEquipe;
+  $("reso-question-note").textContent = r.questionEquipeNote || "";
 }
 
 // ---- Lecteur audio ----
@@ -269,6 +292,8 @@ function retourAccueil() {
 $("btn-briefing-retour").addEventListener("click", retourAccueil);
 $("btn-retour").addEventListener("click", retourAccueil);
 $("btn-recommencer").addEventListener("click", retourAccueil);
+$("btn-reso-retour").addEventListener("click", retourAccueil);
+$("btn-fin-retour").addEventListener("click", retourAccueil);
 $("btn-prepa-retour").addEventListener("click", retourAccueil);
 
 // ---- Bouton précédent/suivant du navigateur ----

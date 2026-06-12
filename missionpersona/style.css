@@ -620,6 +620,144 @@ body::before {
 .brief-incident p:last-child { margin-bottom: 0; }
 .brief-mission { font-size: 15px; line-height: 1.7; color: var(--ink); }
 
+/* ============ ÉCRAN DE RÉSOLUTION ============ */
+.reso-tete {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  margin-bottom: 8px;
+  border-bottom: 1.5px solid var(--line);
+}
+.reso-tete-id { display: flex; align-items: center; gap: 12px; }
+.reso-tete .tampon-classe { margin-bottom: 0; }
+.reso-tete h2 {
+  font-family: var(--titre);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 24px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.reso-section { margin-top: 24px; }
+
+.reso-mobile-resume {
+  font-family: var(--titre);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  border-left: 5px solid var(--red);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.reso-texte { font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); }
+
+/* Circonstances atténuantes : liste numérotée */
+.reso-circ { list-style: none; counter-reset: circ; }
+.reso-circ li {
+  counter-increment: circ;
+  position: relative;
+  padding: 0 0 14px 44px;
+}
+.reso-circ li::before {
+  content: counter(circ);
+  position: absolute;
+  left: 0; top: 0;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--titre);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--gold-2);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+}
+.circ-titre {
+  display: block;
+  font-family: var(--titre);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 2px;
+  padding-top: 4px;
+}
+.circ-txt { font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
+
+/* Verdict */
+.reso-verdict {
+  background: var(--ink);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+.reso-verdict p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #ece4d2;
+  margin-bottom: 10px;
+}
+.reso-verdict p:last-child { margin-bottom: 0; }
+.reso-verdict p:last-child {
+  color: var(--gold-2);
+  font-weight: 600;
+}
+
+/* Mission accomplie */
+.reso-mission {
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+.reso-soustitre {
+  font-family: var(--titre);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 13px;
+  color: var(--ink);
+  margin: 12px 0 10px;
+}
+.reso-etapes { list-style: none; counter-reset: etape; }
+.reso-etapes li {
+  counter-increment: etape;
+  position: relative;
+  padding: 6px 0 6px 30px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.reso-etapes li::before {
+  content: counter(etape) ".";
+  position: absolute; left: 0; top: 6px;
+  font-family: var(--titre);
+  font-weight: 600;
+  color: var(--red);
+}
+
+/* Question équipe */
+.reso-question {
+  border: 1.5px dashed var(--ink);
+  border-radius: 10px;
+  padding: 20px 22px;
+  background: rgba(184,144,47,0.07);
+}
+.reso-question-txt {
+  font-family: var(--titre);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.reso-note { font-family: var(--hand); font-size: 19px; color: var(--ink-soft); }
+
+#ecran-resolution .btn-principal { margin-top: 26px; }
+
 /* ============ BOUTONS ============ */
 .btn {
   font-family: var(--titre);

@@ -56,6 +56,39 @@ const MARCEL = {
     ],
     mission: "Reconstituer le profil psychologique et professionnel de Marcel pour comprendre ce qui a transformé un employé modèle en saboteur de formation… Et, par la même occasion, apprendre à connaître VOS apprenant·e·s.",
   },
+  resolution: {
+    mobile: {
+      resume: "Syndrome de l'imposteur + peur du jugement + transformation digitale imposée sans accompagnement.",
+      texte: "Marcel n'a pas débranché le serveur par malveillance, mais par terreur : convaincu qu'il allait être démasqué comme « imposteur » devant 25 collègues qui le connaissaient depuis 20 ans, il a préféré tout arrêter plutôt qu'avouer qu'il avait besoin d'aide.",
+    },
+    circonstances: [
+      { titre: "Une bascule brutale, sans transition", texte: "Le « tout distanciel obligatoire » a été imposé du jour au lendemain, sans période d'adaptation." },
+      { titre: "Aucun prérequis technique", texte: "On lui a demandé d'animer en ligne alors qu'il ne savait ni gérer son micro ni partager son écran." },
+      { titre: "Un métier ancré dans le geste et le terrain", texte: "Former sur des machines en atelier est, pour lui, incompatible avec une webcam." },
+      { titre: "Un rythme de formation intenable", texte: "3 jours intensifs pour passer de zéro à « formateur digital autonome », puis animer 4 jours plus tard." },
+      { titre: "Une formation imposée, sans adhésion", texte: "Obligation RH sous peine de sanction, aucun travail de sens, motivation nulle." },
+      { titre: "Un besoin d'accompagnement humain ignoré", texte: "Marcel apprend « sur le tas » avec un pair ; on l'a laissé seul face à des tutoriels." },
+      { titre: "Un climat pédagogique non sécurisant", texte: "Le formateur présupposait les bases ; jamais un « c'est normal de ne pas savoir »." },
+      { titre: "Des humiliations passées jamais réparées", texte: "Cybersécurité 2019, distanciel du 8 mars : chaque formation avait laissé une cicatrice." },
+    ],
+    verdict: [
+      "Marcel n'est pas un « saboteur » ni un « réfractaire au changement ».",
+      "Marcel est un apprenant en souffrance, lâché par un système qui n'a pas su voir sa détresse.",
+      "Le sabotage n'est pas la cause, c'est le symptôme.",
+      "La cause : une transformation digitale imposée sans accompagnement, sans sécurité psychologique et sans temps.",
+    ],
+    mission: {
+      intro: "Vous avez reconstitué le portrait complet de Marcel en 16 questions.",
+      sousTitre: "Maintenant, faites le parallèle avec VOS apprenants :",
+      etapes: [
+        "Relisez votre fiche d'enquête complétée.",
+        "Identifiez les points communs entre Marcel et votre public.",
+        "Rédigez un portrait narratif de VOS apprenants (5-8 lignes).",
+      ],
+    },
+    questionEquipe: "Qu'allez-vous faire DIFFÉREMMENT dans votre formation et votre accompagnement pour qu'aucun de VOS apprenants ne devienne un « Marcel » ?",
+    questionEquipeNote: "Notez 2-3 décisions pédagogiques ET organisationnelles concrètes au dos de votre fiche.",
+  },
   questions: [
     // ---------- 1 ----------
     {
@@ -426,6 +459,39 @@ const LEA = {
       "L'analyse des quiz révèle des réponses étrangement… parfaites. Trop parfaites. Suspectes. Interrogée, Léa assume : « Oui, j'ai fait plusieurs choses en même temps. Et alors ? J'ai validé la formation, non ? J'ai mon certificat. Mission accomplie. »",
     ],
     mission: "Reconstituer le profil de Léa pour comprendre comment une professionnelle brillante et ultra-performante en est venue à « hacker » son propre apprentissage… au point de ne plus rien apprendre du tout.",
+  },
+  resolution: {
+    mobile: {
+      resume: "Système organisationnel qui valorise la validation sur l'apprentissage + surcharge cognitive chronique + formation inadaptée au profil opérationnel.",
+      texte: "Léa a « hacké » la formation non par malhonnêteté, mais parce que le système lui-même rendait l'apprentissage réel impossible et inutile.",
+    },
+    circonstances: [
+      { titre: "Aucun temps réellement libéré", texte: "On lui a demandé de se former EN PLUS de son travail à 120 %." },
+      { titre: "Formation obligatoire sur un sujet déjà maîtrisé", texte: "Elle connaissait 80 % du contenu avant de commencer." },
+      { titre: "Objectif systémique = certificat, pas compétence", texte: "L'entreprise valorisait le PDF, pas l'apprentissage réel." },
+      { titre: "Absence de vérification post-formation", texte: "Personne n'a vérifié ce qu'elle avait appris ou retenu." },
+      { titre: "Format inadapté au profil : théorie vs praticité", texte: "Elle avait besoin d'outils actionnables, pas de théorie." },
+      { titre: "Surcharge cognitive empêchant l'apprentissage profond", texte: "Son cerveau était biologiquement incapable d'apprendre en profondeur." },
+      { titre: "Culture d'entreprise de l'urgence permanente", texte: "Le multi-tâches était la norme, pas l'exception." },
+      { titre: "Injonction paradoxale managériale", texte: "« Forme-toi… mais ne ralentis rien. »" },
+    ],
+    verdict: [
+      "Léa n'est pas une « tricheuse » ou une « apprenante désengagée ».",
+      "Léa est le produit d'un système qui organise structurellement l'échec de l'apprentissage.",
+      "Le hack n'est pas la cause, c'est le symptôme.",
+      "La cause : un écosystème professionnel qui détruit systématiquement les conditions nécessaires à l'apprentissage réel.",
+    ],
+    mission: {
+      intro: "Vous avez reconstitué le portrait complet de Léa en 16 questions.",
+      sousTitre: "Maintenant, faites le parallèle avec VOS apprenants :",
+      etapes: [
+        "Relisez votre fiche d'enquête complétée.",
+        "Identifiez les points communs entre Léa et votre public.",
+        "Rédigez un portrait narratif de VOS apprenants (5-8 lignes).",
+      ],
+    },
+    questionEquipe: "Qu'allez-vous faire DIFFÉREMMENT dans votre formation et dans votre SYSTÈME pour éviter que VOS apprenants ne deviennent des « Léa » ?",
+    questionEquipeNote: "Notez 2-3 décisions pédagogiques ET organisationnelles concrètes au dos de votre fiche.",
   },
   questions: [
     // ---------- 1 ----------
