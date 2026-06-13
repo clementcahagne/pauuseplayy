@@ -1205,7 +1205,364 @@ const SOPHIE = {
 };
 
 // ============================================================
-//  AFFAIRES 4 À 6 — à compléter (placeholders)
+//  AFFAIRE N°04 — THOMAS LEFÈVRE
+// ============================================================
+const THOMAS = {
+  id: "thomas",
+  numero: "Affaire n°04",
+  nom: "Thomas Lefèvre",
+  role: "Responsable Qualité",
+  fiche: "38 ans · NutriSafe Industries (220 employés) · 12 ans d'ancienneté",
+  accroche: "3 février 2025. 100 % de réussite sur le papier, 40 % d'échec sur le terrain. Pourquoi a-t-il signé des résultats qu'il savait faux ?",
+  portrait: "portraits/Thomas_Lefevre.png",
+  briefing: {
+    securite: "Dossier ouvert — Niveau de priorité : critique",
+    identite: [
+      ["Nom", "LEFÈVRE, Thomas"],
+      ["Âge", "38 ans"],
+      ["Profession", "Responsable Qualité"],
+      ["Entreprise", "NutriSafe Industries (220 employés)"],
+      ["Ancienneté", "12 ans"],
+    ],
+    incident: [
+      "3 février 2025, 14h00. L'auditeur externe AFNOR ouvre les registres de formation de NutriSafe pour le renouvellement de la certification IFS. Il compare les résultats d'évaluation avec les observations terrain. Incohérence flagrante : 100 % de réussite sur le papier, mais en situation réelle, 8 opérateurs sur 20 ne respectent pas les protocoles HACCP de base.",
+      "Les fichiers d'évaluation portent tous la signature numérique de Thomas Lefèvre, Responsable Qualité, qui a validé les résultats sans vérification terrain.",
+      "Confronté aux faits, Thomas blêmit : « Je savais qu'ils n'étaient pas tous au niveau. Mais si j'avais mis les vrais résultats, on aurait perdu la certification. 220 emplois étaient en jeu. Qu'est-ce que vous auriez fait à ma place ? »",
+    ],
+    mission: "Comprendre pourquoi la formation obligatoire de NutriSafe n'a pas atteint ses objectifs et pourquoi Thomas a préféré masquer la réalité plutôt que d'admettre l'échec du dispositif.",
+  },
+  questions: [
+    // ---------- 1 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas1.mp3",
+        dialogue: [
+          { qui: "", dit: "Thomas se frotte les yeux, épuisé." },
+          { qui: "Thomas", dit: "Mon équipe ? 20 opérateurs de ligne. Je connais leurs noms, leurs postes. Mais qui ils sont vraiment ? D'où ils viennent ? Aucune idée. Je les vois en blouse blanche et charlotte. Pas comme des personnes." },
+        ],
+      },
+      question: "Quelle est la tranche d'âge majoritaire de votre public cible et quelle est sa diversité générationnelle ?",
+      consigne: "Notez la composition générationnelle de VOS apprenants. Les écarts d'âge créent des rapports très différents à l'apprentissage (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : DIVERSITÉ GÉNÉRATIONNELLE EXTRÊME",
+        texte: "L'équipe de Thomas mélangeait jeunes diplômés de 22 ans, intérimaires trentenaires en reconversion et ouvriers cinquantenaires avec 25 ans de maison. Tous ont reçu la même formation HACCP, au même rythme — alors que leurs besoins pédagogiques étaient radicalement opposés.",
+        indice: "L'âge n'est pas un détail administratif, c'est un contexte d'apprentissage complet.",
+      },
+    },
+    // ---------- 2 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas2.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Il y a un truc que je n'ai découvert qu'après l'incident. Sur mes 20 opérateurs, 6 ne parlent pas couramment le français. La formation était en français technique. Avec du jargon HACCP partout. Points critiques de maîtrise, dangers biologiques, procédures de traçabilité… Je n'avais jamais pensé à la barrière linguistique." },
+        ],
+      },
+      question: "Votre public maîtrise-t-il la langue dans laquelle la formation sera dispensée ? Y a-t-il des barrières linguistiques ou culturelles ?",
+      consigne: "Identifiez les barrières linguistiques et culturelles de VOS apprenants. Un vocabulaire technique mal compris ne produit pas de l'apprentissage, mais de la confusion (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : BARRIÈRE LINGUISTIQUE INVISIBLE",
+        texte: "6 opérateurs sur 20 avaient le français comme seconde langue : à l'aise à l'oral, perdus face au jargon technique. Au quiz final, ils ont répondu au hasard — non par ignorance, mais parce qu'ils ne comprenaient pas les questions.",
+        indice: "La maîtrise de la langue de formation est un prérequis invisible souvent oublié.",
+      },
+    },
+    // ---------- 3 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas3.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Et le niveau scolaire… Je n'y avais pas pensé non plus. Certains de mes opérateurs n'ont pas le bac. Ils n'ont pas l'habitude d'être en « formation ». Pour eux, s'asseoir dans une salle et écouter quelqu'un parler pendant 3 heures, c'est l'école. Et l'école, pour beaucoup, c'est un mauvais souvenir." },
+        ],
+      },
+      question: "Quel est le rapport de votre public à l'apprentissage formel ? Ont-ils un bon ou un mauvais souvenir de l'école et de la formation ?",
+      consigne: "Évaluez le rapport de VOS apprenants à l'apprentissage « scolaire ». Un public qui a de mauvais souvenirs de l'école résistera aux formats académiques (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : RAPPORT TRAUMATIQUE À L'APPRENTISSAGE FORMEL",
+        texte: "Plusieurs opérateurs avaient quitté l'école tôt, parfois en échec. « Formation obligatoire avec évaluation finale » a réveillé la boule au ventre de l'examen. L'un d'eux a confié : « J'ai cru que j'allais être viré si je ratais le test. »",
+        indice: "Le rapport à l'apprentissage est chargé d'histoire personnelle. L'ignorer, c'est activer des résistances profondes.",
+      },
+    },
+    // ---------- 4 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas4.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Thomas, vos opérateurs travaillent en horaires décalés, n'est-ce pas ?" },
+          { qui: "Thomas", dit: "Oui. 3x8. Matin, après-midi, nuit. Et la formation était planifiée de 9h à 12h. L'équipe de nuit devait rester APRÈS sa nuit pour suivre la formation. Certains n'avaient pas dormi depuis 20 heures." },
+        ],
+      },
+      question: "Quelles sont les contraintes de vie quotidienne de votre public (horaires, transport, obligations familiales, santé) ?",
+      consigne: "Identifiez les contraintes de vie de VOS apprenants au-delà du cadre professionnel. Horaires, fatigue, transport, enfants… Tout ce qui impacte leur disponibilité cognitive (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : CONDITIONS DE VIE INCOMPATIBLES AVEC LE FORMAT",
+        texte: "Les opérateurs de nuit arrivaient en formation après 8 heures de travail physique, épuisés, l'attention nulle. Former quelqu'un qui n'a pas dormi, c'est remplir un verre percé. Thomas n'a jamais adapté les horaires.",
+        indice: "La disponibilité cognitive de l'apprenant est aussi importante que le contenu de la formation.",
+      },
+    },
+    // ---------- 5 ----------
+    {
+      rubrique: R_PERSO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas5.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Il y a aussi la question du turnover. Sur mes 20 opérateurs, 5 sont des intérimaires qui changent tous les 2-3 mois. Ils suivent la même formation que les CDI, mais ils seront partis avant de pouvoir appliquer ce qu'ils ont appris. Et les nouveaux qui arrivent… ils n'ont eu aucune formation." },
+        ],
+      },
+      question: "Votre public est-il stable ou y a-t-il un turnover important ? Comment gérez-vous les arrivées et les départs ?",
+      consigne: "Évaluez la stabilité de VOS apprenants. Le turnover impose des formats de formation courts, répétables, et intégrables à tout moment (section 🧑 Profil personnel).",
+      revelation: {
+        titre: "PROFIL : TURNOVER CONSTANT, FORMATION PONCTUELLE",
+        texte: "Avec 25 % de l'effectif en rotation permanente, la formation annuelle était un non-sens : un intérimaire arrivé entre deux sessions restait sans AUCUNE formation pendant des semaines. Un dispositif continu et modulaire s'imposait.",
+        indice: "Un public instable nécessite un dispositif de formation permanent, pas ponctuel.",
+      },
+    },
+    // ---------- 6 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas6.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Décrivez-moi le quotidien d'un opérateur de ligne chez NutriSafe." },
+          { qui: "Thomas", dit: "Il arrive, enfile sa blouse, sa charlotte, ses gants. Et pendant 8 heures, il est debout, dans le bruit, dans le froid de l'atelier réfrigéré. Il manipule des denrées, surveille des machines, contrôle des températures. C'est physique, répétitif, et exigeant." },
+        ],
+      },
+      question: "Quel est l'environnement de travail quotidien de votre public et quelles contraintes physiques ou sensorielles s'y appliquent ?",
+      consigne: "Décrivez précisément l'environnement de travail de VOS apprenants. Bruit, température, équipements obligatoires, postures… Tout cela influence le format de formation adapté (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "PROFIL : ENVIRONNEMENT PHYSIQUE CONTRAIGNANT",
+        texte: "Atelier réfrigéré à 4 °C, travail debout, équipements de protection — puis une salle surchauffée et 3 heures assis devant des slides. Former des travailleurs manuels comme des employés de bureau, c'est ignorer la réalité de leur corps.",
+        indice: "L'environnement de travail dicte le format de formation. Pas l'inverse.",
+      },
+    },
+    // ---------- 7 ----------
+    {
+      rubrique: R_PRO,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas7.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Le problème, c'est qu'on leur demande de connaître les normes HACCP sur le bout des doigts. Mais au quotidien, ils appliquent des GESTES, pas des normes. Ils savent que le poulet doit être à telle température, mais ils ne savent pas POURQUOI, ni ce que dit la norme. Et la formation ne faisait que réciter la norme…" },
+        ],
+      },
+      question: "Comment votre public utilise-t-il concrètement les compétences visées dans son travail quotidien ? Théorie ou application pratique ?",
+      consigne: "Distinguez les compétences théoriques des compétences pratiques de VOS apprenants. La formation doit se caler sur l'usage réel, pas sur le référentiel abstrait (section 💼 Profil professionnel).",
+      revelation: {
+        titre: "ANALYSE : FORMATION NORMATIVE VS RÉALITÉ GESTUELLE",
+        texte: "La formation récitait des articles de norme quand les opérateurs avaient besoin de comprendre les GESTES corrects et leurs conséquences. Le consultant choisi était brillant sur la norme, déconnecté du terrain.",
+        indice: "Former sur le « pourquoi réglementaire » sans former sur le « comment pratique » produit de la conformité sur papier, pas de la compétence réelle.",
+      },
+    },
+    // ---------- 8 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas8.mp3",
+        dialogue: [
+          { qui: "Inspecteur", dit: "Thomas, quel était le niveau réel de vos opérateurs AVANT la formation ?" },
+          { qui: "Thomas", dit: "Honnêtement ? Je ne sais pas. Je n'ai fait aucun test de positionnement. J'ai supposé qu'ils savaient les bases puisqu'ils travaillaient là depuis des années. Mais « travailler » ne veut pas dire « comprendre »." },
+        ],
+      },
+      question: "Quel est le niveau de connaissance réel de votre public sur le sujet ? L'avez-vous mesuré ou supposé ?",
+      consigne: "Distinguez le niveau RÉEL du niveau SUPPOSÉ de VOS apprenants. L'ancienneté n'est pas un indicateur fiable de compétence (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : ANCIENNETÉ ≠ COMPÉTENCE",
+        texte: "Après l'audit, Thomas a découvert que des opérateurs présents depuis 10 ans ne savaient pas expliquer les 7 principes HACCP. Des automatismes corrects acquis par mimétisme, aucune compréhension — et la panique face à toute situation nouvelle.",
+        indice: "L'expérience crée des automatismes, pas forcément de la compréhension. Testez le niveau, ne le présumez pas.",
+      },
+    },
+    // ---------- 9 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas9.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Et puis il y avait l'inverse : des jeunes qui sortaient de BTS et qui connaissaient la théorie HACCP par cœur… mais qui ne savaient pas appliquer un seul principe en situation réelle. Ils récitaient les normes mais paniquaient quand un frigo tombait en panne." },
+        ],
+      },
+      question: "Votre public a-t-il des connaissances théoriques sans pratique, ou de la pratique sans théorie ? Où est le déséquilibre ?",
+      consigne: "Identifiez le déséquilibre théorie/pratique de VOS apprenants. Les deux extrêmes (tout théorique, tout pratique) sont des impasses pédagogiques (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : DOUBLE PROFIL — THÉORICIENS SANS TERRAIN ET PRATICIENS SANS CADRE",
+        texte: "Deux groupes opposés : des seniors qui savaient faire sans expliquer, des juniors qui savaient expliquer sans faire. La formation identique n'a comblé aucun des deux écarts — chacun s'est ennuyé sur la moitié qui ne le concernait pas.",
+        indice: "Les besoins de formation sont inversés selon le profil. Un dispositif unique ne peut pas répondre à des lacunes opposées.",
+      },
+    },
+    // ---------- 10 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas10.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Le quiz final… je l'ai regardé après l'incident. 30 questions à choix multiples. Du vocabulaire technique. Des cas théoriques. Aucune mise en situation. Un opérateur pouvait avoir 20/30 en bachotant la veille. Et surtout… le quiz ne testait PAS ce qu'on avait besoin de savoir sur le terrain." },
+        ],
+      },
+      question: "Comment évaluez-vous l'acquisition des compétences de votre public ? Vos évaluations mesurent-elles la compétence réelle ou la capacité à restituer ?",
+      consigne: "Analysez vos méthodes d'évaluation : mesurent-elles ce que VOS apprenants SAVENT FAIRE ou ce qu'ils SAVENT RÉCITER ? (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : ÉVALUATION QUI NE MESURE PAS LA COMPÉTENCE",
+        texte: "Le QCM mesurait la mémorisation, pas la compétence : on pouvait cocher la bonne case sans savoir réagir à une rupture de la chaîne du froid. L'évaluation aurait dû se faire en situation, en observant les gestes.",
+        indice: "Une évaluation déconnectée du terrain produit des résultats mensongers — même sans falsification.",
+      },
+    },
+    // ---------- 11 ----------
+    {
+      rubrique: R_CONN,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas11.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Et vous savez le pire ? Après la formation, personne n'a vérifié si les pratiques avaient changé. Aucun suivi. Aucune observation terrain. On a formé, évalué, classé le dossier. Et tout le monde est reparti travailler exactement comme avant." },
+        ],
+      },
+      question: "Prévoyez-vous un suivi post-formation pour vérifier le transfert des acquis sur le terrain ?",
+      consigne: "La formation sans suivi est un événement sans lendemain. Comment allez-vous vérifier que VOS apprenants appliquent réellement ce qu'ils ont appris ? (section 📚 Niveau de connaissance).",
+      revelation: {
+        titre: "ANALYSE : FORMATION SANS TRANSFERT = FORMATION INUTILE",
+        texte: "Chez NutriSafe, on formait, on évaluait, on cochait la case — sans aucun suivi terrain. Trois mois après, 80 % du contenu était oublié et les habitudes d'avant avaient repris. Seul le registre papier avait changé.",
+        indice: "Sans mécanisme de transfert et de suivi, la formation est un château de sable.",
+      },
+    },
+    // ---------- 12 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas12.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "La formation HACCP est OBLIGATOIRE. Point. Personne ne choisit de la suivre. C'est la loi. Alors la motivation… vous imaginez bien que c'est pas la joie." },
+        ],
+      },
+      question: "La formation est-elle choisie ou imposée ? Comment créer de la motivation dans un contexte de contrainte ?",
+      consigne: "Même dans une formation obligatoire, des leviers de motivation existent. Identifiez-les pour VOS apprenants (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : OBLIGATION ≠ ABSENCE DE MOTIVATION POSSIBLE",
+        texte: "« Obligatoire » ne signifie pas « impossible à rendre motivante ». Fierté du métier, protection juridique personnelle, sens des gestes quotidiens : Thomas disposait de trois leviers. Aucun n'a été activé.",
+        indice: "Même une formation imposée peut devenir motivante si on en explicite le sens personnel.",
+      },
+    },
+    // ---------- 13 ----------
+    {
+      rubrique: R_MOTIV,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas13.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Un opérateur m'a dit après la formation : « Thomas, si tu me montres EN QUOI ça change mon quotidien, je suis partant. Mais si c'est juste pour lire des normes pendant 3 heures, non merci. » Il avait tout résumé." },
+        ],
+      },
+      question: "Votre public perçoit-il un bénéfice concret et immédiat de la formation dans son travail quotidien ?",
+      consigne: "Le bénéfice perçu doit être CONCRET et IMMÉDIAT pour VOS apprenants. Pas « à long terme », pas « pour l'entreprise ». Pour EUX, MAINTENANT (section 🎯 Attentes et motivations).",
+      revelation: {
+        titre: "ANALYSE : BÉNÉFICE ABSTRAIT VS BÉNÉFICE TANGIBLE",
+        texte: "Le formateur parlait « conformité réglementaire » à des opérateurs qui se demandaient : « Qu'est-ce que ça change pour MOI demain matin ? ». La réponse devait être formulée dans leur réalité : comprendre ses gestes, éviter le rappel de produit qui ferme l'usine.",
+        indice: "Le bénéfice doit être formulé dans le langage et la réalité de l'apprenant.",
+      },
+    },
+    // ---------- 14 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas14.mp3",
+        dialogue: [
+          { qui: "", dit: "Thomas baisse la voix." },
+          { qui: "Thomas", dit: "Le vrai problème, c'est la peur. Tout le monde avait peur. Les opérateurs avaient peur de rater l'évaluation. Les managers avaient peur de perdre la certification. Moi, j'avais peur de décevoir la direction. Et la direction avait peur de l'audit AFNOR. Tout le monde avait peur. Et quand tout le monde a peur, personne ne dit la vérité." },
+        ],
+      },
+      question: "Quelles peurs ou pressions s'exercent sur votre public en lien avec la formation (évaluation, jugement, conséquences professionnelles) ?",
+      consigne: "Identifiez les pressions qui pèsent sur VOS apprenants. La peur de l'évaluation, des conséquences, du jugement… Ces pressions déforment le comportement (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : LA PEUR EN CASCADE",
+        texte: "La peur était systémique : sanction pour les opérateurs, certification pour les managers, direction pour Thomas. Alors tout le monde a triché — bachotage, notes arrondies, yeux fermés. La peur a produit de la conformité apparente, pas de la compétence.",
+        indice: "Un système de formation fondé sur la peur produit du mensonge institutionnalisé, pas de l'apprentissage.",
+      },
+    },
+    // ---------- 15 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas15.mp3",
+        dialogue: [
+          { qui: "Thomas", dit: "Et le format… 3 demi-journées en salle, avec un consultant externe qui n'avait jamais mis les pieds dans un atelier agroalimentaire. Il parlait de « dangers biologiques » en termes scientifiques. Mes opérateurs, eux, parlent de « le poulet qui sent bizarre ». Ce n'est pas le même langage." },
+        ],
+      },
+      question: "Le langage utilisé en formation est-il adapté au vocabulaire réel de votre public ?",
+      consigne: "Vérifiez que le vocabulaire de votre formation correspond à celui de VOS apprenants. Le jargon technique peut être un mur invisible (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "ANALYSE : LANGAGE EXPERT VS LANGAGE TERRAIN",
+        texte: "Le formateur disait « points critiques de maîtrise CCP2 » ; les opérateurs entendaient « vérifier que le poulet est pas chaud ». Aucune traduction entre les deux mondes. Ils ont acquiescé poliment sans rien comprendre, et Thomas n'a pas osé intervenir.",
+        indice: "Le jargon technique non traduit en langage terrain crée un mur invisible entre le formateur et l'apprenant.",
+      },
+    },
+    // ---------- 16 ----------
+    {
+      rubrique: R_FREINS,
+      scene: {
+        lieu: "Interrogatoire — Salle 9",
+        audio: "audio/thomas/thomas16.mp3",
+        dialogue: [
+          { qui: "", dit: "Thomas se prend la tête dans les mains." },
+          { qui: "Thomas", dit: "Le 3 février, quand l'auditeur AFNOR m'a regardé droit dans les yeux et m'a dit : « Monsieur Lefèvre, comment expliquez-vous que 100 % de vos opérateurs soient certifiés alors que 40 % ne respectent pas les protocoles de base ? »… j'ai compris que tout s'écroulait. J'ai validé des résultats que je savais faux. Pourquoi ? Parce que si j'avais mis les vrais résultats, la certification aurait sauté. Et sans certification, pas de clients. Et sans clients… 220 emplois. J'ai choisi de mentir pour protéger l'usine." },
+        ],
+      },
+      question: "Quelles conséquences (réelles ou perçues) aurait un échec de la formation pour votre public et pour l'organisation ?",
+      consigne: "Identifiez les enjeux derrière la formation de VOS apprenants. Quand les conséquences d'un échec sont trop lourdes, le système préfère mentir plutôt qu'affronter la réalité (section ⚠️ Freins et pain points).",
+      revelation: {
+        titre: "DÉNOUEMENT : LE SYNDROME DU RESPONSABLE PIÉGÉ",
+        texte: "Thomas n'est pas un fraudeur : c'est un responsable piégé, sommé d'obtenir 100 % de réussite avec un dispositif voué à l'échec. Il a maquillé les résultats parce que, dans son système, l'échec d'une formation est une faute à cacher — pas un problème pédagogique à résoudre.",
+        indice: "Quand l'échec d'une formation est vécu comme une faute à cacher, le système produit du mensonge plutôt que des solutions.",
+        finale: true,
+      },
+    },
+  ],
+  resolution: {
+    mobile: {
+      resume: "Pression systémique + formation inadaptée au public + culture de la conformité apparente.",
+      texte: "Thomas a falsifié les résultats non par malhonnêteté mais parce que le système ne lui laissait aucune marge : dire la vérité menaçait 220 emplois.",
+    },
+    circonstances: [
+      { titre: "Public invisible", texte: "Thomas ne connaissait pas les profils personnels de ses opérateurs (barrières linguistiques, rapport à l'école, contraintes de vie)." },
+      { titre: "Format inadapté", texte: "3 demi-journées en salle (9h-12h) pour des travailleurs manuels en horaires décalés." },
+      { titre: "Formateur déconnecté", texte: "Un consultant qualité expert en normes mais incapable de parler le langage terrain." },
+      { titre: "Évaluation mensongère", texte: "Un QCM qui mesurait la mémorisation, pas la compétence réelle." },
+      { titre: "Aucun suivi post-formation", texte: "Zéro vérification du transfert sur le terrain." },
+      { titre: "Pression systémique", texte: "La certification conditionnait la survie économique de l'entreprise." },
+    ],
+    verdict: [
+      "Thomas n'est pas un fraudeur.",
+      "Thomas est un responsable qui a reçu une mission impossible : obtenir des résultats avec un dispositif voué à l'échec.",
+      "La falsification n'est pas la cause, c'est le symptôme.",
+      "La cause : un système qui valorise la conformité papier au détriment de la compétence réelle.",
+    ],
+    mission: {
+      intro: "Vous avez reconstitué le profil complet de l'équipe de Thomas en 16 questions.",
+      sousTitre: "Maintenant, faites le parallèle avec VOS apprenants :",
+      etapes: [
+        "Relisez votre fiche d'enquête complétée.",
+        "Identifiez les risques que votre formation produise de la conformité apparente plutôt que de la compétence réelle.",
+        "Rédigez un portrait narratif de VOS apprenants (5-8 lignes).",
+      ],
+    },
+    questionEquipe: "Comment allez-vous vérifier que votre formation produit de la COMPÉTENCE RÉELLE et pas seulement de la CONFORMITÉ SUR PAPIER ?",
+    questionEquipeNote: "Notez 2-3 décisions concrètes au dos de votre fiche.",
+  },
+};
+
+// ============================================================
+//  AFFAIRES 5 À 6 — à compléter (placeholders)
 // ============================================================
 const PLACEHOLDER = (id, numero, nom, role, accroche, portrait) => ({
   id, numero, nom, role, accroche, portrait,
@@ -1217,10 +1574,9 @@ const HISTOIRES = [
   MARCEL,
   LEA,
   SOPHIE,
-  PLACEHOLDER("amina", "Affaire n°04", "Amina Diallo", "Dossier à instruire",
+  THOMAS,
+  PLACEHOLDER("amina", "Affaire n°05", "Amina Diallo", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Amina_Diallo.png"),
-  PLACEHOLDER("karim", "Affaire n°05", "Karim Benali", "Dossier à instruire",
+  PLACEHOLDER("karim", "Affaire n°06", "Karim Benali", "Dossier à instruire",
     "Identité enregistrée. L'enquête reste à mener.", "portraits/Karim_Benali.png"),
-  PLACEHOLDER("thomas", "Affaire n°06", "Thomas Lefèvre", "Dossier à instruire",
-    "Identité enregistrée. L'enquête reste à mener.", "portraits/Thomas_Lefevre.png"),
 ];
